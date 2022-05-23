@@ -5,7 +5,7 @@ using task.quiz;
 namespace task.Controllers
 {
     [ApiController]
-    [Route("[api]")]
+    [Route("api")]
     public class dataController : ControllerBase
     {
         private readonly service repository;
@@ -15,13 +15,24 @@ namespace task.Controllers
         }
 
         [HttpGet("getquiz")]
-        public ActionResult<List<model_quiz>> test(){
+        public ActionResult<List<List<LIST_INSERT>>> test(){
             var data = repository.GET_QUIZ();
-            if (data == null || !data.Any())
+            if (data == null)
             {
                 return NotFound();
             }
             return Ok(data);
+        }
+
+        [HttpPost("insert_quiz")]
+        public ActionResult<Boolean> Insert(POST_INSERT data)
+        {
+            var result = repository.INSERT_QUIZ(data.body,data.permissions,data.QUIZ_NAME);
+            if (result == true)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
         }
 
         

@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using task.mainservice;
+using task.quiz;
 
 namespace task.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[api]")]
     public class dataController : ControllerBase
     {
         private readonly service repository;
@@ -13,11 +14,17 @@ namespace task.Controllers
             repository = new service();
         }
 
-        [HttpGet]
-        public Boolean test(){
-            var ans = repository.PUSH_QUIZ();
-            return ans;
+        [HttpGet("getquiz")]
+        public ActionResult<List<model_quiz>> test(){
+            var data = repository.GET_QUIZ();
+            if (data == null || !data.Any())
+            {
+                return NotFound();
+            }
+            return Ok(data);
         }
+
+        
     }
 
 }

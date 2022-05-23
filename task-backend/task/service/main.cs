@@ -2,32 +2,37 @@ using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using MongoDB.Driver;
 using Newtonsoft.Json;
+using task.quiz;
 
 namespace task.mainservice
 {
     public class service
     {
-        IFirebaseConfig config = new FirebaseConfig
+        private MongoClient connet()
         {
-            AuthSecret = "db8305bb26bc676348b9488bcd98003625b744c0",
-            BasePath = "https://task-86437.firebaseapp.com"
-        };
-
-        public Boolean PUSH_QUIZ()
+            var settings = "mongodb+srv://admin:1234@emapp.2oey0.mongodb.net/?retryWrites=true&w=majority";
+            var client = new MongoClient(settings);
+            return client;
+        }
+        public List<model_quiz> GET_QUIZ()
         {
-            try{
-                IFirebaseClient client = new FirebaseClient(config);
-                FirebaseResponse response = client.Get("testfortask");
-                dynamic test = JsonConvert.DeserializeObject(response.Body); 
-                Console.WriteLine(test);
+            try
+            {
+                var client = connet();
+                var database = client.GetDatabase("EMAPP");
+                var test = database.GetCollection<model_quiz>("QUIZ");
+                var insertResult = test.Find(_ => true).ToList();
+                return insertResult;
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex);
-                Console.WriteLine("a-------------------");
-                
+                List<model_quiz> bad = new List<model_quiz>();
+                return bad;
             }
-            return true;
+
         }
 
     }

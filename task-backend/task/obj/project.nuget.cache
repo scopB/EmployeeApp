@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jkrk7Chc6sSj8wRfJKOjXKJlj8J0msA2eme/3RXEIY7AHtMczxQyWLfRsASy2xdKkmOk3FmN0A+ZoitPvF5ejw==",
+  "dgSpecHash": "qmPE8PdHjzuWV7Oas/+TeaNstM0UJW4IbK/a8x1HKEBm/Se7Q1Amsn3fRrtzCKBfi64ofbu3ww+9kZ8unWLTVA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\employeeApp\\task-backend\\task\\task.csproj",
+  "projectFilePath": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\EmployeeApp\\task-backend\\task\\task.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pawat\\.nuget\\packages\\dnsclient\\1.6.0\\dnsclient.1.6.0.nupkg.sha512",
     "C:\\Users\\pawat\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

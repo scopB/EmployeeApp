@@ -30,7 +30,6 @@ namespace task.mainservice
                     ans.Add(insertResult);
                 }
                     return ans;
-
             }
             catch (Exception ex)
             {
@@ -64,9 +63,7 @@ namespace task.mainservice
                 Console.WriteLine(ex);
                 return false;
             }
-
         }
-
 
     }
 }

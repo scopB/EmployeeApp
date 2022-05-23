@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\employeeApp\\task-backend\\task\\task.csproj": {}
+    "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\EmployeeApp\\task-backend\\task\\task.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\employeeApp\\task-backend\\task\\task.csproj": {
+    "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\EmployeeApp\\task-backend\\task\\task.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\employeeApp\\task-backend\\task\\task.csproj",
+        "projectUniqueName": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\EmployeeApp\\task-backend\\task\\task.csproj",
         "projectName": "task",
-        "projectPath": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\employeeApp\\task-backend\\task\\task.csproj",
+        "projectPath": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\EmployeeApp\\task-backend\\task\\task.csproj",
         "packagesPath": "C:\\Users\\pawat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\employeeApp\\task-backend\\task\\obj\\",
+        "outputPath": "C:\\Users\\pawat\\Desktop\\BANK\\EMAPP\\EmployeeApp\\task-backend\\task\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pawat\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -124,3 +124,20 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+.login-form {
+  margin-top: 60px;
+  margin-left: 60px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  box-shadow: 1px 0px 5px 2px #5a5a5a69;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  padding-left: 20px;
+  border-radius: 10px;
+}

@@ -4,11 +4,17 @@ import Home from "./pages/Home";
 
 function App() {
 
-  const [auth,setAuth] = useState(true)
+  const [auth,setAuth] = useState(false)
+
+
+  const onAuth = () => {
+    console.log(auth)
+    setAuth(!auth)
+  }
 
   return(
   <>
-    {auth ? <Home/>:<Login />}
+    {auth ? <Home/>:<Login login={onAuth}/>}
     {/* <Home /> */}
   </>
   );

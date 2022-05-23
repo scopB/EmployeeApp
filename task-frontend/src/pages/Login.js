@@ -11,8 +11,13 @@ const Login = ({ login }) => {
   const onSubmit = (e) => {
     e.preventDefault()
     console.log({username,password})
-    console.log(linkUrl.LinkToBackend)
-    login()
+    axios.post(`${linkUrl.LinkToBackend}`,{username,password}).then((res)=>{
+      console.log(res)
+      if(res.data === true)
+      {
+        login()
+      }
+    })
   }
   return (
     <div className='login-form'>

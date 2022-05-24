@@ -29,9 +29,9 @@ namespace task.Controllers
         }
 
         [HttpPost("insert_quiz")]
-        public ActionResult<Boolean> Insert(POST_INSERT data)
+        public ActionResult<Boolean> Insert(FORM_DATA data)
         {
-            var result = repository.INSERT_QUIZ(data.body,data.permissions,data.QUIZ_NAME);
+            var result = repository.INSERT_QUIZ(data.QUIZ_DETAIL, data.BUILD.permission, data.BUILD.name);
             if (result == true)
             {
                 return Ok(result);
@@ -50,7 +50,15 @@ namespace task.Controllers
             return BadRequest();
         }
 
-        
+        [HttpPost("finduser")]
+        public ActionResult<USER_OF_FETCH> find(HOME_USER_CHECK data){
+            var result = repository.finduser(data.username);
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            return NotFound();
+        }
     }
 
 }

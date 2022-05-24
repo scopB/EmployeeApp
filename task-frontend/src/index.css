@@ -126,18 +126,65 @@ footer {
 }
 
 .login-form {
-  margin-top: 60px;
-  margin-left: 60px;
-  width: 300px;
+  margin: auto;
+  margin-top: 100px;
+  width: 600px;
   background-color: white;
-  display: flex;
+  justify-content: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: all 0.5s;
   box-shadow: 1px 0px 5px 2px #5a5a5a69;
-  padding-top: 30px;
-  padding-bottom: 60px;
-  padding-left: 20px;
+  padding: 80px;
   border-radius: 10px;
+}
+
+.login-btn{
+  margin-top: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 2px 2px;
+}
+
+.navbar-con{
+  /* margin-top: 10px; */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s;
+  box-shadow: 1px 0px 5px 2px #5a5a5a69;
+  padding-top: 2px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+.navbar-box{
+  margin-top: 6px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s;
+  box-shadow: 1px 0px 5px 2px #5a5a5a69;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+}
+
+.box-login{
+  margin-top: 4px;
+}
+
+.pig-logo{
+  max-width: 250px;
+  margin-bottom: 30px;
 }

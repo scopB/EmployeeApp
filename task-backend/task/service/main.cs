@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using task.quiz;
+using task.user;
 
 namespace task.mainservice
 {
@@ -18,7 +19,7 @@ namespace task.mainservice
             List<List<LIST_INSERT>> ans = new List<List<LIST_INSERT>>();
 
             try
-            {          
+            {
                 var database = client.GetDatabase("EMAPP");
                 foreach (var item in database.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
                 {
@@ -29,7 +30,7 @@ namespace task.mainservice
                     var insertResult = test.Find(_ => true).ToList();
                     ans.Add(insertResult);
                 }
-                    return ans;
+                return ans;
             }
             catch (Exception ex)
             {
@@ -39,7 +40,23 @@ namespace task.mainservice
             }
         }
 
-        public Boolean INSERT_QUIZ(List<string> data, string permission, string Q_NAME)
+        public USER_OF_FETCH finduser(string username)
+        {
+            var client = connet();
+            var database = client.GetDatabase("EMAPP");
+            var data = database.GetCollection<USER_OF_FETCH>("USER");
+            var query = data.Find(s => s.USERNAME == username).ToList();
+            if (query.Count() == 1)
+            {
+                foreach (var i in query)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public Boolean INSERT_QUIZ(List<BODY_DATA> data, string permission, string Q_NAME)
         {
             var client = connet();
             try
@@ -50,7 +67,7 @@ namespace task.mainservice
                 {
                     var data_insert = new LIST_INSERT
                     {
-                        INSERT_BODY = i,
+                        INSERT_BODY = i.text,
                         permissions = permission,
                         QUIZ_NAME = Q_NAME
                     };
@@ -64,6 +81,5 @@ namespace task.mainservice
                 return false;
             }
         }
-
     }
 }

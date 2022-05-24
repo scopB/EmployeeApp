@@ -1,3 +1,3 @@
 export const linkUrl = {
-    LinkToBackend: "https://localhost:7050/api/login",
+    LinkToBackend: "https://localhost:7050/api",
 };

@@ -17,7 +17,6 @@ namespace task.login{
             var client = connet();
             var database = client.GetDatabase("EMAPP");
             var data = database.GetCollection<USER_OF_FETCH>("USER");
-            // var filter = Builders<BsonString>.Filter.Eq("username",user_data.USERNAME);
             var query = data.Find(s => s.USERNAME == user_data.USERNAME && s.PASSWORD == user_data.PASSWORD).ToList();
             foreach (var i in query)
             {

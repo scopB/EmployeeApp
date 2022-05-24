@@ -21,4 +21,17 @@ namespace task.quiz
 
     }
 
+    public record FORM_DATA{
+        public HEADER_DATA? BUILD {get; set;}
+        public List<BODY_DATA>? QUIZ_DETAIL{get; set;}
+    }
+    public record HEADER_DATA{
+        public string name{get; set;} = string.Empty;
+        public string permission{get; set;} = string.Empty;
+    }
+    public record BODY_DATA{
+        public Int32 id{get; set;}
+        public string text{get; set;}=string.Empty;
+    }
+
 }

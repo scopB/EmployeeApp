@@ -26,7 +26,7 @@ const Quizbuild = () => {
 
     const addQuiz = (data) => {
         console.log(data)
-        setQuiz(quiz.concat(data))
+        setQuiz([...quiz,data])
         console.log(quiz)
         onSubmit(data)
     }

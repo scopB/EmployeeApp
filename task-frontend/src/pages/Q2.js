@@ -5,14 +5,12 @@ import Submit from "../components/Submit";
 import AddTask from "../components/AddTask";
 
 
-const Home = () => {
+const Q2 = ({changeState,addquizs}) => {
 
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
 
-
   const deleteTask = (id) => {
-    // console.log('Delete', id)
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
@@ -38,11 +36,11 @@ const Home = () => {
       {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
         : 'No Tasks to show'}
-      <Submit tasks={tasks} onReset={reset}/>
+      <Submit tasks={tasks} onReset={reset} changeState={changeState} addquizs={addquizs}/>
       {/* <MyTable Column={['Name', 'ID']} Values={[]} /> */}
     </div>
   );
 }
 
 
-export default Home
+export default Q2

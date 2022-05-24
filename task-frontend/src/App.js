@@ -1,23 +1,24 @@
 import { useState } from "react";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Quizbuild from "./pages/Quizbuild";
 
 function App() {
 
-  const [auth,setAuth] = useState(false)
+  const [auth,setAuth] = useState(true)
 
 
   const onAuth = () => {
     console.log(auth)
     setAuth(!auth)
   }
-
-  return(
-  <>
-    {auth ? <Home/>:<Login login={onAuth}/>}
-    {/* <Home /> */}
-  </>
-  );
+  
+  switch(auth)
+  {
+    case true :
+      return <Login login={onAuth}/>
+    case false :
+      return <Quizbuild />
+  }    
 }
 
 export default App;

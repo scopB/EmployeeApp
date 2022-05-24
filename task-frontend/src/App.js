@@ -6,10 +6,15 @@ import Quizbuild from "./pages/Quizbuild";
 function App() {
 
   const [auth, setAuth] = useState("Login")
+  const [perr, setPerr] = useState()
   // const [permission,setPer] = useState()
 
   useEffect(() => {
-    console.log(auth)
+    // console.log(auth)
+    // console.log(localStorage.getItem("permission"))
+    setPerr(localStorage.getItem("permission"))
+    // console.log(perr)
+
   })
 
 
@@ -31,9 +36,9 @@ function App() {
       }
       return <Login login={onAuth} />
     case "Home":
-      return <Home logout={Logout} setAuth={setAuth} />
+      return <Home logout={Logout} setAuth={setAuth} permis={perr}/>
     case "b_quiz":
-      return <Quizbuild logout={Logout} setAuth={setAuth}/>
+      return <Quizbuild logout={Logout} setAuth={setAuth} permis={perr}/>
     case "Login":
       return <Login />
   }

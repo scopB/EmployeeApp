@@ -6,7 +6,7 @@ import axios from 'axios';
 import { linkUrl } from '../urlBackend';
 import Navbar from '../components/Navbar';
 
-const Quizbuild = ({logout,setAuth}) => {
+const Quizbuild = ({logout,setAuth,permis}) => {
 
     const [state, setState] = useState("A");
     const [quiz, setQuiz] = useState();
@@ -47,7 +47,7 @@ const Quizbuild = ({logout,setAuth}) => {
 
     return (
         <div>
-            <Navbar logout={logout} setAuth={setAuth}/>
+            <Navbar logout={logout} setAuth={setAuth} permission={permis}/>
             {state === "A" ? <Q1 changeState={changeState} addquizs={addQuiz}/> : state === "B" ?
                 <Q2 changeState={changeState} addquizs={addQuiz}/> :
                 <Q3 changeState={changeState} addquizs={addQuiz}/>}

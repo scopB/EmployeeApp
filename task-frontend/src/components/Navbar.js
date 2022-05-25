@@ -25,10 +25,10 @@ const Navbar = ({logout,setAuth,permission,showQuiz}) => {
     return (
         <div className='navbar-con'>
             <ul>
-                <li className='navbar-box'><a href="#index" onClick={onHome}>Home</a></li>
-                <li className='navbar-box'><a href="#your_quiz" onClick={onShow}>You Quiz</a></li>
-                 { permission === "admin" && <li className='navbar-box'><a href="#quiz_create" onClick={onCreate}>New Quiz</a></li>}
-                <li className='navbar-box2'><a href="/" onClick={onOut}>Logout</a></li>
+                <button className='navbar-box' href="#index" onClick={onHome}>Home</button>
+                <button className='navbar-box' href="#your_quiz" onClick={onShow}>You Quiz</button>
+                 { permission === "admin" && <button className='navbar-box' href="#quiz_create" onClick={onCreate}>New Quiz</button>}
+                <button className='navbar-box2 ' onClick={onOut} href="/">Logout</button>
             </ul>
         </div>
     )

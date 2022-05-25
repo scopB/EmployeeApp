@@ -47,25 +47,19 @@ namespace task.mainservice
         {
             var client = connet();
             List<List<LIST_INSERT>> ans = new List<List<LIST_INSERT>>();
-            Console.WriteLine(permission);
             try
             {
                 var database = client.GetDatabase("QUIZ");
                 foreach (var item in database.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
                 {
-                    // Console.WriteLine(item);
                     var COLL_NAME = item["name"].AsString;
-                    // Console.WriteLine(ans);
                     var test = database.GetCollection<LIST_INSERT>(COLL_NAME);
                     var insertResult = test.Find(s => s.permissions == permission).ToList();
-                    // insertResult.ForEach(i => Console.Write("{0}\t", i));
-                    // Console.WriteLine(ans.Count());
                     if(insertResult.Count()!=0)
                     {
                         ans.Add(insertResult);
                     }   
                 }
-                ans.ForEach(i => i.ForEach(j => Console.WriteLine("{0}\t", j)));
                 return ans;
             }
             catch (Exception ex)

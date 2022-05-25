@@ -180,6 +180,23 @@ footer {
   border-radius: 10px;
 }
 
+.navbar-box2{
+  margin-top: 6px;
+  margin-left: 10px;
+  background-color: white;
+  display: inline-block;
+  flex-direction: column;
+  transition: all 0.5s;
+  box-shadow: 1px 0px 5px 2px #5a5a5a69;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  position: absolute;
+  right: 2%;
+}
+
 .box-login{
   margin-top: 4px;
 }

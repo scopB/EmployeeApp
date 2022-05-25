@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using task.login;
 using task.mainservice;
 using task.quiz;
+using task.sendback;
 using task.user;
 
 namespace task.Controllers
@@ -28,6 +29,16 @@ namespace task.Controllers
             return Ok(data);
         }
 
+        [HttpPost("showquiz")]
+        public ActionResult<List<List<LIST_INSERT>>> SHOW_DATA(FOR_SHOW_DATA in_data){
+            var data = repository.SHOW_QUIZ(in_data.permission);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
         [HttpPost("insert_quiz")]
         public ActionResult<Boolean> Insert(FORM_DATA data)
         {
@@ -40,10 +51,11 @@ namespace task.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<Boolean> Login(USER_OF_SENT data)
+        public ActionResult<LOGIN> Login(USER_OF_SENT data)
         {
             var result = LOGIN_C.LOGIN_CHECK(data);
-            if (result == true)
+            // Console.WriteLine(result);
+            if (result.result == true)
             {
                 return Ok(result);
             }

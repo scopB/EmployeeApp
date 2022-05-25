@@ -33,5 +33,13 @@ namespace task.quiz
         public Int32 id{get; set;}
         public string text{get; set;}=string.Empty;
     }
+    public record LOGIN_DATA{
+        public Int32 result{get; set;}
+        public string permission{get; set;}=string.Empty;
+    }
+    public record FOR_SHOW_DATA
+    {
+        public string permission{get; set;}=string.Empty;
+    }
 
 }

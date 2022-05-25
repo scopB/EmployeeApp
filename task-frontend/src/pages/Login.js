@@ -14,9 +14,10 @@ const Login = ({ login }) => {
     console.log({ username, password })
     axios.post(`${linkUrl.LinkToBackend}/login`, { username, password }).then((res) => {
       console.log(res)
-      if (res.data === true) {
+      if (res.data.result === true) {
         localStorage.setItem("status",true)
         localStorage.setItem("username",username)
+        localStorage.setItem("permission",res.data.permission)
         login()
       }
     })

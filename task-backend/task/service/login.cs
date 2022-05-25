@@ -1,8 +1,11 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
+using task.quiz;
+using task.sendback;
 using task.user;
 
-namespace task.login{
+namespace task.login
+{
     public class LOGIN_MANAGE
     {
         private MongoClient connet()
@@ -12,24 +15,29 @@ namespace task.login{
             return client;
         }
 
-        public Boolean LOGIN_CHECK(USER_OF_SENT user_data)
+        public LOGIN LOGIN_CHECK(USER_OF_SENT user_data)
         {
             var client = connet();
+            var a = false;
             var database = client.GetDatabase("EMAPP");
             var data = database.GetCollection<USER_OF_FETCH>("USER");
             var query = data.Find(s => s.USERNAME == user_data.USERNAME && s.PASSWORD == user_data.PASSWORD).ToList();
             foreach (var i in query)
             {
-                if(i != null)
+                // Console.WriteLine(i.PERMISSION);
+                if (i != null)
                 {
-                    return true;
+                    a = true;
                 }
-                else{
-                    return false;
-                }
+                var resultdata = new LOGIN{
+                    result = a,
+                    permission = i.PERMISSION
+                };
+                // Console.WriteLine(resultdata);
+                return resultdata;
             }
-            return false;
+            return null;
         }
 
-    } 
+    }
 }

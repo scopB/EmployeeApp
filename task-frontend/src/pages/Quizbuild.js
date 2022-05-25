@@ -4,9 +4,8 @@ import Q3 from './Q3';
 import Q1 from './Q1';
 import axios from 'axios';
 import { linkUrl } from '../urlBackend';
-import Navbar from '../components/Navbar';
 
-const Quizbuild = ({logout,setAuth,permis}) => {
+const Quizbuild = ({setAuth}) => {
 
     const [state, setState] = useState("A");
     const [quiz, setQuiz] = useState();
@@ -20,6 +19,8 @@ const Quizbuild = ({logout,setAuth,permis}) => {
         }
         if (state === "C") {
             setState("A")
+            localStorage.setItem("auth","Home")
+            window.location.reload(false);
         }
     }
 
@@ -34,7 +35,6 @@ const Quizbuild = ({logout,setAuth,permis}) => {
         if(state === "C"){
             onSubmit(quiz)
         }
-        // console.log(quiz)
     }
 
     const onSubmit = (data) =>{
@@ -47,7 +47,6 @@ const Quizbuild = ({logout,setAuth,permis}) => {
 
     return (
         <div>
-            <Navbar logout={logout} setAuth={setAuth} permission={permis}/>
             {state === "A" ? <Q1 changeState={changeState} addquizs={addQuiz}/> : state === "B" ?
                 <Q2 changeState={changeState} addquizs={addQuiz}/> :
                 <Q3 changeState={changeState} addquizs={addQuiz}/>}

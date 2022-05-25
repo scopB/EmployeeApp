@@ -20,16 +20,52 @@ namespace task.mainservice
 
             try
             {
-                var database = client.GetDatabase("EMAPP");
+                var database = client.GetDatabase("QUIZ");
                 foreach (var item in database.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
                 {
                     // Console.WriteLine(item);
                     var COLL_NAME = item["name"].AsString;
                     // Console.WriteLine(ans);
                     var test = database.GetCollection<LIST_INSERT>(COLL_NAME);
-                    var insertResult = test.Find(_ => true).ToList();
-                    ans.Add(insertResult);
+                    var insertResult = test.Find(s => s.permissions == "ADMIN").ToList();
+                    if(!ans.Any())
+                    {
+                        ans.Add(insertResult);
+                    }   
                 }
+                return ans;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                List<List<LIST_INSERT>> bad = new List<List<LIST_INSERT>>();
+                return bad;
+            }
+        }
+
+        public List<List<LIST_INSERT>> SHOW_QUIZ(string permission)
+        {
+            var client = connet();
+            List<List<LIST_INSERT>> ans = new List<List<LIST_INSERT>>();
+            Console.WriteLine(permission);
+            try
+            {
+                var database = client.GetDatabase("QUIZ");
+                foreach (var item in database.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
+                {
+                    // Console.WriteLine(item);
+                    var COLL_NAME = item["name"].AsString;
+                    // Console.WriteLine(ans);
+                    var test = database.GetCollection<LIST_INSERT>(COLL_NAME);
+                    var insertResult = test.Find(s => s.permissions == permission).ToList();
+                    // insertResult.ForEach(i => Console.Write("{0}\t", i));
+                    // Console.WriteLine(ans.Count());
+                    if(insertResult.Count()!=0)
+                    {
+                        ans.Add(insertResult);
+                    }   
+                }
+                ans.ForEach(i => i.ForEach(j => Console.WriteLine("{0}\t", j)));
                 return ans;
             }
             catch (Exception ex)
@@ -61,7 +97,7 @@ namespace task.mainservice
             var client = connet();
             try
             {
-                var database = client.GetDatabase("EMAPP");
+                var database = client.GetDatabase("QUIZ");
                 var test = database.GetCollection<LIST_INSERT>(Q_NAME);
                 foreach (var i in data)
                 {

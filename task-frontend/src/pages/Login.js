@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { linkUrl } from '../urlBackend';
-// import './logo.png'
 
 const Login = ({ login }) => {
 

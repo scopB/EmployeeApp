@@ -10,7 +10,7 @@ const Quizbox = ({name , text}) => {
     }
 
   return (
-    <div>
+    <div >
         {/* <h2>{name.quiZ_NAME}</h2> */}
         <button className='btn3 btn-block2' onClick={onChange}>{name.quiZ_NAME}</button>
         {text.map((res)=>(

@@ -8,14 +8,16 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: white;
 }
 
 .container {
-  max-width: 500px;
-  margin: 30px auto;
+  max-width: 80%;
+  margin: 50px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid rgb(70, 180, 134);
+  background-color: white;
   padding: 30px;
   border-radius: 5px;
 }
@@ -48,11 +50,16 @@ body {
   border: none;
   padding: 10px 20px;
   margin: 5px;
+  margin-top: 10px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+}
+
+.showquizlist{
+  margin-top: 200px;
 }
 
 .btn2 {
@@ -110,6 +117,7 @@ body {
 
 .form-control {
   margin: 20px 0;
+  
 }
 
 .form-control label {
@@ -158,9 +166,12 @@ footer {
   padding: 80px;
   border-radius: 10px;
 }
+.login-form input{
+  margin-left: 10px;
+}
 
 .login-btn{
-  margin-top: 20px;
+  margin-top: 15px;
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;
@@ -169,39 +180,41 @@ footer {
 }
 
 .navbar-con{
-  /* margin-top: 10px; */
-  background-color: rgb(181, 214, 181);
+  background-color: white(167, 237, 167);
   display: flex;
   flex-direction: column;
   justify-content: center;
   transition: all 0.5s;
-  box-shadow: 1px 0px 5px 2px #5a5a5a69;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  /* border-radius: 10px; */
+  box-shadow: 1px 0px 3px 2px #5a5a5a69;
 }
 
 .navbar-box{
-  margin-right: 6px;
+  /* margin-right: 6px; */
   display: inline-block;
-  background: rgb(239, 238, 235);
+  background: white;
   color: black;
   border: none;
-  padding: 5px;
+  padding: 15px;
   padding-left: 10px;
   padding-right: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
 }
 
+.navbar-box:hover{
+  background-color: rgb(204, 242, 236);
+  transition: 0.2s;
+}
+
 .navbar-box2{
   position: absolute;
   right: 2%;
+  padding: 10px;
   display: inline-block;
+  margin-top: 10px;
   background: rgb(221, 140, 140);
   color: #fff;
   border: none;
@@ -214,6 +227,11 @@ footer {
   font-family: inherit;
 }
 
+.navbar-box2:hover{
+  background-color: rgb(230, 25, 25);
+  transition: 0.1s;
+}
+
 .box-login{
   margin-top: 4px;
 }
@@ -221,4 +239,7 @@ footer {
 .pig-logo{
   max-width: 250px;
   margin-bottom: 30px;
+}
+.pig-home{
+  max-width: 100%;
 }

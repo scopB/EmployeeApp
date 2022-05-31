@@ -43,31 +43,23 @@ namespace task.mainservice
             }
         }
 
-        public List<List<LIST_INSERT>> SHOW_QUIZ(string permission)
+        public List<LIST_INSERT2> SHOW_QUIZ(string permission_find)
         {
             var client = connet();
-            List<List<LIST_INSERT>> ans = new List<List<LIST_INSERT>>();
             try
             {
                 var database = client.GetDatabase("QUIZ");
-                foreach (var item in database.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
-                {
-                    var COLL_NAME = item["name"].AsString;
-                    var test = database.GetCollection<LIST_INSERT>(COLL_NAME);
-                    var insertResult = test.Find(s => s.permissions == permission).ToList();
-                    if (insertResult.Count() != 0)
-                    {
-                        ans.Add(insertResult);
-                    }
-                }
-                return ans;
+                List<LIST_INSERT2> ans = new List<LIST_INSERT2>();
+                var data = database.GetCollection<LIST_INSERT2>("YEAR01");
+                var filter = Builders<LIST_INSERT2>.Filter.ElemMatch(x => x.permissions, x => x.permission == permission_find);
+                var documents = data.Find(filter).ToList();
+                return documents;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                List<List<LIST_INSERT>> bad = new List<List<LIST_INSERT>>();
-                return bad;
             }
+            return null;
         }
 
         public USER_OF_FETCH finduser(string username)
@@ -86,23 +78,20 @@ namespace task.mainservice
             return null;
         }
 
-        public Boolean INSERT_QUIZ(List<BODY_DATA> data, string permission, string Q_NAME)
+        public Boolean INSERT_QUIZ(List<BODY_DATA> data, List<TEST> permission, string Q_NAME)
         {
             var client = connet();
             try
             {
                 var database = client.GetDatabase("QUIZ");
-                var test = database.GetCollection<LIST_INSERT>(Q_NAME);
-                foreach (var i in data)
+                var test = database.GetCollection<LIST_INSERT2>("YEAR01");
+                var data_insert = new LIST_INSERT2
                 {
-                    var data_insert = new LIST_INSERT
-                    {
-                        INSERT_BODY = i.text,
-                        permissions = permission,
-                        QUIZ_NAME = Q_NAME
-                    };
-                    var insertResult = test.InsertOneAsync(data_insert);
-                }
+                    INSERT_BODY = data,
+                    permissions = permission,
+                    QUIZ_NAME = Q_NAME
+                };
+                var insertResult = test.InsertOneAsync(data_insert);
                 return true;
             }
             catch (Exception ex)
@@ -112,42 +101,42 @@ namespace task.mainservice
             }
         }
 
-        public List<LIST_INSERT_TEST> TEST_FUNC(TEST2 data)
-        {
-            var client = connet();
-            try
-            {
-                var database = client.GetDatabase("TEST");
-                var test = database.GetCollection<LIST_INSERT_TEST>("V1");
-                var data_insert = new LIST_INSERT_TEST
-                {
-                    permissions = data.permissions
-                };
-                var insertResult = test.InsertOneAsync(data_insert);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return null;
-        }
+        // public List<LIST_INSERT_TEST> TEST_FUNC(TEST2 data)
+        // {
+        //     var client = connet();
+        //     try
+        //     {
+        //         var database = client.GetDatabase("TEST");
+        //         var test = database.GetCollection<LIST_INSERT_TEST>("V1");
+        //         var data_insert = new LIST_INSERT_TEST
+        //         {
+        //             permissions = data.permissions
+        //         };
+        //         var insertResult = test.InsertOneAsync(data_insert);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine(ex);
+        //     }
+        //     return null;
+        // }
 
-        public List<LIST_INSERT_TEST> TEST_GET(){
-            var client = connet();
-            try
-                {
-                    var database = client.GetDatabase("TEST");
-                    var test = database.GetCollection<LIST_INSERT_TEST>("V1");
-                    var filter = Builders<LIST_INSERT_TEST>.Filter.ElemMatch(x => x.permissions,x => x.odata == "admin");
-                    var documents = test.Find(filter).ToList();
-                    return documents;
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-                return null;
-        }
+        // public List<LIST_INSERT_TEST> TEST_GET(){
+        //     var client = connet();
+        //     try
+        //         {
+        //             var database = client.GetDatabase("TEST");
+        //             var test = database.GetCollection<LIST_INSERT_TEST>("V1");
+        //             var filter = Builders<LIST_INSERT_TEST>.Filter.ElemMatch(x => x.permissions,x => x.odata == "admin");
+        //             var documents = test.Find(filter).ToList();
+        //             return documents;
+        //         }
+        //         catch(Exception ex)
+        //         {
+        //             Console.WriteLine(ex);
+        //         }
+        //         return null;
+        // }
 
     }
 

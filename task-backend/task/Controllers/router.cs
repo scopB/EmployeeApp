@@ -30,7 +30,7 @@ namespace task.Controllers
         }
 
         [HttpPost("showquiz")]
-        public ActionResult<List<List<LIST_INSERT>>> SHOW_DATA(FOR_SHOW_DATA in_data){
+        public ActionResult<List<LIST_INSERT2>> SHOW_DATA(FOR_SHOW_DATA in_data){
             var data = repository.SHOW_QUIZ(in_data.permission);
             if (data == null)
             {
@@ -72,26 +72,26 @@ namespace task.Controllers
             return NotFound();
         }
 
-        [HttpPost("test")]//NOT USE
-        public ActionResult<List<LIST_INSERT_TEST>> test(TEST2 data)
-        {
-            var result = repository.TEST_FUNC(data);
-            if(result != null)
-            {
-                return Ok(result);
-            }
-            return NotFound();
-        }
-        [HttpGet("test")]//NOT USE
-        public ActionResult<List<LIST_INSERT_TEST>> test2()
-        {
-            var result = repository.TEST_GET();
-            if(result != null)
-            {
-                return Ok(result);
-            }
-            return NotFound();
-        }
+        // [HttpPost("test")]//NOT USE
+        // public ActionResult<List<LIST_INSERT_TEST>> test(TEST2 data)
+        // {
+        //     var result = repository.TEST_FUNC(data);
+        //     if(result != null)
+        //     {
+        //         return Ok(result);
+        //     }
+        //     return NotFound();
+        // }
+        // [HttpGet("test")]//NOT USE
+        // public ActionResult<List<LIST_INSERT_TEST>> test2()
+        // {
+        //     var result = repository.TEST_GET();
+        //     if(result != null)
+        //     {
+        //         return Ok(result);
+        //     }
+        //     return NotFound();
+        // }
 
     }
 

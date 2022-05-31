@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  max-width: 80%;
+  max-width: 60%;
   margin: 50px auto;
   overflow: auto;
   min-height: 300px;
@@ -98,7 +98,7 @@ body {
   background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .task.reminder {
@@ -242,4 +242,15 @@ footer {
 }
 .pig-home{
   max-width: 100%;
+}
+
+.quiz-ans{
+  margin-right: 10px;
+  max-width: 20%;
+}
+.quiz-form label{
+  margin-left: 5%;
+}
+.quiz-form{
+  margin-top: 1.5%;
 }

@@ -6,7 +6,8 @@ import Showquiz from "./pages/Showquiz";
 import Navbar from "./components/Navbar";
 import { linkUrl } from './urlBackend';
 import axios from "axios";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Doquiz from "./pages/Doquiz";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const [auth, setAuth] = useState("Login")
   const [perr, setPerr] = useState()
   const [quiz, setQuiz] = useState([])
+  const [quizz,setQuizz] = useState([])
   // const [permission,setPer] = useState()
 
   useEffect(() => {
@@ -60,7 +62,9 @@ function App() {
           permission={perr} showQuiz={showQuiz} />}
           {auth === "Home" && <Home />}
           {auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}
-          {auth === "showbox" && <Showquiz quiz={quiz} />} 
+          {auth === "showbox" && <Showquiz quiz={quiz} setQuizz={setQuizz} setAuth={setAuth}/>} 
+          {auth === "doing" && <Doquiz quiz={quizz}/>}
+
       {/* //   </div> */}
 
 

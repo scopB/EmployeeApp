@@ -1,14 +1,13 @@
 import Quizbox from "./Quizbox"
 
-const Showquiz = ({quiz}) => {
-  
+const Showquiz = ({quiz , setQuizz , setAuth}) => {
   
 
   return (
     <div>
       {quiz.map((quizz)=>(
-        <Quizbox name={quizz[0]} text={quizz}/>
-      ))}
+        <Quizbox name={quizz.quiZ_NAME} text={quizz.inserT_BODY} setQuizz={setQuizz} setAuth={setAuth}/>
+      ))} 
     </div>
   )
 }

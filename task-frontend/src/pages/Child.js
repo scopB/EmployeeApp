@@ -1,11 +1,11 @@
 import React from 'react'
 import Showchild from './Showchild'
 
-const Child = ({ onToggle,text}) => {
+const Child = ({text}) => {
   return (
     <div>
         <div >
-            {onToggle && <Showchild text={text} />}
+            {<Showchild text={text} />}
         </div>
     </div>
   )

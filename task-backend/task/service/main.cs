@@ -28,10 +28,10 @@ namespace task.mainservice
                     // Console.WriteLine(ans);
                     var test = database.GetCollection<LIST_INSERT>(COLL_NAME);
                     var insertResult = test.Find(s => s.permissions == "ADMIN").ToList();
-                    if(!ans.Any())
+                    if (!ans.Any())
                     {
                         ans.Add(insertResult);
-                    }   
+                    }
                 }
                 return ans;
             }
@@ -55,10 +55,10 @@ namespace task.mainservice
                     var COLL_NAME = item["name"].AsString;
                     var test = database.GetCollection<LIST_INSERT>(COLL_NAME);
                     var insertResult = test.Find(s => s.permissions == permission).ToList();
-                    if(insertResult.Count()!=0)
+                    if (insertResult.Count() != 0)
                     {
                         ans.Add(insertResult);
-                    }   
+                    }
                 }
                 return ans;
             }
@@ -111,5 +111,44 @@ namespace task.mainservice
                 return false;
             }
         }
+
+        public List<LIST_INSERT_TEST> TEST_FUNC(TEST2 data)
+        {
+            var client = connet();
+            try
+            {
+                var database = client.GetDatabase("TEST");
+                var test = database.GetCollection<LIST_INSERT_TEST>("V1");
+                var data_insert = new LIST_INSERT_TEST
+                {
+                    permissions = data.permissions
+                };
+                var insertResult = test.InsertOneAsync(data_insert);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+
+        public List<LIST_INSERT_TEST> TEST_GET(){
+            var client = connet();
+            try
+                {
+                    var database = client.GetDatabase("TEST");
+                    var test = database.GetCollection<LIST_INSERT_TEST>("V1");
+                    var filter = Builders<LIST_INSERT_TEST>.Filter.ElemMatch(x => x.permissions,x => x.odata == "admin");
+                    var documents = test.Find(filter).ToList();
+                    return documents;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return null;
+        }
+
     }
+
 }

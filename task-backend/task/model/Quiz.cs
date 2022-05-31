@@ -37,6 +37,25 @@ namespace task.quiz
         public Int32 result{get; set;}
         public string permission{get; set;}=string.Empty;
     }
+
+    public record LIST_INSERT_TEST
+    {
+        [BsonElement("_id")]
+        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        [BsonElement("permissions")] 
+        public List<TEST>? permissions {get; set;}
+    }
+
+    public record TEST2
+    {
+        public List<TEST>? permissions {get; set;}
+    }
+
+    public record TEST
+    {
+        public string odata {get; set;} = string.Empty;
+    }
+
     public record FOR_SHOW_DATA
     {
         public string permission{get; set;}=string.Empty;

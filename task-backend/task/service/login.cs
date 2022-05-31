@@ -8,9 +8,10 @@ namespace task.login
 {
     public class LOGIN_MANAGE
     {
+        private PATH CONNECT_PATH = new PATH();
         private MongoClient connet()
         {
-            var settings = "mongodb+srv://admin:1234@emapp.2oey0.mongodb.net/?retryWrites=true&w=majority";
+            var settings = CONNECT_PATH.CONNECTPATH;
             var client = new MongoClient(settings);
             return client;
         }
@@ -19,23 +20,32 @@ namespace task.login
         {
             var client = connet();
             var a = false;
-            var database = client.GetDatabase("EMAPP");
-            var data = database.GetCollection<USER_OF_FETCH>("USER");
-            var query = data.Find(s => s.USERNAME == user_data.USERNAME && s.PASSWORD == user_data.PASSWORD).ToList();
-            foreach (var i in query)
+            try
             {
-                // Console.WriteLine(i.PERMISSION);
-                if (i != null)
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<USER_OF_FETCH>("USER");
+                var query = data.Find(s => s.USERNAME == user_data.USERNAME && s.PASSWORD == user_data.PASSWORD).ToList();
+                foreach (var i in query)
                 {
-                    a = true;
+                    // Console.WriteLine(i.PERMISSION);
+                    if (i != null)
+                    {
+                        a = true;
+                    }
+                    var resultdata = new LOGIN
+                    {
+                        result = a,
+                        permission = i.PERMISSION
+                    };
+                    // Console.WriteLine(resultdata);
+                    return resultdata;
                 }
-                var resultdata = new LOGIN{
-                    result = a,
-                    permission = i.PERMISSION
-                };
-                // Console.WriteLine(resultdata);
-                return resultdata;
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
             return null;
         }
 

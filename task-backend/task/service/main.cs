@@ -7,9 +7,10 @@ namespace task.mainservice
 {
     public class service
     {
+        private PATH CONNECT_PATH = new PATH();
         private MongoClient connet()
         {
-            var settings = "mongodb+srv://admin:1234@emapp.2oey0.mongodb.net/?retryWrites=true&w=majority";
+            var settings = CONNECT_PATH.CONNECTPATH;
             var client = new MongoClient(settings);
             return client;
         }

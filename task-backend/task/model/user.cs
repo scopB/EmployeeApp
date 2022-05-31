@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using task.quiz;
 
 namespace task.user
 {
@@ -19,8 +20,8 @@ namespace task.user
         public string USERNAME { get; set; } = string.Empty;
         public string PASSWORD { get; set; } = string.Empty;
     }
-    public record HOME_USER_CHECK{
-        public string username { get; set;} = string.Empty;
+    public record MAPPING_PERMISSION{
+        public List<TEST>? PerForOne { get; set;}
     }
         
 }

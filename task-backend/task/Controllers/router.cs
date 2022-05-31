@@ -19,16 +19,6 @@ namespace task.Controllers
             LOGIN_C = new LOGIN_MANAGE();
         }
 
-        [HttpGet("getquiz")]//NOT USE
-        public ActionResult<List<List<LIST_INSERT>>> test(){
-            var data = repository.GET_QUIZ();
-            if (data == null)
-            {
-                return NotFound();
-            }
-            return Ok(data);
-        }
-
         [HttpPost("showquiz")]
         public ActionResult<List<LIST_INSERT2>> SHOW_DATA(FOR_SHOW_DATA in_data){
             var data = repository.SHOW_QUIZ(in_data.permission);
@@ -61,37 +51,6 @@ namespace task.Controllers
             }
             return BadRequest();
         }
-
-        [HttpPost("finduser")]//NOT USE
-        public ActionResult<USER_OF_FETCH> find(HOME_USER_CHECK data){
-            var result = repository.finduser(data.username);
-            if(result != null)
-            {
-                return Ok(result);
-            }
-            return NotFound();
-        }
-
-        // [HttpPost("test")]//NOT USE
-        // public ActionResult<List<LIST_INSERT_TEST>> test(TEST2 data)
-        // {
-        //     var result = repository.TEST_FUNC(data);
-        //     if(result != null)
-        //     {
-        //         return Ok(result);
-        //     }
-        //     return NotFound();
-        // }
-        // [HttpGet("test")]//NOT USE
-        // public ActionResult<List<LIST_INSERT_TEST>> test2()
-        // {
-        //     var result = repository.TEST_GET();
-        //     if(result != null)
-        //     {
-        //         return Ok(result);
-        //     }
-        //     return NotFound();
-        // }
 
     }
 

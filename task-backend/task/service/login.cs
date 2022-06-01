@@ -9,7 +9,7 @@ namespace task.login
     public class LOGIN_MANAGE
     {
         private PATH CONNECT_PATH = new PATH();
-        private MongoClient connet()
+        private MongoClient connect()
         {
             var settings = CONNECT_PATH.CONNECTPATH;
             var client = new MongoClient(settings);
@@ -18,7 +18,7 @@ namespace task.login
 
         public LOGIN LOGIN_CHECK(USER_OF_SENT user_data)
         {
-            var client = connet();
+            var client = connect();
             var a = false;
             try
             {

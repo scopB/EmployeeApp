@@ -4,6 +4,7 @@ using task.mainservice;
 using task.mapping;
 using task.perset;
 using task.quiz;
+using task.score;
 using task.sendback;
 using task.user;
 
@@ -82,6 +83,17 @@ namespace task.Controllers
         public ActionResult<Boolean> update_permissB(GET_PERMISS data)
         {
             var result = MAPPING.UPDATE_PERMISS_B(data.main,data.BOSS);
+            if(result == false)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("submit_quiz")]
+        public ActionResult<Boolean> submit_score(GET_SCORE data)
+        {
+            var result = repository.SEND_SCORE(data.username,data.Q_NAME,data.RESULT);
             if(result == false)
             {
                 return BadRequest();

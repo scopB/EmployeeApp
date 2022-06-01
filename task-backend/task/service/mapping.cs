@@ -8,7 +8,7 @@ namespace task.mapping
     public class SERVICE_MAP
     {
         private PATH CONNECT_PATH = new PATH();
-        private MongoClient connet()
+        private MongoClient connect()
         {
             var settings = CONNECT_PATH.CONNECTPATH;
             var client = new MongoClient(settings);
@@ -16,7 +16,7 @@ namespace task.mapping
         }
         public Boolean INSERT_PERMISS(string MY_PERRMISS, List<TEST> HENCHMAN, List<TEST> BOSS)
         {
-            var client = connet();
+            var client = connect();
             try
             {
                 var database = client.GetDatabase("EMAPP");
@@ -40,7 +40,7 @@ namespace task.mapping
 
         public Boolean UPDATE_PERMISS_H(string MY_PERRMISS, List<TEST> HENCHMAN)
         {
-            var client = connet();
+            var client = connect();
             try
             {
                 var database = client.GetDatabase("EMAPP");
@@ -58,7 +58,7 @@ namespace task.mapping
         }
         public Boolean UPDATE_PERMISS_B(string MY_PERRMISS, List<TEST> BOSS)
         {
-            var client = connet();
+            var client = connect();
             try
             {
                 var database = client.GetDatabase("EMAPP");

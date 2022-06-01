@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using task.login;
 using task.mainservice;
+using task.mapping;
+using task.perset;
 using task.quiz;
 using task.sendback;
 using task.user;
@@ -13,10 +15,12 @@ namespace task.Controllers
     {
         private readonly service repository;
         private readonly LOGIN_MANAGE LOGIN_C;
+        private readonly SERVICE_MAP MAPPING; 
         public dataController()
         {
             repository = new service();
             LOGIN_C = new LOGIN_MANAGE();
+            MAPPING = new SERVICE_MAP();
         }
 
         [HttpPost("showquiz")]
@@ -52,6 +56,38 @@ namespace task.Controllers
             return BadRequest();
         }
 
+        [HttpPost("insert_per")]
+        public ActionResult<Boolean> insert_permiss(GET_PERMISS data)
+        {
+            var result = MAPPING.INSERT_PERMISS(data.main,data.HENCHMAN,data.BOSS);
+            if(result == false)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("insert_update_H")]
+        public ActionResult<Boolean> update_permissH(GET_PERMISS data)
+        {
+            var result = MAPPING.UPDATE_PERMISS_H(data.main,data.HENCHMAN);
+            if(result == false)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("insert_update_B")]
+        public ActionResult<Boolean> update_permissB(GET_PERMISS data)
+        {
+            var result = MAPPING.UPDATE_PERMISS_B(data.main,data.BOSS);
+            if(result == false)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
     }
 
 }

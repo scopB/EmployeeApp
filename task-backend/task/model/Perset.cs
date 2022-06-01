@@ -15,4 +15,11 @@ namespace task.perset
         [BsonElement("boss")]
         public List<TEST>? BOSS {get; set;} 
     }
+
+    public record GET_PERMISS
+    {
+        public string main{get; set;} = string.Empty;
+        public List<TEST>? HENCHMAN {get; set;} 
+        public List<TEST>? BOSS {get; set;} 
+    }
 }

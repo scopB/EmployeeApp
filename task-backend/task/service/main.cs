@@ -16,6 +16,22 @@ namespace task.mainservice
             return client;
         }
 
+        // public List<INSERT_SCORE> SHOW_SCORE(string username)
+        // {
+        //     var client = connect();
+        //     try
+        //     {
+        //         var database = client.GetDatabase("USER");
+        //         var data = database.GetCollection<INSERT_SCORE>(username);
+
+        //     }
+        //     catch(Exception ex)
+        //     {
+        //         Console.WriteLine(ex);
+        //     }
+        //     return null;
+        // }
+
         public List<LIST_INSERT2> SHOW_QUIZ(string permission_find,string username)
         {
             var client = connect();

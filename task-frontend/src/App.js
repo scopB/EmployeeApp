@@ -17,6 +17,7 @@ function App() {
   const [perr, setPerr] = useState()
   const [quiz, setQuiz] = useState([])
   const [quizz,setQuizz] = useState([])
+  const [quiz_name,setQuiz_name] = useState([])
   // const [permission,setPer] = useState()
 
   useEffect(() => {
@@ -34,7 +35,9 @@ function App() {
   }, [])
 
   const showQuiz = () => {
-    const sent = { permission: localStorage.getItem("permission") }
+    const per = localStorage.getItem("permission")
+    const name = localStorage.getItem("username") 
+    const sent = { username:name , permission: per }
     axios.post(`${linkUrl.LinkToBackend}/showquiz`, sent).then((res) => {
       setQuiz(res.data)
     })
@@ -63,8 +66,8 @@ function App() {
           permission={perr} showQuiz={showQuiz} />}
           {auth === "Home" && <Home />}
           {auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}
-          {auth === "showbox" && <Showquiz quiz={quiz} setQuizz={setQuizz} setAuth={setAuth}/>} 
-          {auth === "doing" && <Doquiz quiz={quizz}/>}
+          {auth === "showbox" && <Showquiz quiz={quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth}/>} 
+          {auth === "doing" && <Doquiz name={quiz_name} quiz={quizz}/>}
           {auth === "addper" && <Addper />}
 
       {/* //   </div> */}

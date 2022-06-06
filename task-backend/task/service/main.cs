@@ -16,7 +16,7 @@ namespace task.mainservice
             return client;
         }
 
-        public List<LIST_INSERT2> SHOW_QUIZ(string permission_find)
+        public List<LIST_INSERT2> SHOW_QUIZ(string permission_find,string username)
         {
             var client = connect();
             try
@@ -26,7 +26,24 @@ namespace task.mainservice
                 var data = database.GetCollection<LIST_INSERT2>("QUIZ");
                 var filter = Builders<LIST_INSERT2>.Filter.ElemMatch(x => x.permissions, x => x.permission == permission_find);
                 var documents = data.Find(filter).ToList();
-                return documents;
+                database = client.GetDatabase("USER");
+                var data2 = database.GetCollection<INSERT_SCORE>(username);
+                var result = data2.Find(_ => true).ToList();
+                if(!result.Any())
+                {
+                    return documents;
+                }
+                foreach(var doc in documents)
+                {
+                    foreach (var j in result)
+                    {
+                        if(doc.QUIZ_NAME != j.Q_NAME)
+                        {
+                            ans.Add(doc);
+                        }
+                    }
+                }
+                return ans;
             }
             catch (Exception ex)
             {
@@ -80,6 +97,8 @@ namespace task.mainservice
                 return false;
             }
         }
+
+        
 
 
 

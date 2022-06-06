@@ -35,6 +35,7 @@ namespace task.quiz
 
     public record FOR_SHOW_DATA
     {
+        public string username {get; set;} = string.Empty;
         public string permission{get; set;}=string.Empty;
     }
 

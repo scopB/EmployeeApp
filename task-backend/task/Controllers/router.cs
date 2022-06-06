@@ -26,7 +26,7 @@ namespace task.Controllers
 
         [HttpPost("showquiz")]
         public ActionResult<List<LIST_INSERT2>> SHOW_DATA(FOR_SHOW_DATA in_data){
-            var data = repository.SHOW_QUIZ(in_data.permission);
+            var data = repository.SHOW_QUIZ(in_data.permission,in_data.username);
             if (data == null)
             {
                 return NotFound();

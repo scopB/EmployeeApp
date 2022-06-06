@@ -8,6 +8,7 @@ const Doquiz = ({quiz}) => {
       {quiz.map((res)=>(
             <Child text={res}/>
         ))}
+      <button className='btn btn-block'>Submit</button>
 
     </div>
   )

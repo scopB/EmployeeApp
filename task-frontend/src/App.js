@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import { linkUrl } from './urlBackend';
 import axios from "axios";
 import Doquiz from "./pages/Doquiz";
+import Addper from "./pages/Addper";
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -64,6 +65,7 @@ function App() {
           {auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}
           {auth === "showbox" && <Showquiz quiz={quiz} setQuizz={setQuizz} setAuth={setAuth}/>} 
           {auth === "doing" && <Doquiz quiz={quizz}/>}
+          {auth === "addper" && <Addper />}
 
       {/* //   </div> */}
 

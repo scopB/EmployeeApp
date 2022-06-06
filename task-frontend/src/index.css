@@ -21,6 +21,15 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
+.container2 {
+  max-width: 60%;
+  margin: 50px auto;
+  /* min-height: 700px; */
+  border: 1px solid rgb(70, 180, 134);
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+}
 
 .header {
   display: flex;

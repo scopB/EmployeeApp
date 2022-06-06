@@ -20,6 +20,7 @@ namespace task.score
     }
     public record SCORE_BODY
     {
+        public string number_quiz {get; set;} = string.Empty;
         public Int32 score {get; set;}
     }
 }

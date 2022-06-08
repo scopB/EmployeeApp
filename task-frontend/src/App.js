@@ -8,6 +8,7 @@ import { linkUrl } from './urlBackend';
 import axios from "axios";
 import Doquiz from "./pages/Doquiz";
 import Addper from "./pages/Addper";
+import Score from "./pages/Score";
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -69,6 +70,7 @@ function App() {
           {auth === "showbox" && <Showquiz quiz={quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth}/>} 
           {auth === "doing" && <Doquiz name={quiz_name} quiz={quizz}/>}
           {auth === "addper" && <Addper />}
+          {auth === "score" && <Score />}
 
       {/* //   </div> */}
 

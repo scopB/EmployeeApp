@@ -39,12 +39,19 @@ namespace task.mainservice
                     }
                     return result;
                 }
-                else
+                else if(quizname == string.Empty)
                 {
                     var database = client.GetDatabase("USER");
                     var data = database.GetCollection<INSERT_SCORE>(username);
                     var value = data.Find(_ => true).ToList();
                     return value;
+                }
+                else 
+                {
+                    var database = client.GetDatabase("USER");
+                    var data = database.GetCollection<INSERT_SCORE>(username);
+                    var doc = data.Find(x => x.Q_NAME == quizname).ToList();
+                    return doc;
                 }
             }
             catch (Exception ex)
@@ -99,6 +106,7 @@ namespace task.mainservice
                 var test = database.GetCollection<INSERT_SCORE>(username);
                 INSERT_SCORE data = new INSERT_SCORE
                 {
+                    username = username,
                     Q_NAME = quiz_name,
                     RESULT = result
                 };

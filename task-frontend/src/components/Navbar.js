@@ -27,6 +27,11 @@ const Navbar = ({logout,setAuth,permission,showQuiz}) => {
         setAuth("addper")
     }
     
+    const onScore = () =>{
+        localStorage.setItem("auth","score")
+        setAuth("score")
+    }
+    
     return (
         <div className='navbar-con'>
             <ul>
@@ -34,6 +39,7 @@ const Navbar = ({logout,setAuth,permission,showQuiz}) => {
                 <button className='navbar-box' href="#your_quiz" onClick={onShow}>You Quiz</button>
                 { permission === "admin" && <button className='navbar-box' href="#quiz_create" onClick={onCreate}>New Quiz</button>}
                 { permission === "admin" && <button className='navbar-box' href="#addper" onClick={onPer}>Add Permission</button>}
+                { permission === "admin" && <button className='navbar-box' href="#show" onClick={onScore}>Show Score</button> }
                 <button className='navbar-box2 ' onClick={onOut} href="/">Logout</button>
             </ul>
         </div>

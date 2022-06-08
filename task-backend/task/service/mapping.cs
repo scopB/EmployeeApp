@@ -66,6 +66,7 @@ namespace task.mapping
                 var filter = Builders<FETCH_PERMISS>.Filter.Eq(s => s.main, MY_PERRMISS);
                 var update = Builders<FETCH_PERMISS>.Update.Set("BOSS", BOSS);
                 var query = data.UpdateOne(filter,update);
+                
                 return true;
             }
             catch (Exception ex)

@@ -100,6 +100,17 @@ namespace task.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("search_score")]
+        public ActionResult<List<INSERT_SCORE>> search(SEARCH_SCORE get_data_)
+        {
+            var result = repository.SHOW_SCORE(get_data_.quiz_name,get_data_.username);
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            return new StatusCodeResult(400);
+        }
     }
 
 }

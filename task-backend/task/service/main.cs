@@ -16,23 +16,45 @@ namespace task.mainservice
             return client;
         }
 
-        // public List<INSERT_SCORE> SHOW_SCORE(string username)
-        // {
-        //     var client = connect();
-        //     try
-        //     {
-        //         var database = client.GetDatabase("USER");
-        //         var data = database.GetCollection<INSERT_SCORE>(username);
+        public List<INSERT_SCORE> SHOW_SCORE(string quizname, string username)
+        {
+            var client = connect();
+            var result = new List<INSERT_SCORE>();
+            try
+            {
+                if (username == string.Empty)
+                {
+                    var db = client.GetDatabase("USER");
+                    // var CollectionName = new List<string>();
+                    foreach (var item in db.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
+                    {
+                        var name = item["name"].ToString();
+                        // Console.WriteLine(name);
+                        var test = db.GetCollection<INSERT_SCORE>(name);
+                        var doc = test.Find(x => x.Q_NAME == quizname).ToList();
+                        foreach (var i in doc)
+                        {
+                            result.Add(i);
+                        }
+                    }
+                    return result;
+                }
+                else
+                {
+                    var database = client.GetDatabase("USER");
+                    var data = database.GetCollection<INSERT_SCORE>(username);
+                    var value = data.Find(_ => true).ToList();
+                    return value;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
 
-        //     }
-        //     catch(Exception ex)
-        //     {
-        //         Console.WriteLine(ex);
-        //     }
-        //     return null;
-        // }
-
-        public List<LIST_INSERT2> SHOW_QUIZ(string permission_find,string username)
+        public List<LIST_INSERT2> SHOW_QUIZ(string permission_find, string username)
         {
             var client = connect();
             try
@@ -45,15 +67,15 @@ namespace task.mainservice
                 database = client.GetDatabase("USER");
                 var data2 = database.GetCollection<INSERT_SCORE>(username);
                 var result = data2.Find(_ => true).ToList();
-                if(!result.Any())
+                if (!result.Any())
                 {
                     return documents;
                 }
-                foreach(var doc in documents)
+                foreach (var doc in documents)
                 {
                     foreach (var j in result)
                     {
-                        if(doc.QUIZ_NAME != j.Q_NAME)
+                        if (doc.QUIZ_NAME != j.Q_NAME)
                         {
                             ans.Add(doc);
                         }
@@ -68,14 +90,15 @@ namespace task.mainservice
             return null;
         }
 
-        public Boolean SEND_SCORE(string username,string quiz_name,List<SCORE_BODY> result)
+        public Boolean SEND_SCORE(string username, string quiz_name, List<SCORE_BODY> result)
         {
             var client = connect();
             try
             {
                 var database = client.GetDatabase("USER");
                 var test = database.GetCollection<INSERT_SCORE>(username);
-                INSERT_SCORE data = new INSERT_SCORE{
+                INSERT_SCORE data = new INSERT_SCORE
+                {
                     Q_NAME = quiz_name,
                     RESULT = result
                 };
@@ -113,10 +136,6 @@ namespace task.mainservice
                 return false;
             }
         }
-
-        
-
-
 
     }
 

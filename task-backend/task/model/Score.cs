@@ -23,4 +23,10 @@ namespace task.score
         public string number_quiz {get; set;} = string.Empty;
         public Int32 score {get; set;}
     }
+
+    public record SEARCH_SCORE
+    {
+        public string quiz_name {get; set;} = string.Empty;
+        public string username {get; set;} = string.Empty;
+    }
 }

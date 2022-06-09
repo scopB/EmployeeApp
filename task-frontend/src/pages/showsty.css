@@ -1,0 +1,76 @@
+.conner {
+    max-width: 50%;
+    margin-top: 10px;
+    margin-left: 2%;
+    overflow: auto;
+    min-height: 30px;
+    border: 1px solid rgb(227, 110, 77);
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.s-conner{
+    /* max-width: 50%; */
+    margin-top: 10px;
+    margin-left: 2%;
+    margin-right: 2%;
+    overflow: auto;
+    min-height: 10px;
+    border: 1px solid rgb(227, 110, 77);
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.w-1-box{
+    padding: 8px;
+    border: none;
+    width: 40%;
+    border-bottom: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.w-2-buttom{
+    background-color: #84edc7!important;
+    border-radius: 5px;
+    border: none;
+    width: 10%;
+    font-size: 17px;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 4px 12px;
+}
+
+.conner h2{
+    font-size: medium;
+    /* font-family:; */
+}
+
+.scorebox{
+    margin-top: 2%;
+}
+
+.littlebox{
+    margin-top: 5px;
+    /* background-color: rgb(226, 226, 226); */
+    border-radius: 10px;
+    padding: 2%;
+}
+
+.red{
+    background-color: rgb(249, 93, 93);
+}
+
+.orange{
+    background-color: orange;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.lightgreen{
+    background-color: rgb(175, 232, 175);
+}
+
+.green{
+    background-color: rgb(88, 238, 88);
+}

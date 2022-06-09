@@ -11,7 +11,7 @@ const Score = () => {
     function get_search(sendData)
     {
         axios.post(`${linkUrl.LinkToBackend}/search_score`,sendData).then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             setData_body(res.data)
         })
     }

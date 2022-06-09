@@ -9,7 +9,7 @@ import axios from "axios";
 import Doquiz from "./pages/Doquiz";
 import Addper from "./pages/Addper";
 import Score from "./pages/Score";
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 function App() {
@@ -17,15 +17,15 @@ function App() {
   const [auth, setAuth] = useState("Login")
   const [perr, setPerr] = useState()
   const [quiz, setQuiz] = useState([])
-  const [quizz,setQuizz] = useState([])
-  const [quiz_name,setQuiz_name] = useState([])
+  const [quizz, setQuizz] = useState([])
+  const [quiz_name, setQuiz_name] = useState([])
   // const [permission,setPer] = useState()
 
   useEffect(() => {
     if (auth !== "Login") {
       setPerr(localStorage.getItem("permission"))
     }
-    console.log(quiz)
+    // console.log(quiz)
   })
 
   useEffect(() => {
@@ -37,47 +37,49 @@ function App() {
 
   const showQuiz = () => {
     const per = localStorage.getItem("permission")
-    const name = localStorage.getItem("username") 
-    const sent = { username:name , permission: per }
+    const name = localStorage.getItem("username")
+    const sent = { username: name, permission: per }
     axios.post(`${linkUrl.LinkToBackend}/showquiz`, sent).then((res) => {
       setQuiz(res.data)
     })
   }
 
   const onAuth = () => {
-    console.log(auth)
+    // console.log(auth)
     localStorage.setItem("auth", "Home")
     setAuth("Home")
   }
   const Logout = () => {
-    console.log(auth)
+    // console.log(auth)
     localStorage.clear()
     setAuth("Login")
   }
 
   return (
+
     <div>
-    {/* //   <Router>
-    //     <div>
-    //       <Routes>
-    //         <Route path='/' element={<Home />} />
-    //       </Routes> */}
-
+      <Router>
+        <div>
+          {/* //       <Routes> */}
+          {/* //         <Route path='/' element={<Home />} /> */}
+          {/* //       </Routes> */} 
+          
           {auth === "Login" ? <Login login={onAuth} /> : <Navbar logout={Logout} setAuth={setAuth}
-          permission={perr} showQuiz={showQuiz} />}
-          {auth === "Home" && <Home />}
-          {auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}
-          {auth === "showbox" && <Showquiz quiz={quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth}/>} 
-          {auth === "doing" && <Doquiz name={quiz_name} quiz={quizz}/>}
-          {auth === "addper" && <Addper />}
-          {auth === "score" && <Score />}
-
-      {/* //   </div> */}
-
-
-      {/* // </Router> */}
-
-
+            permission={perr} showQuiz={showQuiz} />}
+          <Routes>
+          <Route path='/home' element={auth === "Home" && <Home />} />
+          
+          <Route path='/create-quiz' element={auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}/>
+          <Route path='/quiz' element={
+          auth === "showbox" ? <Showquiz quiz={quiz} 
+          setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} />:
+          auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
+          }/>
+          <Route path='/permission' element={auth === "addper" && <Addper />}/>
+          <Route path='/result' element={auth === "score" && <Score />}/>
+          </Routes>
+        </div>
+      </Router>
     </div>
   )
 }

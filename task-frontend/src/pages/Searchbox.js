@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import './showsty.css'
+
 
 const Searchbox = ({setData}) => {
     const [quizname,setQuizname] = useState()
@@ -8,7 +10,7 @@ const Searchbox = ({setData}) => {
         e.preventDefault()
         if(!quizname && !username)
         {
-            alert('input !!!')
+            alert('input Searchbox')
             return
         }
         if (!quizname) 
@@ -27,11 +29,11 @@ const Searchbox = ({setData}) => {
     }
 
   return (
-    <div>
-        <form onSubmit={onSend}>
-        <input type="text" placeholder='quizname' onChange={(e) => setQuizname(e.target.value)}/>
-        <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)}/>
-        <input type="submit" value="search" />
+    <div >
+        <form onSubmit={onSend} className='s-conner'>
+        <input className='w-1-box' type="text" placeholder='quizname' onChange={(e) => setQuizname(e.target.value)}/>
+        <input className='w-1-box' type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)}/>
+        <input className='w-2-buttom' type="submit" value="search" />
         </form>
     </div>
   )

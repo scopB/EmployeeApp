@@ -80,15 +80,17 @@ namespace task.mainservice
                 }
                 foreach (var doc in documents)
                 {
+                    var check = true;
                     foreach (var j in result)
                     {
-                        if (!Equals(doc.QUIZ_NAME,j.Q_NAME))
+                        if (Equals(doc.QUIZ_NAME,j.Q_NAME))
                         {
-                            if(ans.Contains(doc) == false)
-                            {
-                                ans.Add(doc);
-                            }
+                            check = false;
                         }   
+                    }
+                    if(check == true)
+                    {
+                        ans.Add(doc);
                     }
                 }
                 return ans;

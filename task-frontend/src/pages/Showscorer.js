@@ -7,6 +7,7 @@ const Showscorer = ({ data_body }) => {
                 return (
                     <div className='conner'>
                         <h2>{e.username}</h2>
+                        <h6>{e.q_NAME}</h6>
                         <div className='scorebox'>
                         {e.result.map((a) =>{
                             var x = ""

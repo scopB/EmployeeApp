@@ -3,6 +3,7 @@ import Select from 'react-select';
 
 const Q3 = ({changeState,addquizs}) => {
   const onSubmit = () => {
+    window.location.href='/home'
     addquizs()
     changeState()
   }

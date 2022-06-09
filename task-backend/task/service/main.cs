@@ -82,10 +82,13 @@ namespace task.mainservice
                 {
                     foreach (var j in result)
                     {
-                        if (doc.QUIZ_NAME != j.Q_NAME)
+                        if (!Equals(doc.QUIZ_NAME,j.Q_NAME))
                         {
-                            ans.Add(doc);
-                        }
+                            if(ans.Contains(doc) == false)
+                            {
+                                ans.Add(doc);
+                            }
+                        }   
                     }
                 }
                 return ans;

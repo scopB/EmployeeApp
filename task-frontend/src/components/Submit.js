@@ -9,7 +9,7 @@ function Submit({tasks, onReset , changeState , addquizs}) {
       changeState()
     }
   return (
-    <button onClick={fetchdata} className='btn2'>Submit</button>
+    <button onClick={fetchdata} className='btn2'>Next</button>
   )
 }
 

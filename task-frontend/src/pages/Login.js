@@ -17,7 +17,7 @@ const Login = ({ login }) => {
         localStorage.setItem("status",true)
         localStorage.setItem("username",username)
         localStorage.setItem("permission",res.data.permission)
-        window.location.href='/home'
+        window.location.href='/'
         login()
       }
     })

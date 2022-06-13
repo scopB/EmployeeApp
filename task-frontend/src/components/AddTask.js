@@ -24,7 +24,7 @@ const AddTask = ({onAdd}) => {
                 <input type="text" placeholder='Add QUIZ' 
                 value={text} onChange={(e)=> setText(e.target.value)}/>
             </div>
-            <input type="submit" value='Save Task' className='btn btn-block'/>
+            <input type="submit" value='Add Quiz' className='btn btn-block'/>
         </form>
         
 

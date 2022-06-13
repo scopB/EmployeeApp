@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { linkUrl } from '../urlBackend';
 import Select from 'react-select';
 
@@ -8,13 +8,24 @@ const Uppermiss = () => {
   const [modec, setModec] = useState()
   const [boss, setBoss] = useState([])
 
-  const options = [
-    { value: 'admin', label: 'ADMIN' },
-    { value: 'hr', label: 'HR' },
-    { value: 'dev', label: 'DEV' },
-    { value: 'bi', label: 'BI' },
-    { value: 'EG', label: 'EG' },
-  ];
+  const options = [];
+
+  useEffect(()=>{
+      if(options.length === 0)
+      {
+          get_data()
+      }       
+  })
+
+  const get_data = ()=>{
+      axios.get(`${linkUrl.LinkToBackend}/show_permission`).then((res)=>{
+          res.data.map((e)=>{
+              const temp = { value: e.permission, label: e.permission }
+              // console.log(temp)
+              options.push(temp)
+          })
+      })
+  }
   const mode = [
     { value: 'henchman', label: 'HENCHMAN' },
     { value: 'boss', label: 'BOSS' }

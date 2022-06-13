@@ -57,6 +57,17 @@ namespace task.Controllers
             return BadRequest();
         }
 
+        [HttpGet("show_permission")]
+        public ActionResult<List<SHOW_PERRMISS>> GET_PER()
+        {
+            var result  = MAPPING.GET_PERMISSION();
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+        }
+
         [HttpPost("insert_per")]
         public ActionResult<Boolean> insert_permiss(GET_PERMISS data)
         {

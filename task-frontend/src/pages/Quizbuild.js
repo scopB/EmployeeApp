@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Q2 from './Q2';
 import Q3 from './Q3';
 import Q1 from './Q1';
@@ -19,9 +19,28 @@ const Quizbuild = ({setAuth}) => {
         }
         if (state === "C") {
             setState("A")
-            localStorage.setItem("auth","Home")
-            window.location.reload(false);
+            localStorage.setItem("auth","showbox")
+            window.location.href='/quiz'
+            // window.location.reload(false);
         }
+    }
+    const options = [];
+
+    useEffect(()=>{
+        if(options.length === 0)
+        {
+            get_data()
+        }       
+    })
+
+    const get_data = ()=>{
+        axios.get(`${linkUrl.LinkToBackend}/show_permission`).then((res)=>{
+            res.data.map((e)=>{
+                const temp = { value: e.permission, label: e.permission }
+                // console.log(temp)
+                options.push(temp)
+            })
+        })
     }
 
     const addQuiz = (data) => {
@@ -47,7 +66,7 @@ const Quizbuild = ({setAuth}) => {
 
     return (
         <div>
-            {state === "A" ? <Q1 changeState={changeState} addquizs={addQuiz}/> : state === "B" ?
+            {state === "A" ? <Q1 changeState={changeState} addquizs={addQuiz} options={options}/> : state === "B" ?
                 <Q2 changeState={changeState} addquizs={addQuiz}/> :
                 <Q3 changeState={changeState} addquizs={addQuiz}/>}
         </div>

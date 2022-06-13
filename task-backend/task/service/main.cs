@@ -12,7 +12,9 @@ namespace task.mainservice
         private MongoClient connect()
         {
             var settings = CONNECT_PATH.CONNECTPATH;
-            var client = new MongoClient(settings);
+            var test = MongoClientSettings.FromConnectionString(CONNECT_PATH.CONNECTPATH);
+            test.ServerApi = new ServerApi(ServerApiVersion.V1);
+            var client = new MongoClient(test);
             return client;
         }
 

@@ -1,6 +1,11 @@
 import Task from "./Task"
 
 const Tasks = ({tasks,onDelete}) => {
+  // function checklog(){
+  //   tasks.map((e)=>{
+  //     console.log(e.id)
+  //   })    
+  // }
   // console.log(test)
   return (
     <div>

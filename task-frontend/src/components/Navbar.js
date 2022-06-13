@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 const Navbar = ({logout,setAuth,permission,showQuiz}) => {
 
     useEffect(()=>{
-        console.log("TEST")
+        // console.log("TEST")
         showQuiz()
     },[])
 
     const onHome = () => {
-        window.location.href='/home'
+        window.location.href='/'
         localStorage.setItem("auth","Home")
         setAuth("Home")
     }

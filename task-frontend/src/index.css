@@ -14,7 +14,7 @@ body {
 .container {
   max-width: 60%;
   margin: 50px auto;
-  overflow: auto;
+  /* overflow: auto; */
   min-height: 300px;
   border: 1px solid rgb(70, 180, 134);
   background-color: white;

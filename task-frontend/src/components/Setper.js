@@ -1,18 +1,29 @@
 import Select from 'react-select';
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect} from 'react'
 import { linkUrl } from '../urlBackend';
 
 const Setper = ({permission,henchman,boss,setPermission,setHenchman,setBoss}) => {
     // const [permissionData,setPermissionData] = useState()
 
-    const options = [
-        { value: 'admin', label: 'ADMIN' },
-        { value: 'hr', label: 'HR' },
-        { value: 'dev', label: 'DEV' },
-        { value: 'bi', label: 'BI' },
-        { value: 'EG', label: 'EG' },
-    ];
+    const options = [];
+
+    useEffect(()=>{
+        if(options.length === 0)
+        {
+            get_data()
+        }       
+    })
+
+    const get_data = ()=>{
+        axios.get(`${linkUrl.LinkToBackend}/show_permission`).then((res)=>{
+            res.data.map((e)=>{
+                const temp = { value: e.permission, label: e.permission }
+                // console.log(temp)
+                options.push(temp)
+            })
+        })
+    }
     const setPermiss = (e) =>{
         e.preventDefault()
         const h_data = []

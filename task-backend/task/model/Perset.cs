@@ -22,4 +22,8 @@ namespace task.perset
         public List<TEST>? HENCHMAN {get; set;} 
         public List<TEST>? BOSS {get; set;} 
     }
+
+    public record SHOW_PERRMISS{
+        public string permission {get; set;} = string.Empty;
+    }
 }

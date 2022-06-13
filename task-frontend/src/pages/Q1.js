@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select';
 
-const Q1 = ({ changeState, addquizs }) => {
+const Q1 = ({ changeState, addquizs ,options}) => {
     const [name, setName] = useState('')
     const [permission, setPermission] = useState([])
     // const [permissions, setPermissions] = useState([])
@@ -27,10 +27,9 @@ const Q1 = ({ changeState, addquizs }) => {
         changeState()
     }
 
-    const options = [
-        { value: 'admin', label: 'ADMIN' },
-        { value: 'hr', label: 'HR' },
-    ];
+    
+
+   
 
     return (
         <div>

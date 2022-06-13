@@ -63,11 +63,10 @@ function App() {
           {/* //       <Routes> */}
           {/* //         <Route path='/' element={<Home />} /> */}
           {/* //       </Routes> */} 
-          
-          {auth === "Login" ? <Login login={onAuth} /> : <Navbar logout={Logout} setAuth={setAuth}
+          {auth !== "Login" &&  <Navbar logout={Logout} setAuth={setAuth}
             permission={perr} showQuiz={showQuiz} />}
-          <Routes>
-          <Route path='/home' element={auth === "Home" && <Home />} />
+          <Routes>          
+          <Route path='/' element={auth === "Home" ? <Home />: auth === "Login" && <Login login={onAuth} />} />
           
           <Route path='/create-quiz' element={auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}/>
           <Route path='/quiz' element={

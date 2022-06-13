@@ -26,5 +26,5 @@ namespace task.user
         
     public record PATH{
         public string CONNECTPATH {get; init;} = "mongodb+srv://admin:1234@emapp.2oey0.mongodb.net/?retryWrites=true&w=majority";
-    }
+    }                                            
 }

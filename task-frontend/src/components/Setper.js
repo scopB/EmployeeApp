@@ -30,18 +30,18 @@ const Setper = ({permission,henchman,boss,setPermission,setHenchman,setBoss}) =>
         henchman.forEach((e) => {
             h_data.push({permission : e.value})
         })
-        console.log(h_data)
+        // console.log(h_data)
         const b_data = []
         boss.forEach((e) => {
             b_data.push({permission : e.value})
         })
-        console.log(b_data)
-        const newPer = {main:permission.value,henchman:h_data,boss:b_data}
-        console.log(newPer)
+        // console.log(b_data)
+        const newPer = {main:permission,henchman:h_data,boss:b_data}
+        // console.log(newPer)
         // setPermissionData(newPer)
 
         axios.post(`${linkUrl.LinkToBackend}/insert_per`,newPer).then((res)=>{
-            console.log(res)
+            // console.log(res)
             window.location.reload(false);
         })
     }
@@ -50,11 +50,8 @@ const Setper = ({permission,henchman,boss,setPermission,setHenchman,setBoss}) =>
             <form className='add-form' onSubmit={setPermiss}>
                 <div className='form-control'>
                     <label>Permission</label>
-                    <Select
-                        defaultValue={permission}
-                        onChange={setPermission}
-                        options={options}
-                    />
+                    <input type="text" placeholder='Add QUIZ Name'
+                            value={permission} onChange={(e) => setPermission(e.target.value)} />
                     <label>Set Henchman</label>
                     <Select
                         isMulti

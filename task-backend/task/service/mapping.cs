@@ -33,7 +33,10 @@ namespace task.mapping
                     {
                         permission = i.main
                     };
-                    result.Add(temp);
+                    if(!result.Contains(temp))
+                    {
+                        result.Add(temp);
+                    }
                 }
                 return result;
             }

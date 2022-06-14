@@ -10,6 +10,7 @@ import Doquiz from "./pages/Doquiz";
 import Addper from "./pages/Addper";
 import Score from "./pages/Score";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Backnavbar from "./pages/Backnavbar";
 
 
 function App() {
@@ -59,24 +60,25 @@ function App() {
 
     <div>
       <Router>
-        <div>
-          {/* //       <Routes> */}
-          {/* //         <Route path='/' element={<Home />} /> */}
-          {/* //       </Routes> */} 
-          {auth !== "Login" &&  <Navbar logout={Logout} setAuth={setAuth}
+        <div >
+          {auth !== "Login" && <Navbar logout={Logout} setAuth={setAuth}
             permission={perr} showQuiz={showQuiz} />}
-          <Routes>          
-          <Route path='/' element={auth === "Home" ? <Home />: auth === "Login" && <Login login={onAuth} />} />
+          <div className="test-page">
+            <Routes>
+              <Route path='/' element={auth === "Home" ? <Home /> : auth === "Login" && <Login login={onAuth} />} />
+
+              <Route path='/create-quiz' element={auth === "b_quiz" && <Quizbuild setAuth={setAuth} />} />
+              <Route path='/quiz' element={
+                auth === "showbox" ? <Showquiz quiz={quiz}
+                  setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} /> :
+                  auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
+              } />
+              <Route path='/permission' element={auth === "addper" && <Addper />} />
+              <Route path='/result' element={auth === "score" && <Score />} />
+            </Routes>
+            </div>
+            <Backnavbar />
           
-          <Route path='/create-quiz' element={auth === "b_quiz" && <Quizbuild setAuth={setAuth} />}/>
-          <Route path='/quiz' element={
-          auth === "showbox" ? <Showquiz quiz={quiz} 
-          setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} />:
-          auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
-          }/>
-          <Route path='/permission' element={auth === "addper" && <Addper />}/>
-          <Route path='/result' element={auth === "score" && <Score />}/>
-          </Routes>
         </div>
       </Router>
     </div>

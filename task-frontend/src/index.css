@@ -345,3 +345,24 @@ footer {
   font-size: 15px;
   font-family: inherit;
 }
+
+.navbar-buttom{
+  overflow: hidden;
+  color: white;
+  background-color: #333;
+  /* bottom: 0; */
+  width: 100%;
+  height: 10%;
+}
+
+.test-page{
+  /* height: 100%; */
+  margin-bottom: 10px;
+}
+
+  /* @media only screen and ( max-height:1000px){
+    .navbar-buttom{
+      display: none !important;
+    }
+  
+} */

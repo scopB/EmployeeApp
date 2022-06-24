@@ -11,6 +11,7 @@ import Addper from "./pages/Addper";
 import Score from "./pages/Score";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Backnavbar from "./pages/Backnavbar";
+import AddUser from "./pages/AddUser";
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
   const [quizz, setQuizz] = useState([])
   const [quiz_name, setQuiz_name] = useState([])
   // const [permission,setPer] = useState()
-
+  const name = localStorage.getItem("username")
   useEffect(() => {
     if (auth !== "Login") {
       setPerr(localStorage.getItem("permission"))
@@ -62,7 +63,7 @@ function App() {
       <Router>
         <div >
           {auth !== "Login" && <Navbar logout={Logout} setAuth={setAuth}
-            permission={perr} showQuiz={showQuiz} />}
+            permission={perr} showQuiz={showQuiz} name={name}/>}
           <div className="test-page">
             <Routes>
               <Route path='/' element={auth === "Home" ? <Home /> : auth === "Login" && <Login login={onAuth} />} />
@@ -75,9 +76,10 @@ function App() {
               } />
               <Route path='/permission' element={auth === "addper" && <Addper />} />
               <Route path='/result' element={auth === "score" && <Score />} />
+              <Route path='/addUser' element={auth === "addUser" && <AddUser />} />
             </Routes>
             </div>
-            <Backnavbar />
+            {/* <Backnavbar /> */}
           
         </div>
       </Router>

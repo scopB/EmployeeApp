@@ -7,7 +7,7 @@ namespace task.user
     public record USER_OF_FETCH
     {
         [BsonElement("_id")]
-        public ObjectId Id { get; set; }
+        public ObjectId Id { get; set; } 
         [BsonElement("username")]
         public string USERNAME { get; set; } = string.Empty;
         [BsonElement("password")]
@@ -19,6 +19,12 @@ namespace task.user
     {
         public string USERNAME { get; set; } = string.Empty;
         public string PASSWORD { get; set; } = string.Empty;
+    }
+    public record USER_OF_REG
+    {
+        public string USERNAME { get; set; } = string.Empty;
+        public string PASSWORD { get; set; } = string.Empty;
+        public string PERMISSION { get; set; } = string.Empty;
     }
     public record MAPPING_PERMISSION{
         public List<TEST>? PerForOne { get; set;}

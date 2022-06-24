@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-const Navbar = ({ logout, setAuth, permission, showQuiz }) => {
-
+const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
+    // console.log(name)
     useEffect(() => {
         // console.log("TEST")
         showQuiz()
     }, [])
-
+    
     const onHome = () => {
         window.location.href = '/'
         localStorage.setItem("auth", "Home")
@@ -38,6 +38,12 @@ const Navbar = ({ logout, setAuth, permission, showQuiz }) => {
         setAuth("score")
     }
 
+    const addUser = () =>{
+        window.location.href = '/addUser'
+        localStorage.setItem("auth", "addUser")
+        setAuth("addUser")
+    }
+
     return (
         <div>
             <div className='navbar-con'>
@@ -47,7 +53,8 @@ const Navbar = ({ logout, setAuth, permission, showQuiz }) => {
                     {permission === "admin" && <button className='navbar-box' onClick={onCreate}>New Quiz</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onPer}>Add Permission</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onScore}>Show Score</button>}
-                    <button className='navbar-box2 ' onClick={onOut} href="/">Logout</button>
+                    {permission === "admin" && <button className='navbar-box' onClick={addUser}>Add User</button>}
+                    <button className='navbar-box2 ' onClick={onOut} href="/">Logout {name}</button>
                 </ul>
             </div>
         </div>

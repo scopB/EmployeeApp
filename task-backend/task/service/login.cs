@@ -52,5 +52,27 @@ namespace task.login
             return null;
         }
 
+        public Boolean register(USER_OF_REG user){
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<USER_OF_FETCH>("USER");
+                var newUser = new USER_OF_FETCH{
+                    Id = ObjectId.GenerateNewId(),
+                    USERNAME = user.USERNAME,
+                    PASSWORD = user.PASSWORD,
+                    PERMISSION = user.PERMISSION
+                };
+                var dataresult = data.InsertOneAsync(newUser);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return false;
+        }
+
     }
 }

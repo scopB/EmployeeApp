@@ -56,6 +56,17 @@ namespace task.Controllers
             }
             return BadRequest();
         }
+        [HttpPost("register")]
+        public ActionResult<Boolean> register(USER_OF_REG data)
+        {
+            var result = LOGIN_C.register(data);
+            // Console.WriteLine(result);
+            if (result == true)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+        }
 
         [HttpGet("show_permission")]
         public ActionResult<List<SHOW_PERRMISS>> GET_PER()

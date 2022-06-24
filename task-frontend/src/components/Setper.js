@@ -50,7 +50,7 @@ const Setper = ({permission,henchman,boss,setPermission,setHenchman,setBoss}) =>
             <form className='add-form' onSubmit={setPermiss}>
                 <div className='form-control'>
                     <label>Permission</label>
-                    <input type="text" placeholder='Add QUIZ Name'
+                    <input type="text" placeholder='Add New Permission'
                             value={permission} onChange={(e) => setPermission(e.target.value)} />
                     <label>Set Henchman</label>
                     <Select

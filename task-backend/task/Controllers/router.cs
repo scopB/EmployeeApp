@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ore.structure;
 using task.login;
 using task.mainservice;
 using task.mapping;
@@ -9,6 +10,7 @@ using task.sendback;
 using task.token;
 using task.token_model;
 using task.user;
+using task.ore_mangement;
 
 namespace task.Controllers
 {
@@ -20,12 +22,14 @@ namespace task.Controllers
         private readonly LOGIN_MANAGE LOGIN_C;
         private readonly SERVICE_MAP MAPPING;
         private readonly token_program token_repository;
+        private readonly ore_mangement_ ore_repository;
         public dataController()
         {
             repository = new service();
             LOGIN_C = new LOGIN_MANAGE();
             MAPPING = new SERVICE_MAP();
             token_repository = new token_program();
+            ore_repository = new ore_mangement_();
         }
 
         [HttpPost("showquiz")]
@@ -153,6 +157,20 @@ namespace task.Controllers
                 return Ok(result);
             }
             return new StatusCodeResult(400);
+        }
+
+        [HttpPost("insert_user")]
+        public ActionResult<Boolean> insert_user(USER_STR user)
+        {
+            var result = LOGIN_C.NEW_REGISTER(user);
+            return Ok(result);
+        }
+
+        [HttpPost("insert_ore")]
+        public ActionResult<Boolean> insert_ore(ORE_STR data)
+        {
+            var result = ore_repository.INSERT_ORE_STR(data);
+            return result;
         }
     }
 

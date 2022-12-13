@@ -39,4 +39,43 @@ namespace task.quiz
         public string permission{get; set;}=string.Empty;
     }
 
+    public record QUIZ_SUPDETAIL
+    {
+        public string sd_name {get;set;} = string.Empty;
+        public string sd_choice01 {get;set;} = string.Empty; 
+        public string sd_choice02 {get;set;} = string.Empty; 
+        public string sd_choice03 {get;set;} = string.Empty; 
+        public string sd_choice04 {get;set;} = string.Empty; 
+        public string sd_choice05 {get;set;} = string.Empty; 
+        public int sd_point01 {get;set;} 
+        public int sd_point02 {get;set;} 
+        public int sd_point03 {get;set;} 
+        public int sd_point04 {get;set;} 
+        public int sd_point05 {get;set;} 
+    }
+
+    public record QUIZ_SUPTOPIC
+    {
+        public string st_name {get;set;} = string.Empty;
+        public int st_weight {get;set;}
+        public List<QUIZ_SUPDETAIL>? st_supdetail {get;set;}
+    }
+
+    public record QUIZ_MAINTOPIC
+    {
+        public string mt_name {get;set;} = string.Empty;
+        public int mt_weight {get;set;}
+        public List<QUIZ_SUPTOPIC>? mt_suptopic {get;set;}
+
+    }
+
+    public record DOC_FORM
+    {
+        public int doc_id {get;set;}
+        public int doc_createbyid {get;set;}
+        public int doc_foruserid {get;set;}
+        public long doc_createdate {get;set;}
+        public List<QUIZ_MAINTOPIC>? doc_maintopic {get;set;}
+    }
+
 }

@@ -26,4 +26,29 @@ namespace task.perset
     public record SHOW_PERRMISS{
         public string permission {get; set;} = string.Empty;
     }
+
+    public record SHOW_DOC_INPUT
+    {
+        public int user_code {get;set;}
+        public string year {get;set;} = string.Empty;
+    }
+
+    public record UPDATE_ST_DOC_INPUT
+    {
+        public int doc_id {get;set;}
+        public string year {get;set;} = string.Empty;
+        public string status_update {get;set;} = string.Empty;
+    }
+
+    public record UPDATE_LS_DOC_INPUT
+    {
+        public int doc_id {get;set;}
+        public string year {get;set;} = string.Empty;
+        public long last_see {get;set;} 
+    }
+    public record FIND_HM_INPUT
+    {
+        public int user_code {get;set;}
+    }
+
 }

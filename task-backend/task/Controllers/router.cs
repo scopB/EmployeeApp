@@ -172,6 +172,44 @@ namespace task.Controllers
             var result = ore_repository.INSERT_ORE_STR(data);
             return result;
         }
+
+        [HttpPost("insert_doc")]
+        public ActionResult<Boolean> insert_doc(DOC_FORM data)
+        {
+            var result = repository.INSERT_DOC(data,"2566");
+            return result;
+        }
+
+        [HttpPost("show_doc")]
+        public ActionResult<List<DOC_FORM>> show_document(SHOW_DOC_INPUT data)
+        {
+            var result = repository.SHOW_DOC_FOR_USER(data.user_code,data.year);
+            return result;
+        }
+
+        [HttpPost("update_status_doc")]
+        public ActionResult<Boolean> update_kpistatus(UPDATE_ST_DOC_INPUT data)
+        {
+            var result = repository.UPDATE_STATUS_DOC(data.doc_id,data.status_update,data.year);
+            return result;
+        }
+
+        [HttpPost("update_lastsee_doc")]
+        public ActionResult<Boolean> update_last_see(UPDATE_LS_DOC_INPUT data)
+        {
+            var result = repository.UPDATE_LASTSEE_DOC(data.doc_id,data.last_see,data.year);
+            return result;
+        }
+
+        [HttpPost("find_henchman")]
+        public ActionResult<List<USER_STR_MONGO>> find_henchman(FIND_HM_INPUT data)
+        {
+            var result = LOGIN_C.FIND_HENCHMAN(data.user_code);
+            return result;
+        }
+
+
+        
     }
 
 }

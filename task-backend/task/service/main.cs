@@ -154,6 +154,96 @@ namespace task.mainservice
             }
         }
 
+        public Boolean INSERT_DOC (DOC_FORM data,string year_doc)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("DOCUMENT");
+                var test = database.GetCollection<DOC_FORM>(year_doc);
+                var data_insert = new DOC_FORM
+                {
+                    doc_id = data.doc_id,
+                    doc_createbyid = data.doc_createbyid,
+                    doc_createdate = data.doc_createdate,
+                    doc_foruserid = data.doc_foruserid,
+                    doc_maintopic = data.doc_maintopic
+                };
+                var insertResult = test.InsertOneAsync(data_insert);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        public List<DOC_FORM> SHOW_DOC_FOR_USER (int user_code,string year)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("DOCUMENT");
+                List<DOC_FORM> show_data = new List<DOC_FORM>();
+                var data = database.GetCollection<DOC_FORM>(year);
+                var filter = Builders<DOC_FORM>.Filter.Eq(s => s.doc_foruserid, user_code);
+                var documents = data.Find(filter).ToList();
+                foreach(var i in documents)
+                {
+                    show_data.Add(i);
+                }
+                return show_data;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
+        public Boolean UPDATE_STATUS_DOC(int doc_id,string status_update,string year)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("DOCUMENT");
+                var data = database.GetCollection<DOC_FORM>(year);
+                var filter = Builders<DOC_FORM>.Filter.Eq(s => s.doc_id, doc_id);
+                var update = Builders<DOC_FORM>.Update.Set(s => s.st_statuskpi, status_update);
+                var result = data.UpdateOneAsync(filter, update);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        public Boolean UPDATE_LASTSEE_DOC(int doc_id,long st_lastsee,string year)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("DOCUMENT");
+                var data = database.GetCollection<DOC_FORM>(year);
+                var filter = Builders<DOC_FORM>.Filter.Eq(s => s.doc_id, doc_id);
+                var update = Builders<DOC_FORM>.Update.Set(s => s.st_lastsee, st_lastsee);
+                var result = data.UpdateOneAsync(filter, update);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+
+
+        
+
     }
 
 }

@@ -13,7 +13,6 @@ namespace ore.structure
         public string ore_path {get;set;} = string.Empty;
         public long create_date {get;set;}
         public int ore_createby {get;set;}
-        public int ore_bossid {get;set;}
     }
 
     public record USER_STR
@@ -21,6 +20,7 @@ namespace ore.structure
         public int ps_id {get;set;}
         public int ps_org_id {get;set;}
         public string ps_name {get;set;} = string.Empty;
+        public long st_lastlogin {get;set;}
         public string ps_lastname {get;set;} = string.Empty;
         public string ps_username {get;set;} = string.Empty;
         public string ps_password {get;set;} = string.Empty;
@@ -42,9 +42,11 @@ namespace ore.structure
 
     public record USER_STR_MONGO
     {
-        [BsonElement("ps_id")]
+        [BsonElement("_id")]
+        public ObjectId _id {get;set;}
+        [BsonElement("ps_code")]
         public int ps_id {get;set;}
-        [BsonElement("ps_org_id")]
+        [BsonElement("ps_org_code")]
         public int ps_org_id {get;set;}
         [BsonElement("ps_name")]
         public string ps_name {get;set;} = string.Empty;
@@ -58,14 +60,16 @@ namespace ore.structure
         public long ps_birthday {get;set;} 
         [BsonElement("ps_cizid")]
         public string ps_cizid {get;set;} = string.Empty;
-        [BsonElement("ps_bossid")]
+        [BsonElement("ps_bosscode")]
         public int ps_bossid {get;set;} 
+        [BsonElement("ps_lastlogin")]
+        public long ps_lastlogin {get;set;}
         [BsonElement("ps_position")]
         public string ps_position {get;set;} = string.Empty;
     }
     public record ORE_STR_MONGO
     {
-        [BsonElement("ore_id")]
+        [BsonElement("ore_code")]
         public int ore_id {get;set;}
         [BsonElement("ore_supervisor")]
         public int ore_supervisor {get;set;}
@@ -81,7 +85,5 @@ namespace ore.structure
         public long create_date {get;set;}
         [BsonElement("ore_createby")]
         public int ore_createby {get;set;}
-        [BsonElement("ore_bossid")]
-        public int ore_bossid {get;set;}
     }
 }

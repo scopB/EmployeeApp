@@ -27,7 +27,6 @@ namespace task.ore_mangement
                 var database = client.GetDatabase("EMAPP");
                 var data = database.GetCollection<ORE_STR_MONGO>("ORE");
                 var data_for_insert = new ORE_STR_MONGO{
-                    ore_bossid = ore_data.ore_bossid,
                     ore_createby = ore_data.ore_createby,
                     ore_id = ore_data.ore_id,
                     ore_level = ore_data.ore_level,

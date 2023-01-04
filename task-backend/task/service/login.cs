@@ -92,7 +92,8 @@ namespace task.login
                     ps_org_id = user.ps_org_id,
                     ps_password = user.ps_password,
                     ps_position = user.ps_position,
-                    ps_username = user.ps_username
+                    ps_username = user.ps_username,
+                    ps_lastlogin = user.st_lastlogin
                 };
                 var dataresult = data.InsertOneAsync(newUser);
                 Console.WriteLine(dataresult);
@@ -102,6 +103,29 @@ namespace task.login
             {
                 Console.WriteLine(ex);
                 return false;
+            }
+        }
+
+        public List<USER_STR_MONGO> FIND_HENCHMAN(int user_code)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<USER_STR_MONGO>("PS");
+                var result_ = new List<USER_STR_MONGO>(); 
+                var filter = Builders<USER_STR_MONGO>.Filter.Eq(s => s.ps_bossid, user_code);
+                var result = data.Find(filter).ToList();
+                foreach(var i in result)
+                {
+                    result_.Add(i);
+                }
+                return result_;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
             }
         }
 

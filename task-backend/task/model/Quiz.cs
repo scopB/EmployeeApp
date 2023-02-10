@@ -82,6 +82,8 @@ namespace task.quiz
     {
         [BsonElement("_id")]
         public ObjectId _id {get;set;}
+        [BsonElement("doc_year")]
+        public string doc_year {get;set;} = string.Empty;
         [BsonElement("doc_code")]
         public int doc_id {get;set;}
         [BsonElement("doc_createby")]
@@ -138,6 +140,24 @@ namespace task.quiz
         public long st_lastsee {get;set;}
         public string st_statuskpi {get;set;} = string.Empty;
         public List<QUIZ_MAINTOPIC_>? doc_maintopic {get;set;}
+    }
+
+    public record CREATE_ASSESSMENT_FORM
+    {
+        [BsonElement("_id")]
+        public ObjectId _id {get;set;}
+        [BsonElement("am_year")]
+        public string am_year {get;set;} = string.Empty;
+        [BsonElement("am_number_of_kpi")]
+        public string am_number_of_kpi {get;set;} = string.Empty;
+        [BsonElement("am_createby")]
+
+        public int am_createby {get;set;}
+        [BsonElement("am_createdate")]
+
+        public long am_createdate {get;set;}
+        [BsonElement("am_enddate")]
+        public long am_enddate {get;set;}
     }
 
 }

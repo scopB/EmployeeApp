@@ -24,22 +24,25 @@ namespace task.login
         {
             var client = connect();
             var a = false;
+            var per = "";
             try
             {
                 var database = client.GetDatabase("EMAPP");
-                var data = database.GetCollection<USER_OF_FETCH>("USER");
-                var query = data.Find(s => s.USERNAME == user_data.USERNAME && s.PASSWORD == user_data.PASSWORD).ToList();
+                var data = database.GetCollection<USER_STR_MONGO>("PS");
+                var query = data.Find(s => s.ps_username == user_data.USERNAME && s.ps_password == user_data.PASSWORD).ToList();
                 foreach (var i in query)
                 {
                     // Console.WriteLine(i.PERMISSION);
                     if (i != null)
                     {
                         a = true;
+                        per = i.ps_position;
                     }
                     var resultdata = new LOGIN
                     {
                         result = a,
-                        permission = i.PERMISSION
+                        permission = per,
+                        user_code = i.ps_id
                     };
                     // Console.WriteLine(resultdata);
                     return resultdata;
@@ -128,6 +131,5 @@ namespace task.login
                 return null;
             }
         }
-
     }
 }

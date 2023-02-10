@@ -19,141 +19,6 @@ namespace task.mainservice
             var client = new MongoClient(test);
             return client;
         }
-
-        public List<INSERT_SCORE> SHOW_SCORE(string quizname, string username)
-        {
-            var client = connect();
-            var result = new List<INSERT_SCORE>();
-            try
-            {
-                if (username == string.Empty)
-                {
-                    var db = client.GetDatabase("USER");
-                    // var CollectionName = new List<string>();
-                    foreach (var item in db.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
-                    {
-                        var name = item["name"].ToString();
-                        // Console.WriteLine(name);
-                        var test = db.GetCollection<INSERT_SCORE>(name);
-                        var doc = test.Find(x => x.Q_NAME == quizname).ToList();
-                        foreach (var i in doc)
-                        {
-                            result.Add(i);
-                        }
-                    }
-                    return result;
-                }
-                else if(quizname == string.Empty)
-                {
-                    var database = client.GetDatabase("USER");
-                    var data = database.GetCollection<INSERT_SCORE>(username);
-                    var value = data.Find(_ => true).ToList();
-                    return value;
-                }
-                else 
-                {
-                    var database = client.GetDatabase("USER");
-                    var data = database.GetCollection<INSERT_SCORE>(username);
-                    var doc = data.Find(x => x.Q_NAME == quizname).ToList();
-                    return doc;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return null;
-        }
-
-        public List<LIST_INSERT2> SHOW_QUIZ(string permission_find, string username)
-        {
-            var client = connect();
-            try
-            {
-                var database = client.GetDatabase("EMAPP");
-                List<LIST_INSERT2> ans = new List<LIST_INSERT2>();
-                var data = database.GetCollection<LIST_INSERT2>("QUIZ");
-                var filter = Builders<LIST_INSERT2>.Filter.ElemMatch(x => x.permissions, x => x.permission == permission_find);
-                var documents = data.Find(filter).ToList();
-                database = client.GetDatabase("USER");
-                var data2 = database.GetCollection<INSERT_SCORE>(username);
-                var result = data2.Find(_ => true).ToList();
-                if (!result.Any())
-                {
-                    return documents;
-                }
-                foreach (var doc in documents)
-                {
-                    var check = true;
-                    foreach (var j in result)
-                    {
-                        if (Equals(doc.QUIZ_NAME,j.Q_NAME))
-                        {
-                            check = false;
-                        }   
-                    }
-                    if(check == true)
-                    {
-                        ans.Add(doc);
-                    }
-                }
-                return ans;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return null;
-        }
-
-        public Boolean SEND_SCORE(string username, string quiz_name, List<SCORE_BODY> result)
-        {
-            var client = connect();
-            try
-            {
-                var database = client.GetDatabase("USER");
-                var test = database.GetCollection<INSERT_SCORE>(username);
-                INSERT_SCORE data = new INSERT_SCORE
-                {
-                    username = username,
-                    Q_NAME = quiz_name,
-                    RESULT = result
-                };
-                var insertResult = test.InsertOneAsync(data);
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return false;
-        }
-
-
-        public Boolean INSERT_QUIZ(List<BODY_DATA> data, List<TEST> permission, string Q_NAME)
-        {
-            var client = connect();
-            try
-            {
-                var database = client.GetDatabase("EMAPP");
-                var test = database.GetCollection<LIST_INSERT2>("QUIZ");
-                var data_insert = new LIST_INSERT2
-                {
-                    INSERT_BODY = data,
-                    permissions = permission,
-                    QUIZ_NAME = Q_NAME
-                };
-                var insertResult = test.InsertOneAsync(data_insert);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
-        }
-
         public Boolean INSERT_DOC (DOC_FORM data,string year_doc)
         {
             var client = connect();
@@ -237,6 +102,53 @@ namespace task.mainservice
             {
                 Console.WriteLine(ex);
                 return false;
+            }
+        }
+
+        public Boolean CREATE_ASSESSMENT(CREATE_ASSESSMENT_FORM data)
+        {
+            var client = connect();
+            try
+            {   
+                var database = client.GetDatabase("EMAPP");
+                var test = database.GetCollection<CREATE_ASSESSMENT_FORM>("ASSESSMENT");
+                var data_insert = new CREATE_ASSESSMENT_FORM
+                {
+                    am_year = data.am_year,
+                    am_number_of_kpi = data.am_number_of_kpi,
+                    am_createby = data.am_createby,
+                    am_createdate = data.am_createdate,
+                    am_enddate = data.am_enddate
+                };
+                var insertResult = test.InsertOneAsync(data_insert);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        public List<CREATE_ASSESSMENT_FORM> SHOW_ASSESSMENT()
+        {
+            var client = connect();
+            try
+            {
+                var result = new List<CREATE_ASSESSMENT_FORM>();
+                var database = client.GetDatabase("EMAPP");
+                var test = database.GetCollection<CREATE_ASSESSMENT_FORM>("ASSESSMENT");
+                var list = test.Find(_ => true).ToList();
+                foreach(var i in list)
+                {
+                    result.Add(i);
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
             }
         }
 

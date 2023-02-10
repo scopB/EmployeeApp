@@ -1,8 +1,11 @@
 import React from 'react'
+import { useEffect } from 'react'
 
-const Quizbox = ({name , text , setQuiz_name , setQuizz , setAuth}) => {
+const Quizbox = ({name , status ,text , setQuiz_name , setQuizz , setAuth}) => {
 
     const onChange = () =>{
+        console.log(status)
+        console.log(text)
         setAuth("doing")
         setQuizz(text)
         setQuiz_name(name)

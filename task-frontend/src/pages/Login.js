@@ -17,6 +17,7 @@ const Login = ({ login }) => {
         localStorage.setItem("status",true)
         localStorage.setItem("username",username)
         localStorage.setItem("permission",res.data.permission)
+        localStorage.setItem("user_code",res.data.user_code)
         window.location.href='/'
         login()
       }
@@ -24,7 +25,7 @@ const Login = ({ login }) => {
   }
   return (
     <div className='login-form'>
-      <img className='pig-logo' src='https://vrm.pt.co.th/static/media/logo_header.be0eb1bb.png'></img>
+      <h1>KPI TOOLS</h1>
       <form>
         <label>Username</label>
         <input type="text" placeholder='Username' value={username}

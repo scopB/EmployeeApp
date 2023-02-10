@@ -7,7 +7,7 @@ const Showquiz = ({quiz , setQuizz ,setQuiz_name, setAuth}) => {
     
     <div className="container-quiz">
       {quiz.length > 0 ? quiz.map((quizz)=>(
-        <Quizbox name={quizz.quiZ_NAME} text={quizz.inserT_BODY} setQuiz_name={setQuiz_name} 
+        <Quizbox name={"2566"} status = {quizz.st_statuskpi} text={quizz.doc_maintopic} setQuiz_name={setQuiz_name} 
         setQuizz={setQuizz} setAuth={setAuth}/>
       )):
       <div>

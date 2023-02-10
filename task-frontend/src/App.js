@@ -12,7 +12,8 @@ import Score from "./pages/Score";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Backnavbar from "./pages/Backnavbar";
 import AddUser from "./pages/AddUser";
-
+import ChatPage from "./pages/ChatPage";
+import Testcreate from "./pages/Testcreate";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
   const [quiz, setQuiz] = useState([])
   const [quizz, setQuizz] = useState([])
   const [quiz_name, setQuiz_name] = useState([])
+  const [hench , setHench] = useState([])
   // const [permission,setPer] = useState()
   const name = localStorage.getItem("username")
   useEffect(() => {
@@ -33,16 +35,39 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("status") === "true") {
       setAuth(localStorage.getItem("auth"))
-      showQuiz()
+      showassessment()
+      // showQuiz()
+      showHech()
     }
   }, [])
 
-  const showQuiz = () => {
-    const per = localStorage.getItem("permission")
-    const name = localStorage.getItem("username")
-    const sent = { username: name, permission: per }
-    axios.post(`${linkUrl.LinkToBackend}/showquiz`, sent).then((res) => {
+  const showQuiz = (year_) => {
+    const code = localStorage.getItem("user_code")
+    const sent = { user_code : code, year: year_ }
+    axios.post(`${linkUrl.LinkToBackend}/show_doc`, sent).then((res) => {
       setQuiz(res.data)
+      console.log(res.data)
+    })
+  }
+  const showHech = () =>{
+    const code = localStorage.getItem("user_code")
+    const sent = {user_code : Number(code)}
+    axios.post(`${linkUrl.LinkToBackend}/find_henchman`, sent).then((res)=>{
+      console.log(res.data)
+      setHench(res.data)
+    })
+  }
+
+  const showassessment = () =>{
+    axios.get(`${linkUrl.LinkToBackend}/show_assessment`).then((res) => {
+      console.log(res.data)
+      for (const i in res.data)
+      {
+        // console.log(res.data[i].am_year)
+        var temp = res.data[i].am_year
+        console.log(temp)
+        showQuiz(temp)
+      }
     })
   }
 
@@ -63,20 +88,16 @@ function App() {
       <Router>
         <div >
           {auth !== "Login" && <Navbar logout={Logout} setAuth={setAuth}
-            permission={perr} showQuiz={showQuiz} name={name}/>}
+            permission={perr} name={name}/>}
           <div className="test-page">
             <Routes>
-              <Route path='/' element={auth === "Home" ? <Home /> : auth === "Login" && <Login login={onAuth} />} />
-
-              <Route path='/create-quiz' element={auth === "b_quiz" && <Quizbuild setAuth={setAuth} />} />
+              <Route path='/' element={auth === "Home" ? <Home hech = {hench} /> : auth === "Login" && <Login login={onAuth} />} />
               <Route path='/quiz' element={
                 auth === "showbox" ? <Showquiz quiz={quiz}
                   setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} /> :
                   auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
               } />
-              <Route path='/permission' element={auth === "addper" && <Addper />} />
-              <Route path='/result' element={auth === "score" && <Score />} />
-              <Route path='/addUser' element={auth === "addUser" && <AddUser />} />
+              <Route path="/createkpi" element={<Testcreate/>}/>
             </Routes>
             </div>
             {/* <Backnavbar /> */}

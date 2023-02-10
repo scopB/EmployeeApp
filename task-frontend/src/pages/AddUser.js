@@ -54,7 +54,7 @@ const AddUser = () => {
                     <label>Password</label>
                     <input type="password" placeholder='Add Password'
                         value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <label>Set Henchman</label>
+                    <label>Set Role</label>
                     <Select
                         defaultValue={permission}
                         onChange={setPermission}

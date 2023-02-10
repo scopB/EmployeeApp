@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
     // console.log(name)
-    useEffect(() => {
-        // console.log("TEST")
-        showQuiz()
-    }, [])
+    // useEffect(() => {
+    //     // console.log("TEST")
+    //     showQuiz()
+    // }, [])
     
     const onHome = () => {
         window.location.href = '/'
@@ -43,6 +43,11 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
         localStorage.setItem("auth", "addUser")
         setAuth("addUser")
     }
+    const onCreatekpi = () =>{
+        window.location.href = '/createkpi'
+        localStorage.setItem("auth","createkpi")
+        setAuth("createkpi")
+    }
 
     return (
         <div>
@@ -50,6 +55,7 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
                 <ul>
                     <button className='navbar-box' onClick={onHome}>Home</button>
                     <button className='navbar-box' onClick={onShow}>You Quiz</button>
+                    <button className='navbar-box' onClick={onCreatekpi}>createkpi</button>
                     {permission === "admin" && <button className='navbar-box' onClick={onCreate}>New Quiz</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onPer}>Add Permission</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onScore}>Show Score</button>}

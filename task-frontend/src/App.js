@@ -14,6 +14,7 @@ import Backnavbar from "./pages/Backnavbar";
 import AddUser from "./pages/AddUser";
 import ChatPage from "./pages/ChatPage";
 import Testcreate from "./pages/Testcreate";
+import Input_org from "./pages/Input_org";
 
 function App() {
 
@@ -98,6 +99,7 @@ function App() {
                   auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
               } />
               <Route path="/createkpi" element={<Testcreate/>}/>
+              <Route path="/uploadorg" element={<Input_org/>}/>
             </Routes>
             </div>
             {/* <Backnavbar /> */}

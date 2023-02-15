@@ -49,6 +49,12 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
         setAuth("createkpi")
     }
 
+    const onOrg = () =>{
+        window.location.href = '/uploadorg'
+        localStorage.setItem("auth","createorg")
+        setAuth("createorg")
+    }
+
     return (
         <div>
             <div className='navbar-con'>
@@ -56,6 +62,7 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
                     <button className='navbar-box' onClick={onHome}>Home</button>
                     <button className='navbar-box' onClick={onShow}>You Quiz</button>
                     <button className='navbar-box' onClick={onCreatekpi}>createkpi</button>
+                    <button className='navbar-box' onClick={onOrg}>Upload org</button>
                     {permission === "admin" && <button className='navbar-box' onClick={onCreate}>New Quiz</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onPer}>Add Permission</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onScore}>Show Score</button>}

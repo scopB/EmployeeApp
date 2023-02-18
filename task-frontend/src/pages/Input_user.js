@@ -1,41 +1,12 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { linkUrl } from '../urlBackend';
 import axios from 'axios';
 import Comfirmwindow from '../components/Comfirmwindow';
-import Select from 'react-select';
 
-const Input_org = () => {
+const Input_user = () => {
     const [jsonData, setJsonData] = useState(null)
     const [dataread, setDataread] = useState()
     const [showBox, setShowBox] = useState(false)
-    const [orgNow, setOrgNow] = useState('')
-    const [showForm, setShowForm] = useState(false)
-    const [ore_data , setOre_data] = useState([])
-    const [options , setOptions] = useState([])
-    const data_ore = []
-
-    useEffect(() => {
-        console.log(options.length)
-        if(options.length === 0)
-        {
-            get_org_data()
-        }
-    })
-
-    function get_org_data(){
-        axios.get(`${linkUrl.LinkToBackend}/get_all_ore`).then((res)=>{
-            // console.log(res.data)
-            let list_data = res.data
-            setOre_data(list_data)
-            let temp_list = []
-            ore_data.map((i)=>{
-                let temp = {value: i.ore_id, label: i.ore_shortname}
-                temp_list.push(temp)
-                data_ore.push(i)
-            })
-            setOptions(temp_list)
-        })
-    }
 
     function previewFile() {
         const content = document.querySelector('.content');
@@ -53,15 +24,12 @@ const Input_org = () => {
 
     function convertString(string) {
         let rows_raw = string.split('\n')
-        // console.log(rows_raw);
         let rows = []
         for (let i = 0; i < rows_raw.length; i++) {
             if (rows_raw[i] !== "") {
-
                 rows.push(rows_raw[i].replace(/(?:\r\n|\r|\n|\t)/g, ''))
             }
         }
-        // console.log(rows);
         let headers = rows[0].split(',')
         for (let i = 0; i < headers.length; i++) {
             headers[i] = headers[i].replace(/(?:\r\n|\r|\n|\t)/g, '');
@@ -69,11 +37,16 @@ const Input_org = () => {
         let data = []
         for (let i = 1; i < rows.length; i++) {
             const row = rows[i].split(',');
+            // console.log(row);
             const obj = {};
             for (let j = 0; j < headers.length; j++) {
-                if (headers[j] === "ore_id" || headers[j] === "ore_supervisor" || headers[j] === "create_date" || headers[j] === "ore_createby") {
+                if (row[j] === "") {
+                    continue
+                }
+                if (headers[j] === "ps_id" || headers[j] === "ps_org_id" || headers[j] === "st_lastlogin" || headers[j] === "ps_birthday" || headers[j] === "ps_bossid") {
                     row[j] = Number(row[j])
                 }
+                // console.log("asd");
                 obj[headers[j]] = row[j];
             }
             if (Object.keys(obj).length !== 0) {
@@ -88,7 +61,7 @@ const Input_org = () => {
         console.log(jsonData)
         for (let i = 0; i < jsonData.length; i++) {
             let data_input = jsonData[i]
-            axios.post(`${linkUrl.LinkToBackend}/insert_ore`, data_input).then((res) => {
+            axios.post(`${linkUrl.LinkToBackend}/insert_user`, data_input).then((res) => {
                 if (res.data === true) {
                     alert("INSERT SUCCESS")
                 }
@@ -98,36 +71,14 @@ const Input_org = () => {
             })
         }
     }
-
-    const ShowEditdata = (e) =>{
-        e.preventDefault();
-        console.log(data_ore)
-        setShowForm(true)
-    }
-
     return (
         <div>
-            INSERT ORE :
+            INSERT USER :
             <input type="file" name="file_cvs" />
             <button onClick={previewFile}>Submit</button>
-            {showBox && <Comfirmwindow message={"Comfirm to insert Ore"} setShowBox={setShowBox} check_data={check_data}/>}
-
-            <div>
-                <form onSubmit={ShowEditdata}>
-                <Select
-                    defaultValue={orgNow}
-                    onChange={setOrgNow}
-                    options={options}
-                />
-                <button>Serch</button>
-                </form>
-            </div>
-            
-            <div>
-
-            </div>
+            {showBox && <Comfirmwindow message={"Comfirm to insert User"} setShowBox={setShowBox} check_data={check_data}/>}
         </div>
     )
 }
 
-export default Input_org
+export default Input_user

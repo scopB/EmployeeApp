@@ -15,6 +15,7 @@ import AddUser from "./pages/AddUser";
 import ChatPage from "./pages/ChatPage";
 import Testcreate from "./pages/Testcreate";
 import Input_org from "./pages/Input_org";
+import Input_user from "./pages/Input_user";
 
 function App() {
 
@@ -100,6 +101,7 @@ function App() {
               } />
               <Route path="/createkpi" element={<Testcreate/>}/>
               <Route path="/uploadorg" element={<Input_org/>}/>
+              <Route path="/insert_user" element={<Input_user/>} />
             </Routes>
             </div>
             {/* <Backnavbar /> */}

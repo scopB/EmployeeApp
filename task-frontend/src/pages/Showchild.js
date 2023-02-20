@@ -1,9 +1,17 @@
 import React, { useEffect } from 'react'
 
-const Showchild = ({ text, setscore, setScorenow }) => {
+const Showchild = ({ text , setScorenow }) => {
 
   const handleScore = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
+    // console.log(setScorenow)
+    setScorenow.forEach(i => {
+      // console.log(i)
+        if (i.namequiz === text.sd_name)
+        {
+          i.score = Number(e.target.value)
+        }
+    });
   }
 
   return (

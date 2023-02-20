@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import Showchild from './Showchild'
 
 const St_child = ({text_st , setscore}) => {
+  const [scorenow,setScorenow] = useState()
   
   var all_sp_weight = 0
   useEffect(()=>{
@@ -15,8 +16,9 @@ const St_child = ({text_st , setscore}) => {
   return (
     <div>
         {text_st.st_name}
+        {"asd"}
         {text_st.st_supdetail.map((res)=>(
-            <Showchild text={res} setscore={setscore}/>
+            <Showchild text={res} setscore={setscore} setScorenow={setScorenow}/>
         ))}
     </div>
   )

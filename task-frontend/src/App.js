@@ -65,7 +65,6 @@ function App() {
       console.log(res.data)
       for (const i in res.data)
       {
-        // console.log(res.data[i].am_year)
         var temp = res.data[i].am_year
         console.log(temp)
         showQuiz(temp)
@@ -74,12 +73,10 @@ function App() {
   }
 
   const onAuth = () => {
-    // console.log(auth)
     localStorage.setItem("auth", "Home")
     setAuth("Home")
   }
   const Logout = () => {
-    // console.log(auth)
     localStorage.clear()
     setAuth("Login")
   }

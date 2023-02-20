@@ -15,6 +15,7 @@ const Child = ({text , setscore}) => {
     <div>
         <div >
           {text.mt_name}
+          
           {text.mt_suptopic.map((res)=>(
             <St_child text_st={res} setscore ={setscore}/>
             ))}

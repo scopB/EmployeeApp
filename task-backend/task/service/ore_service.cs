@@ -26,7 +26,8 @@ namespace task.ore_mangement
                 var client = connect();
                 var database = client.GetDatabase("EMAPP");
                 var data = database.GetCollection<ORE_STR_MONGO>("ORE");
-                var data_for_insert = new ORE_STR_MONGO{
+                var data_for_insert = new ORE_STR_MONGO
+                {
                     ore_createby = ore_data.ore_createby,
                     ore_id = ore_data.ore_id,
                     ore_level = ore_data.ore_level,
@@ -38,7 +39,50 @@ namespace task.ore_mangement
                 var result = data.InsertOneAsync(data_for_insert);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        public List<ORE_STR_MONGO_GET> SHOW_ORE()
+        {
+            try
+            {
+                var client = connect();
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<ORE_STR_MONGO_GET>("ORE");
+                var result = new List<ORE_STR_MONGO_GET>();
+                var list = data.Find(_ => true).ToList();
+                foreach (var i in list)
+                {
+                    result.Add(i);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
+        public Boolean UPDATE_ORE(ORE_STR_MONGO data_new)
+        {
+            try
+            {
+                var client = connect();
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<ORE_STR_MONGO>("ORE");
+                var filter = Builders<ORE_STR_MONGO>.Filter.Eq(i => i.ore_id , data_new.ore_id);
+                var update_ = Builders<ORE_STR_MONGO>.Update.Set(i => i.ore_level,data_new.ore_level).
+                Set(i => i.ore_supervisor , data_new.ore_supervisor).Set(i => i.ore_longname , data_new.ore_longname).
+                Set(i => i.ore_path , data_new.ore_path).Set(i => i.ore_shortname , data_new.ore_shortname);
+                var list = data.UpdateOne(filter,update_);
+                return true;
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return false;

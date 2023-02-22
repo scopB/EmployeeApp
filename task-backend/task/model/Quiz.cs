@@ -160,4 +160,18 @@ namespace task.quiz
         public long am_enddate {get;set;}
     }
 
+    public record CHECK_STATUS
+    {
+        public int doc_id{get;set;}
+        public int for_user{get;set;}
+        public string doc_year {get;set;} = string.Empty;
+        public string status{get;set;} = string.Empty;
+    }
+
+    public record CHECK_STATUS_INPUT
+    {
+        public int id {get;set;}
+        public List<string>? year {get;set;}
+    }
+
 }

@@ -35,7 +35,6 @@ const St_child = ({ text_st , setNewScore }) => {
   return (
     <div>
       {text_st.st_name}
-      {"asd"}
       {text_st.st_supdetail.map((res) => (
         <Showchild text={res}  setScorenow={scoreNow} />
       ))}

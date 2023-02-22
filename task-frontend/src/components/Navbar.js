@@ -11,8 +11,14 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
         localStorage.setItem("auth", "Home")
         setAuth("Home")
     }
+    
     const onCreate = () => {
         window.location.href = '/create-quiz'
+        localStorage.setItem("auth", "b_quiz")
+        setAuth("b_quiz")
+    }
+    const onCreatekpiper = () => {
+        window.location.href = '/createkpipage'
         localStorage.setItem("auth", "b_quiz")
         setAuth("b_quiz")
     }
@@ -33,7 +39,7 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
     }
 
     const onScore = () => {
-        window.location.href = '/result'
+        window.location.href = '/score'
         localStorage.setItem("auth", "score")
         setAuth("score")
     }
@@ -66,10 +72,12 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
             <div className='navbar-con'>
                 <ul>
                     <button className='navbar-box' onClick={onHome}>Home</button>
-                    <button className='navbar-box' onClick={onShow}>You Quiz</button>
+                    {/* <button className='navbar-box' onClick={onShow}>kpi document</button> */}
+                    <button className='navbar-box' onClick={onCreatekpiper}>createperkpi</button>
                     <button className='navbar-box' onClick={onCreatekpi}>createkpi</button>
                     <button className='navbar-box' onClick={onOrg}>ORG MM</button>
                     <button className='navbar-box' onClick={onUser}>USER MM</button>
+                    <button className='navbar-box' onClick={onScore}>Show Score</button>
                     {permission === "admin" && <button className='navbar-box' onClick={onCreate}>New Quiz</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onPer}>Add Permission</button>}
                     {permission === "admin" && <button className='navbar-box' onClick={onScore}>Show Score</button>}

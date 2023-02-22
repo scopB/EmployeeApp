@@ -131,5 +131,49 @@ namespace task.login
                 return null;
             }
         }
+
+        public List<USER_STR_MONGO> SHOW_USER()
+        {
+            try
+            {
+                var client = connect();
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<USER_STR_MONGO>("PS");
+                var result = new List<USER_STR_MONGO>();
+                var list = data.Find(_ => true).ToList();
+                foreach (var i in list)
+                {
+                    result.Add(i);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
+        public Boolean UPDATE_USER(USER_STR_MONGO data_new)
+        {
+            try
+            {
+                var client = connect();
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<USER_STR_MONGO>("ORE");
+                var filter = Builders<USER_STR_MONGO>.Filter.Eq(i => i.ps_id , data_new.ps_id);
+                var update_ = Builders<USER_STR_MONGO>.Update.Set(i => i.ps_bossid,data_new.ps_bossid).
+                Set(i => i.ps_lastname , data_new.ps_lastname).Set(i => i.ps_name , data_new.ps_name).
+                Set(i => i.ps_position , data_new.ps_position);
+                var list = data.UpdateOne(filter,update_);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
     }
 }

@@ -16,6 +16,7 @@ import ChatPage from "./pages/ChatPage";
 import Testcreate from "./pages/Testcreate";
 import Input_org from "./pages/Input_org";
 import Input_user from "./pages/Input_user";
+import CreateKpi from "./pages/Createkpi";
 
 function App() {
 
@@ -25,6 +26,10 @@ function App() {
   const [quizz, setQuizz] = useState([])
   const [quiz_name, setQuiz_name] = useState([])
   const [hench , setHench] = useState([])
+  const [assessment , setAssessment] = useState([])
+
+  
+
   // const [permission,setPer] = useState()
   const name = localStorage.getItem("username")
   useEffect(() => {
@@ -34,22 +39,21 @@ function App() {
     // console.log(quiz)
   })
 
-  useEffect(() => {
+  useEffect( async() => {
     if (localStorage.getItem("status") === "true") {
       setAuth(localStorage.getItem("auth"))
-      showassessment()
+      await showassessment()
       // showQuiz()
       showHech()
     }
   }, [])
 
-  const showQuiz = (year_) => {
+  const showQuiz = async (year_) => {
     const code = localStorage.getItem("user_code")
     const sent = { user_code : code, year: year_ }
-    axios.post(`${linkUrl.LinkToBackend}/show_doc`, sent).then((res) => {
-      setQuiz(res.data)
-      console.log(res.data)
-    })
+    let res = await axios.post(`${linkUrl.LinkToBackend}/show_doc`, sent)
+    // console.log(res.data)
+    return res.data
   }
   const showHech = () =>{
     const code = localStorage.getItem("user_code")
@@ -60,15 +64,27 @@ function App() {
     })
   }
 
-  const showassessment = () =>{
-    axios.get(`${linkUrl.LinkToBackend}/show_assessment`).then((res) => {
+  console.log(quiz);
+
+  const showassessment = async() =>{
+    await axios.get(`${linkUrl.LinkToBackend}/show_assessment`).then( async(res) => {
       console.log(res.data)
+      setAssessment(res.data)
+      let temp_list = []
       for (const i in res.data)
       {
         var temp = res.data[i].am_year
         console.log(temp)
-        showQuiz(temp)
+        var temp_data = await showQuiz(temp)
+        console.log(temp_data);
+        if(temp_data.length != 0)
+        {
+          temp_list.push(temp_data)
+          // console.log(temp_data);
+        }
       }
+      // console.log(temp_list);
+      setQuiz(temp_list)
     })
   }
 
@@ -90,15 +106,22 @@ function App() {
             permission={perr} name={name}/>}
           <div className="test-page">
             <Routes>
-              <Route path='/' element={auth === "Home" ? <Home hech = {hench} /> : auth === "Login" && <Login login={onAuth} />} />
-              <Route path='/quiz' element={
+
+              <Route path='/' element={auth === "Home" ? 
+              <Home hech = {hench} assessment={assessment} 
+              quiz = {quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth}/> :
+              auth === "Login" ? <Login login={onAuth} /> : auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />} />
+
+              {/* { <Route path='/quiz' element={
                 auth === "showbox" ? <Showquiz quiz={quiz}
                   setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} /> :
                   auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
-              } />
+              } /> }  */}
+              <Route path="/createkpipage" element={<CreateKpi/>}/>
               <Route path="/createkpi" element={<Testcreate/>}/>
               <Route path="/uploadorg" element={<Input_org/>}/>
               <Route path="/insert_user" element={<Input_user/>} />
+              <Route path="/score" element={<Score/>}/>
             </Routes>
             </div>
             {/* <Backnavbar /> */}

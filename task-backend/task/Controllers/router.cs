@@ -103,7 +103,39 @@ namespace task.Controllers
         {
             var result = repository.SHOW_ASSESSMENT();
             return result;
-        }        
+        } 
+        [HttpGet("get_all_ore")]
+        public ActionResult<List<ORE_STR_MONGO_GET>> show_ore_all()
+        {
+            var result = ore_repository.SHOW_ORE();
+            return result;
+        }       
+        [HttpPost("update_ore")]
+        public ActionResult<Boolean> update_ore(ORE_STR_MONGO data)
+        {
+            var result = ore_repository.UPDATE_ORE(data);
+            return result;
+        }
+
+        [HttpGet("get_all_user")]
+        public ActionResult<List<USER_STR_MONGO>> show_user_all()
+        {
+            var result = LOGIN_C.SHOW_USER();
+            return result;
+        }       
+        [HttpPost("update_user")]
+        public ActionResult<Boolean> update_ore(USER_STR_MONGO data)
+        {
+            var result = LOGIN_C.UPDATE_USER(data);
+            return result;
+        }
+
+        [HttpPost("get_doc_from")]
+        public ActionResult<List<CHECK_STATUS>> find_doc(CHECK_STATUS_INPUT data)
+        {
+            var result = repository.CHECK_KPI_STATUS(data.id,data.year);
+            return result;
+        }
     }
 
 }

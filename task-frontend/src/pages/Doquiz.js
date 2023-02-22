@@ -10,6 +10,7 @@ const Doquiz = ({name,quiz}) => {
   var all_weight = 0
   
   useEffect(()=>{
+    console.log(quiz)
     quiz.map((res)=>{
       all_weight = all_weight + res.mt_weight
       let temp = {nametop : res.mt_name , score : 0 , weighttop : res.mt_weight}

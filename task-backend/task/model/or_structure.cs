@@ -86,4 +86,26 @@ namespace ore.structure
         [BsonElement("ore_createby")]
         public int ore_createby {get;set;}
     }
+
+    public record ORE_STR_MONGO_GET
+    {
+        [BsonElement("_id")]
+        public ObjectId _id {get;set;}
+        [BsonElement("ore_code")]
+        public int ore_id {get;set;}
+        [BsonElement("ore_supervisor")]
+        public int ore_supervisor {get;set;}
+        [BsonElement("ore_shortname")]
+        public string ore_shortname {get;set;} = string.Empty;
+        [BsonElement("ore_longname")]
+        public string ore_longname {get;set;} = string.Empty;
+        [BsonElement("ore_level")]
+        public string ore_level {get;set;} = string.Empty;
+        [BsonElement("ore_path")]
+        public string ore_path {get;set;} = string.Empty;
+        [BsonElement("create_date")]
+        public long create_date {get;set;}
+        [BsonElement("ore_createby")]
+        public int ore_createby {get;set;}
+    }
 }

@@ -1,53 +1,78 @@
 import React, { useState } from 'react';
 
-function AddDataForm() {
-    const [topics, setTopics] = useState([{ mainTopic: '', weight: '', subTopics: [{ subTopic: '', weight: '' }] }]);
-    const [data, setData] = useState('');
-  
-    const handleSubmit = event => {
-      event.preventDefault();
-      // Perform API call to add data with topics and data
-      console.log(`Adding data: ${data} with topics: ${JSON.stringify(topics)}`);
-    };
-  
-    const handleMainTopicChange = (index, key, value) => {
-      const newTopics = [...topics];
-      newTopics[index][key] = value;
-      setTopics(newTopics);
-    };
-  
-    const handleSubTopicChange = (mainIndex, subIndex, key, value) => {
-      const newTopics = [...topics];
-      newTopics[mainIndex].subTopics[subIndex][key] = value;
-      setTopics(newTopics);
-    };
-  
-    const handleAddMainTopic = () => {
-      const newTopics = [...topics, { mainTopic: '', weight: '', subTopics: [{ subTopic: '', weight: '' }] }];
-      setTopics(newTopics);
-    };
-  
-    const handleRemoveMainTopic = index => {
-      const newTopics = [...topics];
-      newTopics.splice(index, 1);
-      setTopics(newTopics);
-    };
-  
-    const handleAddSubTopic = mainIndex => {
-      const newTopics = [...topics];
-      newTopics[mainIndex].subTopics.push({ subTopic: '', weight: '' });
-      setTopics(newTopics);
-    };
-  
-    const handleRemoveSubTopic = (mainIndex, subIndex) => {
-      const newTopics = [...topics];
-      newTopics[mainIndex].subTopics.splice(subIndex, 1);
-      setTopics(newTopics);
-    };
-  
+function AddDataForm({topics, setTopics}) {
+  // const [topics, setTopics] = useState(
+  //   [{ mainTopic: '', mainWeight: '', mt_suptopic: 
+  //   [{ subTopic: '', weight: '', st_supdetail: 
+  //   [{ supDetail: '', weight: '' , choise1 : '',choise2 : '',choise3 : '',choise4 : '',choise5 : ''}] }] }]);
+
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   console.log(topics);
+  // };
+
+  const handleMainTopicChange = (index, value) => {
+    const newTopics = [...topics];
+    newTopics[index].mt_name = value;
+    setTopics(newTopics);
+  };
+
+  const handleMainWeightChange = (index, value) => {
+    const newTopics = [...topics];
+    newTopics[index].mt_weight = value;
+    setTopics(newTopics);
+  };
+
+  const handleSubTopicChange = (mainIndex, subIndex, key, value) => {
+    const newTopics = [...topics];
+    newTopics[mainIndex].mt_suptopic[subIndex][key] = value;
+    setTopics(newTopics);
+  };
+
+  const handleSupDetailChange = (mainIndex, subIndex, supIndex, key, value) => {
+    const newTopics = [...topics];
+    newTopics[mainIndex].mt_suptopic[subIndex].st_supdetail[supIndex][key] = value;
+    setTopics(newTopics);
+  };
+
+  const handleAddMainTopic = () => {
+    const newTopics = [...topics, { mainTopic: '', mainWeight: '', mt_suptopic: [{ subTopic: '', weight: '', st_supdetail: [{ supDetail: '', weight: '', choise1 : '',choise2 : '',choise3 : '',choise4 : '',choise5 : '' }] }] }];
+    setTopics(newTopics);
+  };
+
+  const handleRemoveMainTopic = index => {
+    const newTopics = [...topics];
+    newTopics.splice(index, 1);
+    setTopics(newTopics);
+  };
+
+  const handleAddSubTopic = mainIndex => {
+    const newTopics = [...topics];
+    newTopics[mainIndex].mt_suptopic.push({ subTopic: '', weight: '', st_supdetail: [{ supDetail: '', weight: '', choise1 : '',choise2 : '',choise3 : '',choise4 : '',choise5 : '' }] });
+    setTopics(newTopics);
+  };
+
+  const handleRemoveSubTopic = (mainIndex, subIndex) => {
+    const newTopics = [...topics];
+    newTopics[mainIndex].mt_suptopic.splice(subIndex, 1);
+    setTopics(newTopics);
+  };
+
+  const handleAddSupDetail = (mainIndex, subIndex) => {
+    const newTopics = [...topics];
+    newTopics[mainIndex].mt_suptopic[subIndex].st_supdetail.push({ supDetail: '', weight: '' , choise1 : '',choise2 : '',choise3 : '',choise4 : '',choise5 : '' });
+    setTopics(newTopics);
+  };
+
+  const handleRemoveSupDetail = (mainIndex, subIndex, supIndex) => {
+    const newTopics = [...topics];
+    newTopics[mainIndex].mt_suptopic[subIndex].st_supdetail.splice(supIndex, 1);
+    setTopics(newTopics);
+  };
+
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form >
       {topics.map((topic, mainIndex) => (
         <div key={mainIndex}>
           <div>
@@ -55,41 +80,99 @@ function AddDataForm() {
             <input
               type="text"
               id={`mainTopic${mainIndex}`}
-              value={topic.mainTopic}
+              value={topic.mt_name}
               onChange={event => handleMainTopicChange(mainIndex, event.target.value)}
             />
-          </div>
-
-          <div>
-            <label htmlFor={`mainTopicWeight${mainIndex}`}>maintopic Weight:</label>
+            <label htmlFor={`mainTopicWeight${mainIndex}`}>Main Topic Weight:</label>
             <input
               type="text"
               id={`mainTopicWeight${mainIndex}`}
-              value={topic.weight}
-              onChange={event => handleMainTopicChange(mainIndex, 'weight', event.target.value)}
+              value={topic.mt_weight}
+              onChange={event => handleMainWeightChange(mainIndex, event.target.value)}
             />
           </div>
-
-          {topic.subTopics.map((subTopic, subIndex) => (
+          {topic.mt_suptopic.map((subTopic, subIndex) => (
             <div key={`${mainIndex}-${subIndex}`}>
               <div>
                 <label htmlFor={`subTopic${mainIndex}-${subIndex}`}>Sub Topic:</label>
                 <input
                   type="text"
                   id={`subTopic${mainIndex}-${subIndex}`}
-                  value={subTopic.subTopic}
-                  onChange={event => handleSubTopicChange(mainIndex, subIndex, 'subTopic', event.target.value)}
+                  value={subTopic.st_name}
+                  onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_name', event.target.value)}
                 />
-              </div>
-              <div>
-                <label htmlFor={`subTopicWeight${mainIndex}-${subIndex}`}>Suptopic Weight:</label>
+                <label htmlFor={`subTopicWeight${mainIndex}-${subIndex}`}>Sub Topic Weight:</label>
                 <input
                   type="text"
                   id={`subTopicWeight${mainIndex}-${subIndex}`}
-                  value={subTopic.weight}
-                  onChange={event => handleSubTopicChange(mainIndex, subIndex, 'weight', event.target.value)}
+                  value={subTopic.st_weight}
+                  onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_weight', event.target.value)}
                 />
               </div>
+              {subTopic.st_supdetail.map((supDetail, supIndex) => (
+                <div key={`${mainIndex}-${subIndex}-${supIndex}`}>
+                  <div>
+                    <label htmlFor={`supDetail${mainIndex}-${subIndex}-${supIndex}`}>Sup Detail:</label>
+                    <input
+                      type="text"
+                      id={`supDetail${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.sd_name}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_name', event.target.value)}
+                    />
+                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>Sup Detail Weight:</label>
+                    <input
+                      type="text"
+                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.weight}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'weight', event.target.value)}
+                    />
+                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>Choice for 1 point:</label>
+                    <input
+                      type="text"
+                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.sd_choice01}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice01', event.target.value)}
+                    />
+                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>Choice for 2 point:</label>
+                    <input
+                      type="text"
+                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.sd_choice02}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice02', event.target.value)}
+                    />
+                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>Choice for 3 point:</label>
+                    <input
+                      type="text"
+                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.sd_choice03}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice03', event.target.value)}
+                    />
+                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>Choice for 4 point:</label>
+                    <input
+                      type="text"
+                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.sd_choice04}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice04', event.target.value)}
+                    />
+                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>Choice for 5 point:</label>
+                    <input
+                      type="text"
+                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                      value={supDetail.sd_choice05}
+                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice05', event.target.value)}
+                    />
+
+                  </div>
+                  {supIndex > 0 && (
+                    <button type="button" onClick={() => handleRemoveSupDetail(mainIndex, subIndex, supIndex)}>
+                      Remove Sup Detail
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button type="button" onClick={() => handleAddSupDetail(mainIndex, subIndex)}>
+                Add Sup Detail
+              </button>
               {subIndex > 0 && (
                 <button type="button" onClick={() => handleRemoveSubTopic(mainIndex, subIndex)}>
                   Remove Sub Topic
@@ -100,23 +183,19 @@ function AddDataForm() {
           <button type="button" onClick={() => handleAddSubTopic(mainIndex)}>
             Add Sub Topic
           </button>
-          {topics.length > 1 && (
-        <button type="button" onClick={() => handleRemoveMainTopic(mainIndex)}>
-          Remove Main Topic
-        </button>
-      )}
-    </div>
-  ))}
-  <button type="button" onClick={handleAddMainTopic}>
-    Add Main Topic
-  </button>
-  <div>
-    <label htmlFor="data">Data:</label>
-    <textarea id="data" value={data} onChange={event => setData(event.target.value)} />
-  </div>
-  <button type="submit">Add Data</button>
-</form>
-);
+          {mainIndex > 0 && (
+            <button type="button" onClick={() => handleRemoveMainTopic(mainIndex)}>
+              Remove Main Topic
+            </button>
+          )}
+          <button type="button" onClick={handleAddMainTopic}>
+            Add Main Topic
+          </button>
+        </div>
+      ))}
+      {/* <button type="button" onClick={handleSubmit}>Submit</button> */}
+    </form>
+  );
 }
 
 export default AddDataForm;

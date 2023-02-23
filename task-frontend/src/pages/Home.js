@@ -9,7 +9,7 @@ const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name}) => {
       <div>
         You Huchman Kpi
         {hech.length > 0 ? hech.map((i) => (
-          <Hech hech={i.ps_name} assessment={assessment} />
+          <Hech hech={i.ps_name} assessment={assessment} hech_id = {i.ps_id}/>
         )) :
           <div>
             No huchman

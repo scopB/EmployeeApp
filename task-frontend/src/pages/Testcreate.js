@@ -40,7 +40,7 @@ const Testcreate = () => {
             const start_date = Math.floor(start.getTime()/1000)
             const finish_date = Math.floor(finish.getTime()/1000)
             const user = localStorage.getItem("user_code")
-            const data_input = { am_year:year_kpi , am_number_of_kpi : kpitime , am_createby : user ,
+            const data_input = { am_year:year_kpi , am_number_of_kpi : kpitime.value , am_createby : user ,
                 am_createdate : start_date , am_enddate : finish_date
             };
 

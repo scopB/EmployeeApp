@@ -1,47 +1,59 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
+import Adddoc from '../components/Adddoc';
 
-function CreateKpi() {
-  const [name, setName] = useState('');
-  const [value, setValue] = useState(0);
-  const [isPublic, setIsPublic] = useState(false);
+function CreateKpi({ assessment , hech, myid }) {
+  
+  const [foruser , setForuser] = useState();
+  const [year , setYear] = useState();
+  const [text , onAdd] = useState()
+
+  const options_user = []
+  const options_year = []
+
+  console.log(assessment)
+
+  useEffect(()=>{
+    if(options_user.length === 0) 
+    {
+      hech.map((i)=>{
+        let temp = {value : i.ps_id , label: i.ps_name} 
+        options_user.push(temp)
+      })
+    }
+    if(options_year.length === 0) 
+    {
+      assessment.map((i)=>{
+        let string = i.am_year + " ครั้งที่ : " + i.am_number_of_kpi
+        let temp = {value : i.am_year , label: string , value2 : i.am_number_of_kpi} 
+        options_year.push(temp)
+      })
+    }
+  })
 
   const handleSubmit = event => {
     event.preventDefault();
-    // Perform API call to create the KPI with name, value, and isPublic data
-    console.log(`Creating KPI: ${name} - ${value} - ${isPublic}`);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={event => setName(event.target.value)}
+    <div>
+      <form onSubmit={handleSubmit}>
+        FOR USER : 
+        <Select
+          defaultValue={foruser}
+          onChange={setForuser}
+          options={options_user}
         />
-      </div>
-      <div>
-        <label htmlFor="value">Value:</label>
-        <input
-          type="number"
-          id="value"
-          value={value}
-          onChange={event => setValue(event.target.value)}
+        Year of : 
+        <Select
+          defaultValue={year}
+          onChange={setYear}
+          options={options_year}
         />
-      </div>
-      <div>
-        <label htmlFor="public">Public:</label>
-        <input
-          type="checkbox"
-          id="public"
-          checked={isPublic}
-          onChange={event => setIsPublic(event.target.checked)}
-        />
-      </div>
-      <button type="submit">Create KPI</button>
-    </form>
+        <Adddoc/>
+      </form>
+    </div>
+
   );
 }
 

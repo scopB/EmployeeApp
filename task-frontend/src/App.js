@@ -59,24 +59,24 @@ function App() {
     const code = localStorage.getItem("user_code")
     const sent = {user_code : Number(code)}
     axios.post(`${linkUrl.LinkToBackend}/find_henchman`, sent).then((res)=>{
-      console.log(res.data)
+      // console.log(res.data)
       setHench(res.data)
     })
   }
 
-  console.log(quiz);
+  // console.log(quiz);
 
   const showassessment = async() =>{
     await axios.get(`${linkUrl.LinkToBackend}/show_assessment`).then( async(res) => {
-      console.log(res.data)
+      // console.log(res.data)
       setAssessment(res.data)
       let temp_list = []
       for (const i in res.data)
       {
         var temp = res.data[i].am_year
-        console.log(temp)
+        // console.log(temp)
         var temp_data = await showQuiz(temp)
-        console.log(temp_data);
+        // console.log(temp_data);
         if(temp_data.length != 0)
         {
           temp_list.push(temp_data)
@@ -110,14 +110,15 @@ function App() {
               <Route path='/' element={auth === "Home" ? 
               <Home hech = {hench} assessment={assessment} 
               quiz = {quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth}/> :
-              auth === "Login" ? <Login login={onAuth} /> : auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />} />
+              auth === "Login" ? <Login login={onAuth} /> : 
+              auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />} />
 
               {/* { <Route path='/quiz' element={
                 auth === "showbox" ? <Showquiz quiz={quiz}
                   setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} /> :
                   auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
               } /> }  */}
-              <Route path="/createkpipage" element={<CreateKpi/>}/>
+              <Route path="/createkpipage" element={<CreateKpi hech = {hench} assessment={assessment}/>}/>
               <Route path="/createkpi" element={<Testcreate/>}/>
               <Route path="/uploadorg" element={<Input_org/>}/>
               <Route path="/insert_user" element={<Input_user/>} />

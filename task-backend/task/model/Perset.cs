@@ -35,14 +35,14 @@ namespace task.perset
 
     public record UPDATE_ST_DOC_INPUT
     {
-        public int doc_id {get;set;}
+        public string doc_id {get;set;} = string.Empty;
         public string year {get;set;} = string.Empty;
         public string status_update {get;set;} = string.Empty;
     }
 
     public record UPDATE_LS_DOC_INPUT
     {
-        public int doc_id {get;set;}
+        public string doc_id {get;set;} = string.Empty;
         public string year {get;set;} = string.Empty;
         public long last_see {get;set;} 
     }

@@ -19,6 +19,15 @@ namespace task.mainservice
             var client = new MongoClient(test);
             return client;
         }
+
+        private static Random random = new Random();
+        public string RANDOM_STRING()
+        {
+            var length = 24;
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         public Boolean INSERT_DOC(DOC_FORM data, string year_doc)
         {
             var client = connect();
@@ -26,12 +35,17 @@ namespace task.mainservice
             {
                 var database = client.GetDatabase("DOCUMENT");
                 var test = database.GetCollection<DOC_FORM>(year_doc);
+                var stringid = RANDOM_STRING();
                 var data_insert = new DOC_FORM
                 {
-                    doc_id = data.doc_id,
+                    doc_id = stringid,
                     doc_createbyid = data.doc_createbyid,
                     doc_createdate = data.doc_createdate,
                     doc_foruserid = data.doc_foruserid,
+                    doc_year = data.doc_year,
+                    doc_yeartime = data.doc_yeartime,
+                    st_lastsee = data.st_lastsee,
+                    st_statuskpi = data.st_statuskpi,
                     doc_maintopic = data.doc_maintopic
                 };
                 var insertResult = test.InsertOneAsync(data_insert);
@@ -67,7 +81,7 @@ namespace task.mainservice
             }
         }
 
-        public Boolean UPDATE_STATUS_DOC(int doc_id, string status_update, string year)
+        public Boolean UPDATE_STATUS_DOC(string doc_id, string status_update, string year)
         {
             var client = connect();
             try
@@ -86,7 +100,7 @@ namespace task.mainservice
             }
         }
 
-        public Boolean UPDATE_LASTSEE_DOC(int doc_id, long st_lastsee, string year)
+        public Boolean UPDATE_LASTSEE_DOC(string doc_id, long st_lastsee, string year)
         {
             var client = connect();
             try
@@ -167,7 +181,8 @@ namespace task.mainservice
                     var documents = data.Find(filter).ToList();
                     foreach (var j in documents)
                     {
-                        var temp = new CHECK_STATUS{
+                        var temp = new CHECK_STATUS
+                        {
                             doc_id = j.doc_id,
                             doc_year = j.doc_year,
                             status = j.st_statuskpi,
@@ -182,6 +197,25 @@ namespace task.mainservice
             {
                 Console.WriteLine(ex);
                 return null;
+            }
+        }
+
+        public Boolean UPDATE_DOC(UPDATE_DOC data)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("DOCUMENT");
+                var collection = database.GetCollection<DOC_FORM>(data.year);
+                var filter = Builders<DOC_FORM>.Filter.Eq(s => s.doc_id, data.doc_code);
+                var update = Builders<DOC_FORM>.Update.Set(s => s.doc_maintopic,data.doc_maintopic);
+                var result = collection.UpdateOneAsync(filter, update);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
             }
         }
 

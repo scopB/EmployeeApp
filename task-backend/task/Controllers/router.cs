@@ -129,11 +129,16 @@ namespace task.Controllers
             var result = LOGIN_C.UPDATE_USER(data);
             return result;
         }
-
         [HttpPost("get_doc_from")]
         public ActionResult<List<CHECK_STATUS>> find_doc(CHECK_STATUS_INPUT data)
         {
             var result = repository.CHECK_KPI_STATUS(data.id,data.year);
+            return result;
+        }
+        [HttpPost("update_doc")]
+        public ActionResult<Boolean> update_doc(UPDATE_DOC data)
+        {
+            var result = repository.UPDATE_DOC(data);
             return result;
         }
     }

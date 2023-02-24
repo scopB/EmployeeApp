@@ -85,7 +85,10 @@ namespace task.quiz
         [BsonElement("doc_year")]
         public string doc_year {get;set;} = string.Empty;
         [BsonElement("doc_code")]
-        public int doc_id {get;set;}
+        public string doc_id {get;set;} = string.Empty;
+        [BsonElement("doc_yeartime")]
+        public int doc_yeartime {get;set;}
+        
         [BsonElement("doc_createby")]
 
         public int doc_createbyid {get;set;}
@@ -102,6 +105,13 @@ namespace task.quiz
         public string st_statuskpi {get;set;} = string.Empty;
         [BsonElement("doc_maintopic")]
 
+        public List<QUIZ_MAINTOPIC>? doc_maintopic {get;set;}
+    }
+
+    public record UPDATE_DOC
+    {
+        public string doc_code {get;set;} = string.Empty;
+        public string year {get;set;} = string.Empty;
         public List<QUIZ_MAINTOPIC>? doc_maintopic {get;set;}
     }
 
@@ -162,7 +172,7 @@ namespace task.quiz
 
     public record CHECK_STATUS
     {
-        public int doc_id{get;set;}
+        public string doc_id{get;set;} = string.Empty;
         public int for_user{get;set;}
         public string doc_year {get;set;} = string.Empty;
         public string status{get;set;} = string.Empty;

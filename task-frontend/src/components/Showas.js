@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import Testshowk from './Testshowk'
 
-const Showas = ({ assessment , status}) => {
+const Showas = ({ assessment , status , setAuth , setMaintopic , hech_id}) => {
 
     // console.log(assessment , status);
     return (
         <div>
             {assessment.length > 0 ? assessment.map((i) => (
-                <Testshowk ass_year= {i.am_year} status={status}/>
+                <Testshowk ass_year= {i.am_year} status={status} setAuth={setAuth} setMaintopic={setMaintopic} hech_id={hech_id}/>
             )) :
                 <div>
                     No assessment

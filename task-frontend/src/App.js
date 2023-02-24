@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Quizbuild from "./pages/Quizbuild";
-import Showquiz from "./pages/Showquiz";
 import Navbar from "./components/Navbar";
 import { linkUrl } from './urlBackend';
 import axios from "axios";
 import Doquiz from "./pages/Doquiz";
-import Addper from "./pages/Addper";
 import Score from "./pages/Score";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Backnavbar from "./pages/Backnavbar";
-import AddUser from "./pages/AddUser";
-import ChatPage from "./pages/ChatPage";
 import Testcreate from "./pages/Testcreate";
 import Input_org from "./pages/Input_org";
 import Input_user from "./pages/Input_user";
 import CreateKpi from "./pages/Createkpi";
+import Acceptkpi from "./pages/Acceptkpi";
+import Updatedoc from "./pages/Updatedoc";
 
 function App() {
 
@@ -27,6 +24,9 @@ function App() {
   const [quiz_name, setQuiz_name] = useState([])
   const [hench , setHench] = useState([])
   const [assessment , setAssessment] = useState([])
+  const [docid , setDocid] = useState()
+  const [maintopic , setMaintopic] = useState()
+  
 
   
 
@@ -83,7 +83,7 @@ function App() {
           // console.log(temp_data);
         }
       }
-      // console.log(temp_list);
+      console.log(temp_list);
       setQuiz(temp_list)
     })
   }
@@ -109,15 +109,13 @@ function App() {
 
               <Route path='/' element={auth === "Home" ? 
               <Home hech = {hench} assessment={assessment} 
-              quiz = {quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth}/> :
+              quiz = {quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} 
+              setAuth={setAuth} setDocid={setDocid} setMaintopic={setMaintopic}/> :
               auth === "Login" ? <Login login={onAuth} /> : 
-              auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />} />
-
-              {/* { <Route path='/quiz' element={
-                auth === "showbox" ? <Showquiz quiz={quiz}
-                  setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} /> :
-                  auth === "doing" && <Doquiz name={quiz_name} quiz={quizz} />
-              } /> }  */}
+              auth === "doing" ? <Doquiz name={quiz_name} quiz={quizz} />:
+              auth === "Accept" ? <Acceptkpi doc_id={docid} name={quiz_name} quiz={quizz} /> :
+              auth === "Edit" && <Updatedoc maintopic = {maintopic}/>
+              } />
               <Route path="/createkpipage" element={<CreateKpi hech = {hench} assessment={assessment}/>}/>
               <Route path="/createkpi" element={<Testcreate/>}/>
               <Route path="/uploadorg" element={<Input_org/>}/>

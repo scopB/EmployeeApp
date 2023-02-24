@@ -52,7 +52,7 @@ function CreateKpi({ assessment , hech, myid }) {
     let user = localStorage.getItem("user_code")
     let time = Math.floor(now.getTime()/1000)
     let temp = {
-      doc_id : 0,
+      doc_id : "",
       doc_year : year.value ,doc_yeartime : Number(year.value2),
       doc_createbyid : Number(user) ,doc_foruserid : foruser.value,
       doc_createdate : time, st_lastsee : 0, st_statuskpi : "00" , doc_maintopic : topics

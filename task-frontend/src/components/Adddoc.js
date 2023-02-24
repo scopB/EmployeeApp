@@ -48,7 +48,7 @@ function AddDataForm({topics, setTopics}) {
 
   const handleAddSubTopic = mainIndex => {
     const newTopics = [...topics];
-    newTopics[mainIndex].mt_suptopic.push({ subTopic: '', weight: '', st_supdetail: [{ supDetail: '', weight: '', choise1 : '',choise2 : '',choise3 : '',choise4 : '',choise5 : '' }] });
+    newTopics[mainIndex].mt_suptopic.push({ st_name: '', st_weight: '', st_supdetail: [{ sd_name: '', weight: '' , sd_choice01 : '',sd_choice02 : '',sd_choice03 : '',sd_choice04 : '',sd_choice05 : ''}] });
     setTopics(newTopics);
   };
 
@@ -60,7 +60,7 @@ function AddDataForm({topics, setTopics}) {
 
   const handleAddSupDetail = (mainIndex, subIndex) => {
     const newTopics = [...topics];
-    newTopics[mainIndex].mt_suptopic[subIndex].st_supdetail.push({ supDetail: '', weight: '' , choise1 : '',choise2 : '',choise3 : '',choise4 : '',choise5 : '' });
+    newTopics[mainIndex].mt_suptopic[subIndex].st_supdetail.push({ sd_name: '', weight: '' , sd_choice01 : '',sd_choice02 : '',sd_choice03 : '',sd_choice04 : '',sd_choice05 : ''});
     setTopics(newTopics);
   };
 

@@ -26,6 +26,7 @@ function App() {
   const [assessment , setAssessment] = useState([])
   const [docid , setDocid] = useState()
   const [maintopic , setMaintopic] = useState()
+  const [quizbody , setQuizbody] = useState()
   
 
   
@@ -110,9 +111,9 @@ function App() {
               <Route path='/' element={auth === "Home" ? 
               <Home hech = {hench} assessment={assessment} 
               quiz = {quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} 
-              setAuth={setAuth} setDocid={setDocid} setMaintopic={setMaintopic}/> :
+              setAuth={setAuth} setDocid={setDocid} setMaintopic={setMaintopic} setQuizbody={setQuizbody}/> :
               auth === "Login" ? <Login login={onAuth} /> : 
-              auth === "doing" ? <Doquiz name={quiz_name} quiz={quizz} />:
+              auth === "doing" ? <Doquiz name={quiz_name} quiz={quizz} quizbody={quizbody}/>:
               auth === "Accept" ? <Acceptkpi doc_id={docid} name={quiz_name} quiz={quizz} /> :
               auth === "Edit" && <Updatedoc maintopic = {maintopic}/>
               } />

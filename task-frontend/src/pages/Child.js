@@ -10,25 +10,27 @@ const Child = ({text , setscore}) => {
   useEffect(()=>{
     text.mt_suptopic.map((res)=>{
       all_mt_weight = all_mt_weight + res.st_weight
-      let temp = {stname : res.st_name , st_score : 0 , st_weight : res.st_weight}
+      let temp = {st_name : res.st_name , st_score : 0 , st_weight : res.st_weight , st_supdetail : []}
       scoreNow.push(temp)
     })
     console.log("st :",all_mt_weight)
   },[])
 
-  const tempfun = () =>{
+  const tempchild = () =>{
     let tempAll = 0
-    console.log(scoreNow);
+    // console.log(scoreNow);
     scoreNow.forEach(i =>{
       let temp = (i.st_score/100)*(i.st_weight/all_mt_weight)*100
       tempAll = tempAll + temp
       // console.log(temp)
     })
     setscore.forEach(i => {
-      if(i.nametop === text.mt_name)
+      if(i.mt_name === text.mt_name)
       {
-        i.score = tempAll
+        i.mt_score = tempAll
+        i.mt_suptopic = scoreNow
       }
+
     })
   }
 
@@ -38,9 +40,9 @@ const Child = ({text , setscore}) => {
           {text.mt_name}
           
           {text.mt_suptopic.map((res)=>(
-            <St_child text_st={res}  setNewScore={scoreNow}/>
+            <St_child text_st={res}  setNewScore={scoreNow} tempchild={tempchild}/>
             ))}
-          <button onClick={tempfun}>TESTOF</button>
+          {/* <button onClick={tempfun}>TESTOF</button> */}
             {/* {<Showchild text={text} score={score}/>} */}
         </div>
     </div>

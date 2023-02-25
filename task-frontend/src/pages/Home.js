@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Hech from "../components/Hech"
 import Showquiz from "./Showquiz"
 
-const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name , setDocid , setMaintopic}) => {
+const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name , setDocid , setMaintopic , setQuizbody}) => {
 
   // console.log(quiz);
   return (
@@ -19,7 +19,7 @@ const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name , setDoc
       </div>
       <div>
         My KPI
-        <Showquiz quiz={quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} setDocid={setDocid}/>
+        <Showquiz quiz={quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} setAuth={setAuth} setDocid={setDocid} setQuizbody={setQuizbody}/>
       </div>
     </div>
   )

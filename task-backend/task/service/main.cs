@@ -208,7 +208,7 @@ namespace task.mainservice
                 var database = client.GetDatabase("DOCUMENT");
                 var collection = database.GetCollection<DOC_FORM>(data.year);
                 var filter = Builders<DOC_FORM>.Filter.Eq(s => s.doc_id, data.doc_code);
-                var update = Builders<DOC_FORM>.Update.Set(s => s.doc_maintopic,data.doc_maintopic);
+                var update = Builders<DOC_FORM>.Update.Set(s => s.doc_maintopic,data.doc_maintopic).Set(s => s.st_statuskpi,"00");
                 var result = collection.UpdateOneAsync(filter, update);
                 return true;
             }
@@ -219,9 +219,52 @@ namespace task.mainservice
             }
         }
 
+        public Boolean INSERT_SCORE(SUBMIT_SCORE data)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("SCORE");
+                var test = database.GetCollection<SUBMIT_SCORE>(data.doc_year);
+                var data_insert = new SUBMIT_SCORE
+                {
+                    doc_createbyid = data.doc_createbyid,
+                    doc_foruserid = data.doc_foruserid,
+                    doc_id = data.doc_id,
+                    doc_score = data.doc_score,
+                    doc_year = data.doc_year,
+                    doc_yeartime = data.doc_yeartime,
+                    doc_mode_id = 111
+                };
+                var insertResult = test.InsertOneAsync(data_insert);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
 
-
-
+        public Boolean UPDATE_SCORE(SUBMIT_SCORE data)
+        {
+            var client = connect();
+            try
+            {
+                var database = client.GetDatabase("SCORE");
+                var collection = database.GetCollection<SUBMIT_SCORE>(data.doc_year);
+                var filter = Builders<SUBMIT_SCORE>.Filter.Eq(s => s.doc_id, data.doc_id);
+                var update = Builders<SUBMIT_SCORE>.Update.Set(s => s.maintopics,data.maintopics)
+                .Set(s => s.doc_mode_id,112).Set(s=>s.doc_score,data.doc_score);
+                var result = collection.UpdateOneAsync(filter, update);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
 
     }
 

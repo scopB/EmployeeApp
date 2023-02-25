@@ -141,6 +141,19 @@ namespace task.Controllers
             var result = repository.UPDATE_DOC(data);
             return result;
         }
+        [HttpPost("insert_score")]
+        public ActionResult<Boolean> insert_score(SUBMIT_SCORE data)
+        {
+            var result = repository.INSERT_SCORE(data);
+            return result;
+        }
+        
+        [HttpPost("update_score")]
+        public ActionResult<Boolean> update_score(SUBMIT_SCORE data)
+        {
+            var result = repository.UPDATE_SCORE(data);
+            return result;
+        }
     }
 
 }

@@ -7,7 +7,7 @@ const Showchild = ({ text , setScorenow ,tempfun}) => {
       // console.log(i)
         if (i.sd_name === text.sd_name)
         {
-          i.score = Number(e.target.value)
+          i.score = Math.ceil(Number(e.target.value))
           i.sd_choice = e.target.id
         }
     });

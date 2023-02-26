@@ -14,11 +14,11 @@ import Input_user from "./pages/Input_user";
 import CreateKpi from "./pages/Createkpi";
 import Acceptkpi from "./pages/Acceptkpi";
 import Updatedoc from "./pages/Updatedoc";
+import Checkscore from "./pages/Checkscore";
 
 function App() {
 
   const [auth, setAuth] = useState("Login")
-  const [perr, setPerr] = useState()
   const [quiz, setQuiz] = useState([])
   const [quizz, setQuizz] = useState([])
   const [quiz_name, setQuiz_name] = useState([])
@@ -27,18 +27,10 @@ function App() {
   const [docid , setDocid] = useState()
   const [maintopic , setMaintopic] = useState()
   const [quizbody , setQuizbody] = useState()
-  
-
-  
-
-  // const [permission,setPer] = useState()
+  const [scoreCheck , setScoreCheck] = useState()
+  const [mode, setMode] = useState("0")
   const name = localStorage.getItem("username")
-  useEffect(() => {
-    if (auth !== "Login") {
-      setPerr(localStorage.getItem("permission"))
-    }
-    // console.log(quiz)
-  })
+
 
   useEffect( async() => {
     if (localStorage.getItem("status") === "true") {
@@ -104,18 +96,21 @@ function App() {
       <Router>
         <div >
           {auth !== "Login" && <Navbar logout={Logout} setAuth={setAuth}
-            permission={perr} name={name}/>}
+           name={name}/>}
           <div className="test-page">
             <Routes>
 
               <Route path='/' element={auth === "Home" ? 
               <Home hech = {hench} assessment={assessment} 
               quiz = {quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name} 
-              setAuth={setAuth} setDocid={setDocid} setMaintopic={setMaintopic} setQuizbody={setQuizbody}/> :
+              setAuth={setAuth} setDocid={setDocid} setMaintopic={setMaintopic} 
+              setQuizbody={setQuizbody} setScoreCheck={setScoreCheck}/> :
               auth === "Login" ? <Login login={onAuth} /> : 
-              auth === "doing" ? <Doquiz name={quiz_name} quiz={quizz} quizbody={quizbody}/>:
+              auth === "doing" ? <Doquiz name={quiz_name} quiz={quizz} quizbody={quizbody} mode={mode}/>:
               auth === "Accept" ? <Acceptkpi doc_id={docid} name={quiz_name} quiz={quizz} /> :
-              auth === "Edit" && <Updatedoc maintopic = {maintopic}/>
+              auth === "Edit" ? <Updatedoc maintopic = {maintopic}/> :
+              auth === "Checkscore" && <Checkscore  maintopic = {scoreCheck} setMode={setMode} 
+                                                    setQuizz={setQuizz} setQuizbody={setQuizbody} setAuth={setAuth}/>
               } />
               <Route path="/createkpipage" element={<CreateKpi hech = {hench} assessment={assessment}/>}/>
               <Route path="/createkpi" element={<Testcreate/>}/>

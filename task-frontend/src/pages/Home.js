@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Hech from "../components/Hech"
 import Showquiz from "./Showquiz"
 
-const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name , setDocid , setMaintopic , setQuizbody}) => {
+const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name , setDocid , setMaintopic , setQuizbody , setScoreCheck}) => {
 
   // console.log(quiz);
   return (
@@ -10,7 +10,7 @@ const Home = ({ hech, assessment, quiz, setAuth ,setQuizz ,setQuiz_name , setDoc
       <div>
         You Huchman Kpi
         {hech.length > 0 ? hech.map((i) => (
-          <Hech hech={i.ps_name} assessment={assessment} hech_id = {i.ps_id} setAuth={setAuth} setMaintopic={setMaintopic}/>
+          <Hech hech={i.ps_name} assessment={assessment} hech_id = {i.ps_id} setAuth={setAuth} setMaintopic={setMaintopic} setScoreCheck={setScoreCheck}/>
         )) :
           <div>
             No huchman

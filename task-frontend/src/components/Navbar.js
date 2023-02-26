@@ -12,11 +12,6 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
         setAuth("Home")
     }
     
-    const onCreate = () => {
-        window.location.href = '/create-quiz'
-        localStorage.setItem("auth", "b_quiz")
-        setAuth("b_quiz")
-    }
     const onCreatekpiper = () => {
         window.location.href = '/createkpipage'
         localStorage.setItem("auth", "b_quiz")
@@ -26,17 +21,6 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
         window.location.href = '/'
         logout()
     }
-    const onShow = () => {
-        window.location.href = '/quiz'
-        localStorage.setItem("auth", "showbox")
-        setAuth("showbox")
-    }
-
-    const onPer = () => {
-        window.location.href = '/permission'
-        localStorage.setItem("auth", "addper")
-        setAuth("addper")
-    }
 
     const onScore = () => {
         window.location.href = '/score'
@@ -44,11 +28,6 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
         setAuth("score")
     }
 
-    const addUser = () =>{
-        window.location.href = '/addUser'
-        localStorage.setItem("auth", "addUser")
-        setAuth("addUser")
-    }
     const onCreatekpi = () =>{
         window.location.href = '/createkpi'
         localStorage.setItem("auth","createkpi")
@@ -78,10 +57,6 @@ const Navbar = ({ logout, setAuth, permission, showQuiz ,name}) => {
                     <button className='navbar-box' onClick={onOrg}>ORG MM</button>
                     <button className='navbar-box' onClick={onUser}>USER MM</button>
                     <button className='navbar-box' onClick={onScore}>Show Score</button>
-                    {permission === "admin" && <button className='navbar-box' onClick={onCreate}>New Quiz</button>}
-                    {permission === "admin" && <button className='navbar-box' onClick={onPer}>Add Permission</button>}
-                    {permission === "admin" && <button className='navbar-box' onClick={onScore}>Show Score</button>}
-                    {permission === "admin" && <button className='navbar-box' onClick={addUser}>Add User</button>}
                     <button className='navbar-box2 ' onClick={onOut} href="/">Logout {name}</button>
                 </ul>
             </div>

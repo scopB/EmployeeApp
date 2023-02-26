@@ -27,7 +27,7 @@ const Child = ({text , setscore}) => {
     setscore.forEach(i => {
       if(i.mt_name === text.mt_name)
       {
-        i.mt_score = tempAll
+        i.mt_score = Math.ceil(tempAll)
         i.mt_suptopic = scoreNow
       }
 

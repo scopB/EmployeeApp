@@ -28,7 +28,7 @@ const St_child = ({ text_st , setNewScore ,tempchild }) => {
 
     setNewScore.forEach(i => {
       if (i.st_name === text_st.st_name) {
-        i.st_score = temp_all
+        i.st_score = Math.ceil(temp_all)
         i.st_supdetail = scoreNow
       }
     })

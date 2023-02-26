@@ -154,6 +154,17 @@ namespace task.Controllers
             var result = repository.UPDATE_SCORE(data);
             return result;
         }
+        [HttpPost("show_score")]
+        public ActionResult<SUBMIT_SCORE> show_score(INPUT_SCORE data)
+        {
+            var result = repository.SHOW_SHOW_WHO(data.doc_id,data.year);
+            return result;
+        }
+        [HttpPost("test")]
+        public SUBMIT_SCORE test(SUBMIT_SCORE data)
+        {
+            return data;
+        }
     }
 
 }

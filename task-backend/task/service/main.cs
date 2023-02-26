@@ -234,7 +234,8 @@ namespace task.mainservice
                     doc_score = data.doc_score,
                     doc_year = data.doc_year,
                     doc_yeartime = data.doc_yeartime,
-                    doc_mode_id = 111
+                    doc_mode_id = 111,
+                    maintopics = data.maintopics
                 };
                 var insertResult = test.InsertOneAsync(data_insert);
                 return true;
@@ -265,6 +266,30 @@ namespace task.mainservice
                 return false;
             }
         }
+
+        public SUBMIT_SCORE SHOW_SHOW_WHO(string doc_id,string year)
+        {
+            var client = connect();
+            try
+            {
+                var result = new SUBMIT_SCORE();
+                var database = client.GetDatabase("SCORE");
+                var collection = database.GetCollection<SUBMIT_SCORE>(year);
+                var filter = Builders<SUBMIT_SCORE>.Filter.Eq(s => s.doc_id, doc_id);
+                var documents = collection.Find(filter).ToList();
+                foreach(var i in documents)
+                {
+                    result = i;
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
 
     }
 

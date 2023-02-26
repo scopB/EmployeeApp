@@ -152,6 +152,7 @@ namespace task.quiz
         public List<QUIZ_MAINTOPIC_SCOER>? maintopics {get;set;}
     }
 
+
     public record QUIZ_SUPDETAIL_SCORE
     {
         [BsonElement("sd_name")]
@@ -184,7 +185,12 @@ namespace task.quiz
         public int mt_score {get;set;}
         [BsonElement("mt_suptopic")]
         public List<QUIZ_SUPTOPIC_SCORE>? mt_suptopic {get;set;}
+    }
 
+    public record INPUT_SCORE
+    {
+        public string doc_id {get;set;} = string.Empty;
+        public string year {get;set;} = string.Empty; 
     }
 
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 
-const Quizbox = ({ doc_id , name , status ,text , setQuiz_name , setQuizz , setAuth, setDocid, setQuizbody , body}) => {
+const Quizbox = ({nameShow, doc_id , name , status ,text , setQuiz_name , setQuizz , setAuth, setDocid, setQuizbody , body}) => {
 
     const onChange = () =>{
       // console.log(body);
@@ -16,8 +16,8 @@ const Quizbox = ({ doc_id , name , status ,text , setQuiz_name , setQuizz , setA
 
   return (
     <div >
-      Start to kpi :
-        <button className='btn-quiz' onClick={onChange}>{name}</button>
+      เริ่มการประเมินตนเอง :
+        <button className='btn-quiz' onClick={onChange}>{nameShow}</button>
     </div>
   )
 }

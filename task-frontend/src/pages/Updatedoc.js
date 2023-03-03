@@ -12,31 +12,50 @@ const Updatedoc = ({maintopic}) => {
 
     const [year , setYear] = useState('')
     const [docid,setDocid] = useState('')
+    const [text,setText] = useState('')
   
   useEffect(()=>{
     maintopic.map((i)=>{
+      console.log(i);
       setTopics(i.doc_maintopic)
       setYear(i.doc_year)
+      setText(i.doc_denyDetail)
       setDocid(i.doc_id)
     })
   },[])
 
   const handleSubmit = () =>{
-    // console.log(topics) //axios
-    // console.log(year);
-    // console.log(docid);
-    let temp = { doc_code : docid , year : year , doc_maintopic : topics}
+    let temp = { doc_code : docid , year : year , doc_maintopic : topics , status : "00" }
     axios.post(`${linkUrl.LinkToBackend}/update_doc`, temp).then((res) => {
       console.log(res);
+      window.location.reload(false);
+    })
+  }
+
+  const handleSave = () =>{
+    let temp = { doc_code : docid , year : year , doc_maintopic : topics , status : "--" }
+    axios.post(`${linkUrl.LinkToBackend}/update_doc`, temp).then((res) => {
+      console.log(res);
+      window.location.reload(false);
     })
   }
 
   // console.log(maintopic);
   return (
     <div>
-      Updatedoc
+      แก้ไขเอกสารการประเมิน
+
+      <div>
+        เหตุผลของการปฏิเสธเอกสารแบบประเมิน
+        {text !== '' ? <div>
+          {text}
+        </div> : <div>
+          ' ไม่ระบุเหตุผล '
+          </div>}
+      </div>
       <Adddoc topics={topics} setTopics={setTopics}/>    
-      <button onClick={handleSubmit}>Check</button>  
+      <button onClick={handleSave}>Save</button>
+      <button onClick={handleSubmit}>Submit</button>  
     </div>
   )
 }

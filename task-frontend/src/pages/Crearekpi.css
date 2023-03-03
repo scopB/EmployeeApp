@@ -1,0 +1,75 @@
+/* CreateKpi form */
+form {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-top : 10%;
+  }
+  
+  /* Form input labels */
+  label {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  /* Select dropdowns */
+  .Select {
+    width: 250px;
+    margin-top: 5px;
+  }
+  
+  /* Adddoc component */
+  .adddoc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .adddoc label {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  /* Adddoc table */
+  .adddoc table {
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .adddoc th,
+  .adddoc td {
+    padding: 5px 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .adddoc th {
+    font-weight: bold;
+  }
+  
+  .adddoc .addrow {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  /* Submit button */
+  button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+  

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Showas from './Showas'
 import { linkUrl } from '../urlBackend';
 
-const Hech = ({hech , assessment , hech_id , setAuth , setMaintopic , setScoreCheck}) => {
+const Hech = ({hech , assessment , hech_id , setAuth , setMaintopic , setScoreCheck , setCreate}) => {
 
     const [showAssessment , setShowassessment] = useState(false)
     const [status , setStatus] = useState()
@@ -27,10 +27,10 @@ const Hech = ({hech , assessment , hech_id , setAuth , setMaintopic , setScoreCh
         // console.log(temp)
     }
   return (
-    <div>
-        <button onClick={onHandle}>{hech}</button>
-        {showAssessment && <Showas assessment={assessment} status={status} setAuth={setAuth} 
-        setMaintopic={setMaintopic} hech_id={hech_id} setScoreCheck={setScoreCheck}/>}
+    <div className=''>
+        <button className='btn' onClick={onHandle}>{hech}</button>
+        {showAssessment && <Showas hech={hech} assessment={assessment} status={status} setAuth={setAuth} 
+        setMaintopic={setMaintopic} hech_id={hech_id} setScoreCheck={setScoreCheck} setCreate={setCreate}/>}
     </div>
   )
 }

@@ -89,12 +89,14 @@ const Input_org = () => {
         for (let i = 0; i < jsonData.length; i++) {
             let data_input = jsonData[i]
             axios.post(`${linkUrl.LinkToBackend}/insert_ore`, data_input).then((res) => {
-                if (res.data === true) {
-                    alert("INSERT SUCCESS")
-                }
-                else {
-                    alert("INSERT FAILL")
-                }
+                window.location.reload(false);
+                // if (res.data === true) {
+                //     alert("INSERT SUCCESS")
+                // }
+                // else {
+                //     alert("INSERT FAILL")
+                // }
+
             })
         }
     }
@@ -112,7 +114,7 @@ const Input_org = () => {
             <button onClick={previewFile}>Submit</button>
             {showBox && <Comfirmwindow message={"Comfirm to insert Ore"} setShowBox={setShowBox} check_data={check_data}/>}
 
-            <div>
+            {/* <div>
                 <form onSubmit={ShowEditdata}>
                 <Select
                     defaultValue={orgNow}
@@ -121,7 +123,7 @@ const Input_org = () => {
                 />
                 <button>Serch</button>
                 </form>
-            </div>
+            </div> */}
             
             <div>
 

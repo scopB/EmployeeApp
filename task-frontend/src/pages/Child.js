@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Showchild from './Showchild'
 import St_child from './St_child'
 
-const Child = ({text , setscore}) => {
+const Child = ({text , setscore , mode , score_test , indexM}) => {
 
   const [scoreNow , setScorenow] = useState([])
+
+  // console.log(score_test);
 
   var all_mt_weight = 0
   useEffect(()=>{
@@ -13,7 +15,7 @@ const Child = ({text , setscore}) => {
       let temp = {st_name : res.st_name , st_score : 0 , st_weight : res.st_weight , st_supdetail : []}
       scoreNow.push(temp)
     })
-    console.log("st :",all_mt_weight)
+    // console.log("st :",all_mt_weight)
   },[])
 
   const tempchild = () =>{
@@ -37,10 +39,18 @@ const Child = ({text , setscore}) => {
   return (
     <div>
         <div >
-          {text.mt_name}
+          หัวข้อดัชนีชี้วัดที่ {indexM + 1} : {text.mt_name}
+          {mode === "1" && <div>
+            คะแนนจากการประเมินตนเองได้ในหัวข้อ {text.mt_name} : {score_test.mt_score}
+          </div>}
           
-          {text.mt_suptopic.map((res)=>(
-            <St_child text_st={res}  setNewScore={scoreNow} tempchild={tempchild}/>
+          {text.mt_suptopic.map((res,index)=>(
+            <div>
+              
+              {mode === "0" && <St_child text_st={res}  setNewScore={scoreNow} tempchild={tempchild} mode={mode} indexM={indexM} indexS={index} />}
+              {mode === "1" && <St_child text_st={res}  setNewScore={scoreNow} tempchild={tempchild} mode={mode} score_test={score_test.mt_suptopic[index]} indexM={indexM} indexS={index}/>}
+
+            </div>
             ))}
           {/* <button onClick={tempfun}>TESTOF</button> */}
             {/* {<Showchild text={text} score={score}/>} */}

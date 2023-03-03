@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Accpetstatus = ({doc_id,name , status ,text , setQuiz_name , setQuizz , setAuth , setDocid}) => {
+const Accpetstatus = ({nameShow,doc_id,name , status ,text , setQuiz_name , setQuizz , setAuth , setDocid , setQuizbody , body}) => {
 
     const onChange = () =>{
         // console.log(status)
@@ -9,12 +9,13 @@ const Accpetstatus = ({doc_id,name , status ,text , setQuiz_name , setQuizz , se
         setQuizz(text)
         setQuiz_name(name)
         setDocid(doc_id)
+        setQuizbody(body)
     }
 
   return (
     <div>
-        Accpetstatus
-        <button className='btn-quiz' onClick={onChange} >{name}</button>
+        ตอบรับเอกสารการประเมิน : 
+        <button className='btn-quiz' onClick={onChange} >{nameShow}</button>
     </div>
   )
 }

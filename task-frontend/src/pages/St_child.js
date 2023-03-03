@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import Showchild from './Showchild'
 
-const St_child = ({ text_st , setNewScore ,tempchild }) => {
+const St_child = ({ text_st , setNewScore ,tempchild, mode ,score_test , indexM , indexS}) => {
   const [scoreNow, setScorenow] = useState([])
 
   var all_sp_weight = 0
@@ -11,10 +11,10 @@ const St_child = ({ text_st , setNewScore ,tempchild }) => {
   useEffect(() => {
     text_st.st_supdetail.map((res) => {
       all_sp_weight = all_sp_weight + res.weight
-      let temp = { sd_name: res.sd_name, score: 0, weight: res.weight , sd_choice : "" }
+      let temp = { sd_name: res.sd_name, score: 0, weight: res.weight , sd_choice : "" ,sd_detail : ""}
       scoreNow.push(temp)
     })
-    console.log("sp :", all_sp_weight)
+    // console.log("sp :", all_sp_weight)
   }, [])
 
   const tempfun = () => {
@@ -37,9 +37,15 @@ const St_child = ({ text_st , setNewScore ,tempchild }) => {
 
   return (
     <div>
-      {text_st.st_name}
-      {text_st.st_supdetail.map((res) => (
-        <Showchild text={res}  setScorenow={scoreNow} tempfun={tempfun} />
+      ดัชนีตัวชี้วัดหลักที่ {indexM+1}.{indexS+1} : {text_st.st_name}
+      {mode === "1" && <div>
+        คะแนนจากการประเมินตนเองของดัชนีชี้วัดหลัก {text_st.st_name} : {score_test.st_score}
+      </div>}
+      {text_st.st_supdetail.map((res,index) => (
+        <div>
+          {mode === "0" && <Showchild text={res}  setScorenow={scoreNow} tempfun={tempfun} index={index} mode={mode} indexM={indexM} indexS={indexS}/>}
+          {mode === "1" && <Showchild text={res}  setScorenow={scoreNow} tempfun={tempfun} index={index} mode={mode} score_test={score_test.st_supdetail[index]} indexM={indexM} indexS={indexS}/>}
+        </div>
       ))}
       {/* <button onClick={tempfun}>TEST</button> */}
     </div>

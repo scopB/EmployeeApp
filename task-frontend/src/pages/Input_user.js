@@ -62,12 +62,7 @@ const Input_user = () => {
         for (let i = 0; i < jsonData.length; i++) {
             let data_input = jsonData[i]
             axios.post(`${linkUrl.LinkToBackend}/insert_user`, data_input).then((res) => {
-                if (res.data === true) {
-                    alert("INSERT SUCCESS")
-                }
-                else {
-                    alert("INSERT FAILL")
-                }
+                window.location.reload(false);
             })
         }
     }

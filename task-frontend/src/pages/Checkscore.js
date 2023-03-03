@@ -1,8 +1,19 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { linkUrl } from '../urlBackend';
 
-const Checkscore = ({maintopic , setMode , setQuizz , setQuizbody , setAuth}) => {
+const Checkscore = ({maintopic , setMode , setQuizz , setQuizbody , setAuth ,setScore_}) => {
+
+
+  const [name,setName] = useState('')
+
+  useEffect(()=>{
+    axios.get(`${linkUrl.LinkToBackend}/find_user/${maintopic.doc_foruserid}`).then((res)=>{
+      let temp = res.data.ps_name + " " + res.data.ps_lastname
+      setName(temp)
+    })
+  })
+
     // console.log(maintopic);
 
     //setQuizz = main topic
@@ -19,6 +30,7 @@ const Checkscore = ({maintopic , setMode , setQuizz , setQuizbody , setAuth}) =>
         all_body = i
       })
       setQuizz(main)
+      setScore_(maintopic.maintopics)
       setQuizbody(all_body)
       setMode("1")
       setAuth("doing")
@@ -27,22 +39,31 @@ const Checkscore = ({maintopic , setMode , setQuizz , setQuizbody , setAuth}) =>
 
   return (
     <div>
-      Checkscore
-      Name : {maintopic.doc_year}
-      Result Score : {maintopic.doc_score}
+      ตรวจสอบผลการประเมินตนเอง
+      <br></br>
+      ชื่อเอกสารแบบประเมิน : {maintopic.doc_year}
+      <br></br>
+      ผลคะแนนรวม : {maintopic.doc_score}
+      <br></br>
+      <br></br>
       {maintopic.maintopics.map((i)=>(
         <div>
-          Main topic Name : {i.mt_name} " "
-          Main topic Score : {i.mt_score}
+          ชื่อหัวข้อดัชนีชี้วัด : {i.mt_name} " "
+          <br></br>
+          คะแนนรวมหัวข้อดัชนีชี้วัด : {i.mt_score}
+          <br></br>
           {i.mt_suptopic.map((j)=>(
             <div>
-              Sup topic Name : {j.st_name} " "
-              Sup topic Score : {j.st_score}
+              ชื่อดัชนีชี้วัดหลัก : {j.st_name} " "
+              <br></br>
+              ผลคะแนน ดัชนีชี้วัดหลัก : {j.st_score}
+              <br></br>
               {j.st_supdetail.map((k)=>(
                 <div>
-                  SubDetail Name : {k.sd_name} " "
-                  SubDetail Choice : {k.sd_choice} " "
-                  SubDetail Score : {k.score} 
+                  ชื่อดัชนีชี้วัดย่อย : {k.sd_name} " "
+                  ตัวเลือกที่เลือก : {k.sd_choice} " "
+                  ผลคะแนนดัชนีชี้วัดย่อย : {k.score} " "
+                  เหตุผลที่เลือก : {k.sd_detail}
                   {/* <br>a</br> */}
                 </div>
               ))}
@@ -50,7 +71,7 @@ const Checkscore = ({maintopic , setMode , setQuizz , setQuizbody , setAuth}) =>
           ))}
         </div>
       ))}
-      <button onClick={handleKpi}>Do this kpi</button>
+      <button onClick={handleKpi}>เริ่มการประเมิน {name}</button>
     </div>
   )
 }

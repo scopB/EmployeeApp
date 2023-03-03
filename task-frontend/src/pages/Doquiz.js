@@ -4,15 +4,18 @@ import Child from './Child'
 import { linkUrl } from '../urlBackend';
 import { useEffect } from 'react';
 
-const Doquiz = ({ name, quiz, quizbody , mode}) => {
+const Doquiz = ({ name, quiz, quizbody , mode , score_}) => {
+
+  console.log(quizbody);
+
   const [score, setScore] = useState([])
   const [tempscore, settempScore] = useState([])
   var all_weight = 0
 
 
   useEffect(() => {
-    console.log(quizbody);
-    console.log(quiz)
+    // console.log(quizbody);
+    // console.log(quiz)
     console.log(mode);
 
     quiz.map((res) => {
@@ -20,7 +23,7 @@ const Doquiz = ({ name, quiz, quizbody , mode}) => {
       let temp = { mt_name: res.mt_name, mt_score: 0, mt_weight: res.mt_weight, mt_suptopic: [] }
       tempscore.push(temp)
     })
-    console.log("mt :", all_weight)
+    // console.log("mt :", all_weight)
   }, [])
 
   const onChick = () => {
@@ -54,30 +57,40 @@ const Doquiz = ({ name, quiz, quizbody , mode}) => {
       let temp = { doc_id: quizbody.doc_id, year: quizbody.doc_year, status_update: "33" }
     axios.post(`${linkUrl.LinkToBackend}/insert_score`, result).then((res) => {
       axios.post(`${linkUrl.LinkToBackend}/update_status_doc`, temp).then((res) => {
-        console.log(res);
+        // console.log(res);
+        window.location.reload(false);
       })
     })
     }
     else if(mode === "1")
     {
       let temp = { doc_id: quizbody.doc_id, year: quizbody.doc_year, status_update: "44" }
-      console.log(result);
+      // console.log(result);
       axios.post(`${linkUrl.LinkToBackend}/update_score`, result).then((res) => {
         axios.post(`${linkUrl.LinkToBackend}/update_status_doc`, temp).then((res) => {
-          console.log(res);
+          // console.log(res);
+          window.location.reload(false);
         })
       })
     }
     
-
     // console.log(temp);
   }
 
   return (
     <div>
-      {quiz.map((res) => (
-        <Child text={res} setscore={tempscore} />
+
+      ชื่อเอกสาร : {quizbody.doc_name}
+      <br></br>
+      <br></br>
+
+      {quiz.map((res,index) => (
+        <div>
+        {mode === "0" && <Child score_test = {[]} text={res} setscore={tempscore} mode={mode} indexM={index}/>}
+        {mode === "1" && <Child score_test = {score_[index]} text={res} setscore={tempscore} mode={mode} indexM={index}/>}
+        </div>
       ))}
+
       <button className='btn btn-block' onClick={onChick}>Submit</button>
     </div>
   )

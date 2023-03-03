@@ -1,51 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Scoreinfo from './Scoreinfo';
 import './showsty.css'
 const Showscorer = ({ data_body }) => {
+    // console.log(data_body);
+    const [mode, setMode] = useState(false)
+    var x = ""
     return (
         <div>
-            {data_body.map((e) => {
-                return (
-                    <div className='conner'>
-                        <h2>Name : {e.username}</h2>
-                        <h6>Quiz Name : {e.q_NAME}</h6>
-                        <div className='scorebox'>
-                        {e.result.map((a) =>{
-                            var x = ""
-                            if((a.score === 1))
-                            {
-                                x = 'red'
-                            }
-                            if((a.score === 2))
-                            {
-                                x = 'orange'
-                            }
-                            if((a.score === 3))
-                            {
-                                x = 'yellow'
-                            }
-                            if((a.score === 4))
-                            {
-                                x = 'lightgreen'
-                            }
-                            if((a.score === 5))
-                            {
-                                x = 'green'
-                            }
-                            // console.log(x)
-                            
-                            return(
-                                <div className={'littlebox ' + x}>
-                                    {a.number_quiz} : {a.score}
-                                </div>
-                            )
-                        })}
+            <div className='conner'>
+                <h2>Name : {data_body.ps.ps_name} {data_body.ps.ps_lastname}</h2>
+                <h6>Quiz Name : {data_body.body.doc_year}</h6>
+                <div className='scorebox'>
+                    <div className={'littlebox ' + data_body.color}>
+                        {data_body.body.doc_year} : {data_body.body.doc_score}
+                        <button onClick={() => { setMode(!mode) }}>Check Info</button>
+                        {mode === true && <Scoreinfo quiz={data_body.body} />}
                     </div>
-                    </div>
-                )
-
-            })}
+                </div>
+            </div>
         </div>
     )
 }
 
 export default Showscorer
+
+// <div className={'littlebox ' + x}>
+//                                     {a.number_quiz} : {a.score}
+//                                 </div>

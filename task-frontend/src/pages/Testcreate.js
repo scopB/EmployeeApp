@@ -91,23 +91,28 @@ const Testcreate = ({ modeCreate, CreateDetail ,setAuth}) => {
     // console.log(kpitime);
 
     return (
-        <div>
+        <div className='create-kpi'>
             <form onSubmit={onSubmit}>
 
-                กำหนดชื่อเอกสารการประเมิน : <input type="text" placeholder='ชื่อเอกสารการประเมิน' value={nameDoc} onChange={(e) => setNameDoc(e.target.value)} />
-
-                กำหนดปีการประเมิน : <input type="text" placeholder='ระบุปีการประเมิน' value={year_kpi} onChange={(e) => onYear_kpi(e.target.value)} />
-
-                กำหนดระยะเวลาเริ่ม : <DateTimePicker onChange={onStart} value={start} />
-
-                กำหนดระยะเวลาสิ้นสุด : <DateTimePicker onChange={onFinish} value={finish} />
-
+                ชื่อการประเมิน : <input type="text" placeholder='ชื่อการประเมิน' value={nameDoc} onChange={(e) => setNameDoc(e.target.value)} />
+                <br></br>
+                <br></br>
+                ปีประเมิน : <input type="text" placeholder='ระบุปีประเมิน' value={year_kpi} onChange={(e) => onYear_kpi(e.target.value)} />
+                <br></br>
+                <br></br>
+                วันเวลาที่เริ่มประเมิน : <DateTimePicker onChange={onStart} value={start} />
+                <br></br>
+                <br></br>
+                วันเวลาที่สิ้นสุดการประเมิน : <DateTimePicker onChange={onFinish} value={finish} />
+                <br></br>
+                <br></br>
                 ครั้งที่ : {modeCreate === "0" ? <Select
                     defaultValue={kpitime}
                     onChange={setKpitime}
                     options={options}
                 /> : <input type="number" value={kpitime} onChange={(e) => setKpitime(e.target.value)}></input>}
-                <button type="submit">Submit</button>
+                <div>
+                <button type="submit">สร้างการประเมิน</button></div>
             </form>
         </div>
     )

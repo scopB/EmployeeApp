@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Adddo.css'
 
 function AddDataForm({ topics, setTopics }) {
+
   const handleMainTopicChange = (index, value) => {
     const newTopics = [...topics];
     newTopics[index].mt_name = value;
@@ -65,140 +66,207 @@ function AddDataForm({ topics, setTopics }) {
   return (
     <form >
       {topics.map((topic, mainIndex) => (
-        <div key={mainIndex}>
-          <div>
-            <div>
-              {mainIndex + 1 + ". "}
-            </div>
-            <label htmlFor={`mainTopic${mainIndex}`}>กำหนดหัวข้อดัชนีตัวชี้วัด :</label>
-            <input
-              type="text"
-              id={`mainTopic${mainIndex}`}
-              value={topic.mt_name}
-              onChange={event => handleMainTopicChange(mainIndex, event.target.value)}
-            />
-            <label htmlFor={`mainTopicWeight${mainIndex}`}>กำหนดน้ำหนัก หัวข้อดัชนีตัวชี้วัดหลัก :</label>
-            <input
-              type="text"
-              id={`mainTopicWeight${mainIndex}`}
-              value={topic.mt_weight}
-              onChange={event => handleMainWeightChange(mainIndex, event.target.value)}
-            />
-          </div>
-          {topic.mt_suptopic.map((subTopic, subIndex) => (
-            <div key={`${mainIndex}-${subIndex}`}>
-              <div>
+        <div>
+          <div key={mainIndex} className="dov_body">
+            <div className='dov-body-in'>
+              {/* {mainIndex + 1 + ". "} */}
+              <div className='dov-body-in2'>
+                <div className='col-doc-btn-mar'>
+                  {mainIndex + 1 + ". "}
+                </div>
+                <label htmlFor={`mainTopic${mainIndex}`}>วัตถุประสงค์ :</label>
+                <div className='main-box-name'>
+                  <input
+                    type="text"
+                    id={`mainTopic${mainIndex}`}
+                    value={topic.mt_name}
+                    onChange={event => handleMainTopicChange(mainIndex, event.target.value)}
+                  />
+                </div>
+                <label htmlFor={`mainTopicWeight${mainIndex}`}>น้ำหนักวัตถุประสงค์ :</label>
                 <div>
-                  {mainIndex + 1 + "."}{subIndex + 1 + ". "}
+                  <input
+                    type="text"
+                    id={`mainTopicWeight${mainIndex}`}
+                    value={topic.mt_weight}
+                    onChange={event => handleMainWeightChange(mainIndex, event.target.value)}
+                  />
                 </div>
-                <label htmlFor={`subTopic${mainIndex}-${subIndex}`}> กำหนด ดัชนีตัวชี้วัดหลัก :</label>
-                <input
-                  type="text"
-                  id={`subTopic${mainIndex}-${subIndex}`}
-                  value={subTopic.st_name}
-                  onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_name', event.target.value)}
-                />
-                <label htmlFor={`subTopicWeight${mainIndex}-${subIndex}`}>กำหนดน้ำหนัก ดัชนีตัวชี้วัดหลัก : </label>
-                <input
-                  type="text"
-                  id={`subTopicWeight${mainIndex}-${subIndex}`}
-                  value={subTopic.st_weight}
-                  onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_weight', event.target.value)}
-                />
               </div>
-              {subTopic.st_supdetail.map((supDetail, supIndex) => (
-                <div key={`${mainIndex}-${subIndex}-${supIndex}`}>
-                  <div>
-                    <div>
-                      {mainIndex + 1 + "."}{subIndex + 1 + "."}{supIndex + 1 + ". "}
+            </div>
+            {topic.mt_suptopic.map((subTopic, subIndex) => (
+              <div>
+                <div key={`${mainIndex}-${subIndex}`} className='dov_body-child1'>
+                  <div className='dov_body-child1-body'>
+                    <div className='dov-body-in2'>
+                      <div className='col-doc-btn-mar'>
+                        {mainIndex + 1 + "."}{subIndex + 1 + ". "}
+                      </div>
+                      <label htmlFor={`subTopic${mainIndex}-${subIndex}`}> ตัวชี้วัดหลัก :</label>
+                      <div className='main-box-name'>
+                        <input
+                          type="text"
+                          id={`subTopic${mainIndex}-${subIndex}`}
+                          value={subTopic.st_name}
+                          onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_name', event.target.value)}
+                        />
+                      </div>
+
+                      <label htmlFor={`subTopicWeight${mainIndex}-${subIndex}`}>น้ำหนักตัวชี้วัดหลัก : </label>
+                      <div>
+                        <input
+                          type="text"
+                          id={`subTopicWeight${mainIndex}-${subIndex}`}
+                          value={subTopic.st_weight}
+                          onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_weight', event.target.value)}
+                        />
+                      </div>
+                      <br></br>
+                      <br></br>
                     </div>
-                    <label htmlFor={`supDetail${mainIndex}-${subIndex}-${supIndex}`}>กำหนด ดัชนีตัวชี้วัดย่อย :</label>
-                    <input
-                      type="text"
-                      id={`supDetail${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_name}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_name', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>กำหนด น้ำหนักดัชนีตัวชี้วัดย่อย:</label>
-                    <input
-                      type="text"
-                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.weight}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'weight', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailDetail${mainIndex}-${subIndex}-${supIndex}`}>กำหนด คำอธิบายดัชนีตัวชี้วัดย่อย:</label>
-                    <input
-                      type="text"
-                      id={`supDetailDetail${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_detail}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_detail', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 1 สำหรับ 1 คะแนน :</label>
-                    <input
-                      type="text"
-                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_choice01}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice01', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 2 สำหรับ 2 คะแนน :</label>
-                    <input
-                      type="text"
-                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_choice02}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice02', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 3 สำหรับ 3 คะแนน :</label>
-                    <input
-                      type="text"
-                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_choice03}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice03', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 4 สำหรับ 4 คะแนน :</label>
-                    <input
-                      type="text"
-                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_choice04}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice04', event.target.value)}
-                    />
-                    <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 5 สำหรับ 5 คะแนน :</label>
-                    <input
-                      type="text"
-                      id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                      value={supDetail.sd_choice05}
-                      onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice05', event.target.value)}
-                    />
+
+
+                    {subTopic.st_supdetail.map((supDetail, supIndex) => (
+                      <div key={`${mainIndex}-${subIndex}-${supIndex}`} className="dov_body-child2">
+                        <div className='dov_body-child22'>
+                          <div className='dov-body-in2'>
+                            <div className='col-doc-btn-mar'>
+                              {mainIndex + 1 + "."}{subIndex + 1 + "."}{supIndex + 1 + ". "}
+                            </div>
+                            <label htmlFor={`supDetail${mainIndex}-${subIndex}-${supIndex}`}>ตัวชี้วัดรอง :</label>
+                            <div className='main-box-name'>
+                              <input
+                                type="text"
+                                id={`supDetail${mainIndex}-${subIndex}-${supIndex}`}
+                                value={supDetail.sd_name}
+                                onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_name', event.target.value)}
+                              />
+                            </div>
+                            <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>น้ำหนักตัวชี้วัดรอง:</label>
+                            <div className='main-box-name-w'>
+                              <input
+                                type="text"
+                                id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                                value={supDetail.weight}
+                                onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'weight', event.target.value)}
+                              />
+                            </div>
+
+                          </div>
+
+                          <label htmlFor={`supDetailDetail${mainIndex}-${subIndex}-${supIndex}`}>คำอธิบายตัวชี้วัดรอง :</label>
+                          <input
+                            type="text"
+                            id={`supDetailDetail${mainIndex}-${subIndex}-${supIndex}`}
+                            value={supDetail.sd_detail}
+                            onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_detail', event.target.value)}
+                          />
+                          <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 1 สำหรับ 1 คะแนน :</label>
+                          <input
+                            type="text"
+                            id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                            value={supDetail.sd_choice01}
+                            onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice01', event.target.value)}
+                          />
+                          <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 2 สำหรับ 2 คะแนน :</label>
+                          <input
+                            type="text"
+                            id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                            value={supDetail.sd_choice02}
+                            onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice02', event.target.value)}
+                          />
+                          <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 3 สำหรับ 3 คะแนน :</label>
+                          <input
+                            type="text"
+                            id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                            value={supDetail.sd_choice03}
+                            onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice03', event.target.value)}
+                          />
+                          <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 4 สำหรับ 4 คะแนน :</label>
+                          <input
+                            type="text"
+                            id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                            value={supDetail.sd_choice04}
+                            onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice04', event.target.value)}
+                          />
+                          <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>เกณฑ์ที่ 5 สำหรับ 5 คะแนน :</label>
+                          <input
+                            type="text"
+                            id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                            value={supDetail.sd_choice05}
+                            onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'sd_choice05', event.target.value)}
+                          />
+                        </div>
+                        <div className='sb-add'>
+                          <div className='col2'>
+                            <button type="button" onClick={() => handleAddSupDetail(mainIndex, subIndex)}>
+                              <i className='material-icons'>add</i>
+                            </button>
+                          </div>
+                          <div className='col2'>
+                            {supIndex >= 0 && (
+                              <button type="button" onClick={() => handleRemoveSupDetail(mainIndex, subIndex, supIndex)}>
+                                <i className='material-icons'>delete</i>
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  {supIndex >= 0 && (
-                    <button type="button" onClick={() => handleRemoveSupDetail(mainIndex, subIndex, supIndex)}>
-                      ลบดัชนีตัวชีวัดย่อย
+                  {/* <div className='col2'>
+                    <button type="button" onClick={() => handleAddSupDetail(mainIndex, subIndex)}>
+                      <i className='material-icons'>add</i>
                     </button>
-                  )}
+                  </div> */}
                 </div>
-              ))}
-              <button type="button" onClick={() => handleAddSupDetail(mainIndex, subIndex)}>
-                เพิ่มดัชนีตัวชี้วัดย่อย
-              </button>
-              {subIndex >= 0 && (
-                <button type="button" onClick={() => handleRemoveSubTopic(mainIndex, subIndex)}>
-                  ลบดัชนีตัวชี้วัดหลัก
+                <div className='col2'>
+                  <div className='col-doc-btn'>
+                    <div className='col-doc-btn-mar'>
+                      <button type="button" onClick={() => handleAddSubTopic(mainIndex)}>
+                        <i className='material-icons'>add</i>
+                      </button>
+                    </div>
+
+                    {subIndex >= 0 && (
+                      <button type="button" onClick={() => handleRemoveSubTopic(mainIndex, subIndex)}>
+                        <i className='material-icons'>delete</i>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {topic.mt_suptopic.length === 0 &&
+              <div className='col-doc-btn'>
+                <div className='col-doc-btn-mar'>
+                  <button type="button" onClick={() => handleAddSubTopic(mainIndex)}>
+                    <i className='material-icons'>add</i>
+                  </button>
+                </div>
+              </div>}
+          </div>
+          <div className='button-b-quiz'>
+            <div className='col-doc-btn'>
+              <div className='col-doc-btn-mar'>
+                <button type="button" onClick={handleAddMainTopic}>
+                  <i className='material-icons'>add</i>
+                </button>
+              </div>
+              {mainIndex >= 0 && (
+                <button type="button" onClick={() => handleRemoveMainTopic(mainIndex)}>
+                  <i className='material-icons'>delete</i>
                 </button>
               )}
             </div>
-          ))}
-          <button type="button" onClick={() => handleAddSubTopic(mainIndex)}>
-            เพิ่มดัชนีตัวชี้วัดหลัก
-          </button>
-          {mainIndex >= 0 && (
-            <button type="button" onClick={() => handleRemoveMainTopic(mainIndex)}>
-              ลบหัวข้อดัชนีตัวชี้วัด
-            </button>
-          )}
+          </div>
         </div>
       ))}
-      <button type="button" onClick={handleAddMainTopic}>
-        เพิ่มหัวข้อดัชนีตัวชี้วัด
-      </button>
+      {topics.length === 0 && <div className='button-b-quiz'>
+        <button type="button" onClick={handleAddMainTopic}>
+          <i className='material-icons'>add</i>
+        </button>
+      </div>}
       {/* <button type="button" onClick={handleSubmit}>Submit</button> */}
     </form>
   );

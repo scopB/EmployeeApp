@@ -43,7 +43,7 @@ const Testshowk = ({ nameYear,hech, ass_year, status, setAuth, setMaintopic, hec
 
   return (
     <div>
-      {nameYear} :
+      <h5>{nameYear} :</h5>
       {status.length > 0 && (
         status.map((i) => {
           if (i.doc_year === ass_year) {
@@ -80,6 +80,7 @@ const Testshowk = ({ nameYear,hech, ass_year, status, setAuth, setMaintopic, hec
 
       </div>
       {/* {mode} */}
+      <br></br>
 
     </div>
   )

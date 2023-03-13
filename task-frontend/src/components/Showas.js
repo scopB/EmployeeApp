@@ -5,7 +5,7 @@ const Showas = ({ hech, assessment, status, setAuth, setMaintopic, hech_id, setS
 
     const now = new Date();
     const start_date = Math.floor(now.getTime() / 1000)
-    console.log(assessment , start_date);
+    // console.log(assessment , start_date);
     let mode = "ไม่มีเอกสารการประเมิน"
     return (
         <div>

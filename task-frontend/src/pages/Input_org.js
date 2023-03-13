@@ -10,26 +10,25 @@ const Input_org = () => {
     const [showBox, setShowBox] = useState(false)
     const [orgNow, setOrgNow] = useState('')
     const [showForm, setShowForm] = useState(false)
-    const [ore_data , setOre_data] = useState([])
-    const [options , setOptions] = useState([])
+    const [ore_data, setOre_data] = useState([])
+    const [options, setOptions] = useState([])
     const data_ore = []
 
     useEffect(() => {
         console.log(options.length)
-        if(options.length === 0)
-        {
+        if (options.length === 0) {
             get_org_data()
         }
     })
 
-    function get_org_data(){
-        axios.get(`${linkUrl.LinkToBackend}/get_all_ore`).then((res)=>{
+    function get_org_data() {
+        axios.get(`${linkUrl.LinkToBackend}/get_all_ore`).then((res) => {
             // console.log(res.data)
             let list_data = res.data
             setOre_data(list_data)
             let temp_list = []
-            ore_data.map((i)=>{
-                let temp = {value: i.ore_id, label: i.ore_shortname}
+            ore_data.map((i) => {
+                let temp = { value: i.ore_id, label: i.ore_shortname }
                 temp_list.push(temp)
                 data_ore.push(i)
             })
@@ -101,7 +100,7 @@ const Input_org = () => {
         }
     }
 
-    const ShowEditdata = (e) =>{
+    const ShowEditdata = (e) => {
         e.preventDefault();
         console.log(data_ore)
         setShowForm(true)
@@ -109,10 +108,16 @@ const Input_org = () => {
 
     return (
         <div>
-            INSERT ORE :
-            <input type="file" name="file_cvs" />
-            <button onClick={previewFile}>Submit</button>
-            {showBox && <Comfirmwindow message={"Comfirm to insert Ore"} setShowBox={setShowBox} check_data={check_data}/>}
+           {!showBox && <div className='body-insert'>
+                เพิ่มหน่วยงาน :
+                <div className='file-body'>
+                    <input type="file" name="file_cvs" />
+                </div>
+                <div className='insert-btn'>
+                    <button onClick={previewFile}>Submit</button>
+                </div>
+            </div>}
+            {showBox && <Comfirmwindow message={"Comfirm to insert Ore"} setShowBox={setShowBox} check_data={check_data} />}
 
             {/* <div>
                 <form onSubmit={ShowEditdata}>
@@ -124,10 +129,6 @@ const Input_org = () => {
                 <button>Serch</button>
                 </form>
             </div> */}
-            
-            <div>
-
-            </div>
         </div>
     )
 }

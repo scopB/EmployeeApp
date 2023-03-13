@@ -14,8 +14,8 @@ const Accpetstatus = ({nameShow,doc_id,name , status ,text , setQuiz_name , setQ
 
   return (
     <div>
-        ตอบรับเอกสารการประเมิน : 
-        <button className='btn-quiz' onClick={onChange} >{nameShow}</button>
+         {nameShow} : 
+        <button className='btn-quiz' onClick={onChange} >ตอบรับเอกสารการประเมิน</button>
     </div>
   )
 }

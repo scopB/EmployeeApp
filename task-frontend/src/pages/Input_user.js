@@ -18,11 +18,12 @@ const Input_user = () => {
             convertString(tempdata)
         }, false);
         if (file) {
-            reader.readAsText(file);
+            reader.readAsText(file, 'UTF-8');
         }
     }
 
     function convertString(string) {
+        console.log(string);
         let rows_raw = string.split('\n')
         let rows = []
         for (let i = 0; i < rows_raw.length; i++) {
@@ -68,10 +69,16 @@ const Input_user = () => {
     }
     return (
         <div>
-            INSERT USER :
-            <input type="file" name="file_cvs" />
-            <button onClick={previewFile}>Submit</button>
-            {showBox && <Comfirmwindow message={"Comfirm to insert User"} setShowBox={setShowBox} check_data={check_data}/>}
+            {!showBox &&<div className='body-insert'>
+                เพิ่มผู้ใช้งาน :
+                <div className='file-body'>
+                    <input type="file" name="file_cvs" />
+                </div>
+                <div className='insert-btn'>
+                    <button onClick={previewFile}>Submit</button>
+                </div>
+            </div>}
+            {showBox && <Comfirmwindow message={"Comfirm to insert User"} setShowBox={setShowBox} check_data={check_data} />}
         </div>
     )
 }

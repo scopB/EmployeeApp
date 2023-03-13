@@ -3,10 +3,11 @@ import { useEffect } from 'react'
 
 const Quizbox = ({nameShow, doc_id , name , status ,text , setQuiz_name , setQuizz , setAuth, setDocid, setQuizbody , body}) => {
 
+
     const onChange = () =>{
       // console.log(body);
-        console.log(status)
-        console.log(text)
+        // console.log(status)
+        // console.log(text)
         setAuth("doing")
         setQuizz(text)
         setQuiz_name(name)
@@ -16,8 +17,8 @@ const Quizbox = ({nameShow, doc_id , name , status ,text , setQuiz_name , setQui
 
   return (
     <div >
-      เริ่มการประเมินตนเอง :
-        <button className='btn-quiz' onClick={onChange}>{nameShow}</button>
+       {nameShow}  :
+        <button className='btn-quiz' onClick={onChange}>เริ่มการประเมินตนเอง</button>
     </div>
   )
 }

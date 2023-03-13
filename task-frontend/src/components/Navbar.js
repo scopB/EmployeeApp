@@ -1,13 +1,19 @@
+import axios from 'axios';
+import { linkUrl } from '../urlBackend';
 import React, { useEffect, useState } from 'react'
-import Switch from './Switch'
-import './Switch.css';
-const Navbar = ({ logout, setAuth, permission, showQuiz, name , ps}) => {
+const Navbar = ({ logout, setAuth, permission, showQuiz, name , ps,code_}) => {
 
     const [per , setPer] = useState();
+    const [realname , setRealname] = useState()
 
     useEffect(()=>{
         let temp = localStorage.getItem("permission")
         setPer(temp)
+        axios.get(`${linkUrl.LinkToBackend}/find_user/${code_}`).then((res)=>{
+            setRealname(res.data.ps_name);
+
+        })
+        
     })
 
     const onHome = () => {
@@ -71,15 +77,15 @@ const Navbar = ({ logout, setAuth, permission, showQuiz, name , ps}) => {
         <div>
             <div className='navbar-con'>
                 <ul>
-                    {per !== "ADMINZ" && <button className='navbar-box' onClick={onHome}>Home</button>}
-                    {per === "ADMINZ" && <button className='navbar-box' onClick={onCreatekpi}>createkpi</button>}
-                    {per === "ADMINZ" && <button className='navbar-box' onClick={onOrg}>ORG MM</button>}
-                    {per === "ADMINZ" && <button className='navbar-box' onClick={onUser}>USER MM</button>}
-                    {per === "ADMINZ" && <button className='navbar-box' onClick={onAss}>Ass</button>}
-                    {per === "ADMINZ" && <button className='navbar-box' onClick={onDeny}>Deny</button>}
-                    {per === "ADMINZ" && <button className='navbar-box' onClick={onDetail}>all Detail</button>}
-                    {<button className='navbar-box' onClick={onScore}>Show Score</button>}
-                    {<button className='navbar-box2 ' onClick={onOut} href="/">Logout {name}</button>}
+                    {per !== "ADMINZ" && <button className='navbar-box' onClick={onHome}>หน้าแรก</button>}
+                    {per === "ADMINZ" && <button className='navbar-box' onClick={onCreatekpi}>สร้างการประเมิน</button>}
+                    {per === "ADMINZ" && <button className='navbar-box' onClick={onOrg}>เพิ่มหน่วยงาน</button>}
+                    {per === "ADMINZ" && <button className='navbar-box' onClick={onUser}>เพิ่มผู้ใช้งาน</button>}
+                    {per === "ADMINZ" && <button className='navbar-box' onClick={onAss}>การประเมิน</button>}
+                    {per === "ADMINZ" && <button className='navbar-box' onClick={onDeny}>ประวัติการปฏิเสธตัวชี้วัด</button>}
+                    {per === "ADMINZ" && <button className='navbar-box' onClick={onDetail}>รายละเอียดการประเมิน</button>}
+                    {<button className='navbar-box' onClick={onScore}>ผลการประเมิน</button>}
+                    {<button className='navbar-box2 ' onClick={onOut} href="/">Logout {realname}</button>}
 
                 </ul>
             </div>

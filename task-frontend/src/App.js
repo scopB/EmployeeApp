@@ -33,11 +33,15 @@ function App() {
   const [scoreCheck, setScoreCheck] = useState()
   const [mode, setMode] = useState("0")
   const [score_, setScore_] = useState([])
-  const [onCreate, setCreate] = useState()
+  const [onCreate, setCreate] = useState({name : "" , year: "", id:0 , hech: "" , time : ""})
   const [modeCreate, setModeCreate] = useState("0")
   const [CreateDetail, setCreateDetail] = useState({})
+
+  const [newScore , setNewScore] = useState()
+
   const name = localStorage.getItem("username")
   const ps = localStorage.getItem("permission")
+  const code_ = localStorage.getItem("user_code")
 
 
   useEffect(async () => {
@@ -110,22 +114,25 @@ function App() {
       <Router>
         <div >
           {auth !== "Login" && <Navbar logout={Logout} setAuth={setAuth}
-            name={name} ps={ps} />}
+            name={name} ps={ps} code_={code_}/>}
           <div className="test-page">
             <Routes>
               <Route path='/' element={auth === "Home" ?
-                <Home hech={hench} assessment={assessment}
+                <Home hech={hench} assessment={assessment} setMode={setMode}
                   quiz={quiz} setQuizz={setQuizz} setQuiz_name={setQuiz_name}
                   setAuth={setAuth} setDocid={setDocid} setMaintopic={setMaintopic}
-                  setQuizbody={setQuizbody} setScoreCheck={setScoreCheck} setCreate={setCreate} /> :
+                  setQuizbody={setQuizbody} setScoreCheck={setScoreCheck} setCreate={setCreate} 
+                  setScore_={setScore_} setNewScore={setNewScore}/> :
                 auth === "Login" ? <Login login={onAuth} /> :
                   auth === "doing" ? <Doquiz name={quiz_name} quiz={quizz} quizbody={quizbody} mode={mode} score_={score_} /> :
                     auth === "Accept" ? <Acceptkpi all={quizbody} doc_id={docid} name={quiz_name} quiz={quizz} /> :
                       auth === "Edit" ? <Updatedoc maintopic={maintopic} /> :
-                        auth === "Checkscore" ? <Checkscore maintopic={scoreCheck} setMode={setMode}
+                        auth === "Checkscore" ? 
+                        <Checkscore newScore={newScore} maintopic={scoreCheck} setMode={setMode}
                           setQuizz={setQuizz} setQuizbody={setQuizbody}
                           setAuth={setAuth} setScore_={setScore_} /> :
-                          auth === "b_quiz" && <CreateKpi onCreate={onCreate} />
+                          auth === "b_quiz" && 
+                          <CreateKpi onCreate={onCreate} />
               } />
               {/* <Route path="/createkpipage" element={<CreateKpi hech = {hench} assessment={assessment}/>}/> */}
               <Route path="/assessment" element={

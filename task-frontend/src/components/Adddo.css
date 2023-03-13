@@ -1,22 +1,25 @@
-form {
+ /* form {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 600px;
     margin: 0 auto;
-  }
+  } */
   
-  label {
+  /* label {
     font-size: 16px;
     font-weight: bold;
-  }
+  } */
   
   input[type="text"] {
     font-size: 16px;
     padding: 8px;
     border: 1px solid #ccc;
+    outline: none;
+    line-break: anywhere;
     border-radius: 4px;
     width: 100%;
+    resize: vertical;
   }
 
   input[type="password"] {
@@ -35,6 +38,7 @@ form {
   button {
     font-size: 16px;
     font-weight: bold;
+    /* margin-top: 1%; */
     background-color: #0077cc;
     color: #fff;
     padding: 8px 16px;
@@ -53,11 +57,11 @@ form {
     outline: none;
   }
   
-  .subtopic {
+  /* .subtopic {
     margin-left: 20px;
   }
   
   .supdetail {
     margin-left: 40px;
-  }
-  
+  } */
+   

@@ -19,7 +19,7 @@ const Comfirmwindow = ({ message, setShowBox, check_data }) => {
     return (
         <div>
             <div className={`modal ${showModal ? 'show' : ''}`}>
-                <div>
+                <div className='window-con'>
                     <p>{message}</p>
                     <div>
                         <button onClick={handleConfirm}>Yes</button>

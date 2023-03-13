@@ -29,7 +29,8 @@ const Denypage = ({ assessment }) => {
             for (var i in res.data)
             {
                 let res = await axios.get(`${linkUrl.LinkToBackend}/find_user/${list[i].doc_foruserid}`)
-                let temp_ = {name : res.data , body : list[i]}
+                let res_ = await axios.get(`${linkUrl.LinkToBackend}/find_user/${list[i].doc_createbyid}`)
+                let temp_ = {name : res.data , body : list[i] , boss : res_.data}
                 temp.push(temp_)
             }
             console.log(temp);
@@ -50,18 +51,26 @@ const Denypage = ({ assessment }) => {
             {show !== "0" &&
                 <div>
                     {denyBody.length > 0 ?
-                        <div>
+                        <div className='detail-card' >
                             {denyBody.map((i) => (
-                                <div>
-                                    ชื่อเอกสาร : {i.body.doc_name}
+                                <div className='box-all-detail'>
+                                    <h4>ชื่อเอกสาร : {i.body.doc_name}</h4>
                                     <br></br>
                                     รอบปีการประเมิน : {i.body.doc_year}
                                     <br></br>
+                                    เอกสารจากผู้ประเมิน : {i.boss.ps_name + " " +i.boss.ps_lastname}
+                                    <br></br>
+                                    รหัสประจำตัวผู้ประเมิน : {i.body.doc_createbyid}
+                                    <br></br>
+                                    <br></br>
                                     ถูกปฏิเสธจาก : {i.name.ps_name + " " +i.name.ps_lastname}
                                     <br></br>
+                                    รหัสประจำตัวผู้ปฏิเสธ : {i.body.doc_foruserid}
+                                    <br></br>
+                                    <h5>เมื่อวันที่ : {new Date(i.body.doc_createdate*1000).toLocaleString('th-TH')}</h5>
+                                    <br></br>
                                     เหตุผลเมื่อปฏิเสธเอกสารการประเมิน : {i.body.doc_denyDetail}
-                                    <br></br>
-                                    <br></br>
+                                    
                                 </div>
                             ))}
                         </div> :

@@ -271,7 +271,12 @@ const Searchbox = ({ setData }) => {
 
     return (
         <div >
-            <button onClick={handleMode}>{name}</button>
+            {/* <button onClick={handleMode}>{name}</button> */}
+           
+            <input type="radio" value="" checked={name === "ค้นหาจากพนักงาน"} onChange={handleMode}></input>
+            <label>ค้นหาจากพนักงาน</label>
+            <input type="radio" value="" checked={name === "ค้นหาจากหน่วยงาน"} onChange={handleMode}></input>
+            <label>ค้นหาจากหน่วยงาน</label>
             <div>
                 การประเมินประจำปี :
                 <Select

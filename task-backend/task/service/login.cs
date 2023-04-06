@@ -154,6 +154,29 @@ namespace task.login
             }
         }
 
+        public USER_STR_MONGO FIND_USER(int user_id)
+        {
+            try
+            {
+                var output = new USER_STR_MONGO();
+                var client = connect();
+                var database = client.GetDatabase("EMAPP");
+                var data = database.GetCollection<USER_STR_MONGO>("PS");
+                var filter = Builders<USER_STR_MONGO>.Filter.Eq(s => s.ps_id,user_id);
+                var result = data.Find(filter).ToList();
+                foreach(var i in result)
+                {
+                    output = i;
+                }
+                return output;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
         public Boolean UPDATE_USER(USER_STR_MONGO data_new)
         {
             try

@@ -59,10 +59,17 @@ const Child = ({ save , quizbody, all_weight_, onScore, text, setscore, mode, sc
   return (
     <div>
       <div className='main-quiz-body'>
-        <h4>วัตถุประสงค์ที่ {indexM + 1} : {text.mt_name}</h4>
-        คะแนน : {Math.ceil(score_)}
+        <div className='point-main'>
+          <h4>วัตถุประสงค์ที่ {indexM + 1} : {text.mt_name}</h4>
+          <div className='point-box'>
+            คะแนนวัตถุประสงค์ : {Math.ceil(score_)}
+          </div>
+          
+        </div>
+        {/* <br></br> */}
+        
         {mode === "1" && <div>
-          คะแนนจากการประเมินตนเองได้ในหัวข้อ  : {score_test.mt_score}
+          คะแนนจากการประเมินตนเองของผู้รับการประเมิน  : {score_test.mt_score * score_test.mt_weight / all_weight_} 
         </div>}
         {
           <div>

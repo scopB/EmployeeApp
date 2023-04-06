@@ -23,6 +23,8 @@ namespace task.quiz
     {
         [BsonElement("sd_name")]
         public string sd_name {get;set;} = string.Empty;
+        [BsonElement("sd_detail")]
+        public string sd_detail {get;set;} = string.Empty;
         [BsonElement("sd_choice01")]
         public string sd_choice01 {get;set;} = string.Empty; 
         [BsonElement("sd_choice02")]
@@ -64,6 +66,8 @@ namespace task.quiz
         public ObjectId _id {get;set;}
         [BsonElement("doc_year")]
         public string doc_year {get;set;} = string.Empty;
+        [BsonElement("doc_name")]
+        public string doc_name {get;set;} = string.Empty;
         [BsonElement("doc_code")]
         public string doc_id {get;set;} = string.Empty;
         [BsonElement("doc_yeartime")]
@@ -83,6 +87,37 @@ namespace task.quiz
         public long st_lastsee {get;set;}
         [BsonElement("st_statuskpi")]
         public string st_statuskpi {get;set;} = string.Empty;
+        [BsonElement("doc_denyDetail")]
+        public string doc_denyDetail {get;set;} = string.Empty;
+        [BsonElement("doc_maintopic")]
+
+        public List<QUIZ_MAINTOPIC>? doc_maintopic {get;set;}
+    }
+
+    public record DENY_DOC
+    {
+        [BsonElement("_id")]
+        public ObjectId _id {get;set;}
+        [BsonElement("doc_year")]
+        public string doc_year {get;set;} = string.Empty;
+        [BsonElement("doc_name")]
+        public string doc_name {get;set;} = string.Empty;
+        [BsonElement("doc_code")]
+        public string doc_id {get;set;} = string.Empty;
+        [BsonElement("doc_yeartime")]
+        public int doc_yeartime {get;set;}
+        
+        [BsonElement("doc_createby")]
+
+        public int doc_createbyid {get;set;}
+        [BsonElement("doc_foruser")]
+
+        public int doc_foruserid {get;set;}
+        [BsonElement("doc_createdate")]
+
+        public long doc_createdate {get;set;}
+        [BsonElement("doc_denyDetail")]
+        public string doc_denyDetail {get;set;} = string.Empty;
         [BsonElement("doc_maintopic")]
 
         public List<QUIZ_MAINTOPIC>? doc_maintopic {get;set;}
@@ -90,8 +125,11 @@ namespace task.quiz
 
     public record UPDATE_DOC
     {
+        
         public string doc_code {get;set;} = string.Empty;
         public string year {get;set;} = string.Empty;
+        public string status {get;set;} = string.Empty;
+        public long last_see {get;set;}
         public List<QUIZ_MAINTOPIC>? doc_maintopic {get;set;}
     }
 
@@ -101,8 +139,14 @@ namespace task.quiz
         public ObjectId _id {get;set;}
         [BsonElement("am_year")]
         public string am_year {get;set;} = string.Empty;
+        [BsonElement("am_amName")]
+        public string am_name {get;set;} = string.Empty;
+        [BsonElement("am_code")]
+        public string am_code {get;set;} = string.Empty;
         [BsonElement("am_number_of_kpi")]
         public string am_number_of_kpi {get;set;} = string.Empty;
+        [BsonElement("am_number_of_year")]
+        public string am_number_of_year {get;set;} = string.Empty;
         [BsonElement("am_createby")]
 
         public int am_createby {get;set;}
@@ -113,12 +157,27 @@ namespace task.quiz
         public long am_enddate {get;set;}
     }
 
+    public record SHOW_ASSEMENT_BY_USER
+    {
+        public int for_user{get;set;}
+        public string ps_name {get;set;} = string.Empty;
+        public string ps_lastname {get;set;} = string.Empty;
+        public string doc_code{get;set;} = string.Empty;
+        public string st_statuskpi {get;set;} = string.Empty;
+        public long st_lastsee {get;set;} 
+        public int boss_id {get;set;}
+        public string boss_name {get;set;} = string.Empty;
+        public string boss_lastname {get;set;} = string.Empty;
+        
+    }
+
     public record CHECK_STATUS
     {
         public string doc_id{get;set;} = string.Empty;
         public int for_user{get;set;}
         public string doc_year {get;set;} = string.Empty;
         public string status{get;set;} = string.Empty;
+        public long st_lastsee {get;set;}
     }
 
     public record CHECK_STATUS_INPUT
@@ -133,6 +192,8 @@ namespace task.quiz
         public ObjectId _id {get;set;}
         [BsonElement("doc_year")]
         public string doc_year {get;set;} = string.Empty;
+        [BsonElement("doc_name")]
+        public string doc_name {get;set;} = string.Empty;
         [BsonElement("doc_code")]
         public string doc_id {get;set;} = string.Empty;
         [BsonElement("doc_yeartime")]
@@ -159,6 +220,8 @@ namespace task.quiz
         public string sd_name {get;set;} = string.Empty;
         [BsonElement("sd_choice")]
         public string sd_choice {get;set;} = string.Empty; 
+        [BsonElement("sd_detail")]
+        public string sd_detail {get;set;} = string.Empty;
         [BsonElement("weight")]
         public int weight {get;set;}
         [BsonElement("score")]
@@ -186,11 +249,18 @@ namespace task.quiz
         [BsonElement("mt_suptopic")]
         public List<QUIZ_SUPTOPIC_SCORE>? mt_suptopic {get;set;}
     }
-
     public record INPUT_SCORE
     {
         public string doc_id {get;set;} = string.Empty;
         public string year {get;set;} = string.Empty; 
+        public int mode {get;set;} 
+    }
+
+    public record INPUT_SEARCH_SCORE
+    {
+        public string year {get;set;} = string.Empty;
+        public int mode {get;set;}//By ORE,USER
+        public int search_input {get;set;}
     }
 
 }

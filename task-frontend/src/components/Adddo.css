@@ -22,6 +22,17 @@
     resize: vertical;
   }
 
+  .weight-doc input{
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    line-break: anywhere;
+    border-radius: 4px;
+    width: 100%;
+    resize: vertical;
+  }
+
   input[type="password"] {
     font-size: 16px;
     padding: 8px;
@@ -33,14 +44,13 @@
   input[type="text"]:focus {
     outline: none;
     border: 1px solid #0077cc;
-  }
+  } 
   
   button {
     font-size: 16px;
     font-weight: bold;
-    /* margin-top: 1%; */
-    background-color: #0077cc;
-    color: #fff;
+    background-color: #41c24a;
+    /* color: #fff; */
     padding: 8px 16px;
     border: none;
     border-radius: 4px;

@@ -56,11 +56,18 @@ const St_child = ({ save, quizbody, all_weight_st, testweight, text_st, setNewSc
 
   return (
     <div className='sub-quiz-body'>
-      <div>ตัวชี้วัดหลักที่ {indexM + 1}.{indexS + 1} :</div>
-      <h4>{text_st.st_name}</h4>
-      คะแนนตัวชี้วัดหลัก = {Math.ceil(score_)}
+      <div className='point-main'>
+        <div>ตัวชี้วัดหลักที่ {indexM + 1}.{indexS + 1} :</div>
+        <h4>{text_st.st_name}</h4>
+        <div className='point-box'>
+          คะแนนตัวชี้วัดหลัก = {Math.ceil(score_)}
+        </div>
+
+      </div>
+
       {mode === "1" && <div>
-        คะแนนจากการประเมินตนเองของดัชนีชี้วัดหลัก {text_st.st_name} : {score_test.st_score}
+      {/* (Math.ceil(score_test.st_score) / 100) * (score_test.st_weight / all_weight_st) * testweight */}
+        คะแนนจากการประเมินตนเองตัวชี้วัดหลัก : {Math.floor((Math.ceil(score_test.st_score) / 100) * (score_test.st_weight / all_weight_st) * testweight)}
       </div>}
       {
         quizbody.st_statuskpi !== "55" && quizbody.st_statuskpi !== "66" && <div>

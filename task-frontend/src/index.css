@@ -586,6 +586,21 @@ footer {
   margin-right: 10px;
 }
 
+.point-main
+{
+  display: flex;
+  margin-bottom: 1%;
+}
+.point-box
+{
+  margin-left: auto;
+  margin-right: 3%;
+  border: 1px solid rgb(70, 180, 134);
+  padding: 1%;
+  border-radius: 15px;
+  background-color: white;
+}
+
 .box-form-doc {
   /* max-width: 2%; */
   /*max-height: 0.0000001%; */

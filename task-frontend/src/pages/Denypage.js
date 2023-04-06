@@ -41,7 +41,7 @@ const Denypage = ({ assessment }) => {
 
     return (
         <div>
-            Denypage
+            <h4>ค้นหาจากการประเมิน</h4>
             <Select
                 defaultValue={search}
                 onChange={setSearch}

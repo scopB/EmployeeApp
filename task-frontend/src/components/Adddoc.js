@@ -84,9 +84,9 @@ function AddDataForm({ topics, setTopics }) {
                   />
                 </div>
                 <label htmlFor={`mainTopicWeight${mainIndex}`}>น้ำหนักวัตถุประสงค์ :</label>
-                <div>
+                <div className='weight-doc'>
                   <input
-                    type="text"
+                    type="number"
                     id={`mainTopicWeight${mainIndex}`}
                     value={topic.mt_weight}
                     onChange={event => handleMainWeightChange(mainIndex, event.target.value)}
@@ -113,9 +113,9 @@ function AddDataForm({ topics, setTopics }) {
                       </div>
 
                       <label htmlFor={`subTopicWeight${mainIndex}-${subIndex}`}>น้ำหนักตัวชี้วัดหลัก : </label>
-                      <div>
+                      <div className='weight-doc'>
                         <input
-                          type="text"
+                          type="number"
                           id={`subTopicWeight${mainIndex}-${subIndex}`}
                           value={subTopic.st_weight}
                           onChange={event => handleSubTopicChange(mainIndex, subIndex, 'st_weight', event.target.value)}
@@ -144,12 +144,14 @@ function AddDataForm({ topics, setTopics }) {
                             </div>
                             <label htmlFor={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}>น้ำหนักตัวชี้วัดรอง:</label>
                             <div className='main-box-name-w'>
-                              <input
-                                type="text"
-                                id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
-                                value={supDetail.weight}
-                                onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'weight', event.target.value)}
-                              />
+                              <div className='weight-doc'>
+                                <input
+                                  type="number"
+                                  id={`supDetailWeight${mainIndex}-${subIndex}-${supIndex}`}
+                                  value={supDetail.weight}
+                                  onChange={event => handleSupDetailChange(mainIndex, subIndex, supIndex, 'weight', event.target.value)}
+                                />
+                              </div>
                             </div>
 
                           </div>
@@ -199,13 +201,13 @@ function AddDataForm({ topics, setTopics }) {
                         </div>
                         <div className='sb-add'>
                           <div className='col2'>
-                            <button type="button" onClick={() => handleAddSupDetail(mainIndex, subIndex)}>
+                            <button type="button" title='เพิ่มตัวชี้วัดรอง' onClick={() => handleAddSupDetail(mainIndex, subIndex)}>
                               <i className='material-icons'>add</i>
                             </button>
                           </div>
                           <div className='col2'>
                             {supIndex >= 0 && (
-                              <button type="button" onClick={() => handleRemoveSupDetail(mainIndex, subIndex, supIndex)}>
+                              <button type="button" title='ลบตัวชี้วัดรอง' onClick={() => handleRemoveSupDetail(mainIndex, subIndex, supIndex)}>
                                 <i className='material-icons'>delete</i>
                               </button>
                             )}
@@ -223,13 +225,13 @@ function AddDataForm({ topics, setTopics }) {
                 <div className='col2'>
                   <div className='col-doc-btn'>
                     <div className='col-doc-btn-mar'>
-                      <button type="button" onClick={() => handleAddSubTopic(mainIndex)}>
+                      <button type="button" title='เพิ่มตัวชี้วัดหลัก' onClick={() => handleAddSubTopic(mainIndex)}>
                         <i className='material-icons'>add</i>
                       </button>
                     </div>
 
                     {subIndex >= 0 && (
-                      <button type="button" onClick={() => handleRemoveSubTopic(mainIndex, subIndex)}>
+                      <button type="button" title='ลบตัวชี้วัดหลัก' onClick={() => handleRemoveSubTopic(mainIndex, subIndex)}>
                         <i className='material-icons'>delete</i>
                       </button>
                     )}
@@ -240,7 +242,7 @@ function AddDataForm({ topics, setTopics }) {
             {topic.mt_suptopic.length === 0 &&
               <div className='col-doc-btn'>
                 <div className='col-doc-btn-mar'>
-                  <button type="button" onClick={() => handleAddSubTopic(mainIndex)}>
+                  <button type="button" title='เพิ่มตัวชี้วัดหลัก' onClick={() => handleAddSubTopic(mainIndex)}>
                     <i className='material-icons'>add</i>
                   </button>
                 </div>
@@ -249,12 +251,12 @@ function AddDataForm({ topics, setTopics }) {
           <div className='button-b-quiz'>
             <div className='col-doc-btn'>
               <div className='col-doc-btn-mar'>
-                <button type="button" onClick={handleAddMainTopic}>
+                <button type="button" title='เพิ่มวัตถุประสงค์' onClick={handleAddMainTopic}>
                   <i className='material-icons'>add</i>
                 </button>
               </div>
               {mainIndex >= 0 && (
-                <button type="button" onClick={() => handleRemoveMainTopic(mainIndex)}>
+                <button type="button" title='ลบวัตถุประสงค์' onClick={() => handleRemoveMainTopic(mainIndex)}>
                   <i className='material-icons'>delete</i>
                 </button>
               )}
@@ -263,7 +265,7 @@ function AddDataForm({ topics, setTopics }) {
         </div>
       ))}
       {topics.length === 0 && <div className='button-b-quiz'>
-        <button type="button" onClick={handleAddMainTopic}>
+        <button type="button" title='เพิ่มวัตถุประสงค์' onClick={handleAddMainTopic}>
           <i className='material-icons'>add</i>
         </button>
       </div>}

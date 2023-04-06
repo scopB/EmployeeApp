@@ -241,13 +241,14 @@ const Hech = ({ setNewScore,setMode, setQuizz, setQuizbody, setScore_, hech, ass
                         {mode === "เอกสารการประเมินยังไม่ได้รับการบันทึก" && <button onClick={()=>handleedit(i)}>แก้ไขเอกสารข้อตกลง</button>}
                         {mode === "เอกสารการประเมินตนเองเสร็จสิ้น" && 
                         <div>
-                          <button onClick={()=>handleCheck(i)}>ตรวจสอบผลการประเมินตนเองของ {hech}</button>
+                          <button onClick={()=>handleCheck(i)}>ตรวจสอบผลการประเมินตนเอง</button>
                           <br></br>
-                          <button onClick={()=>onDoing(i)}>เริ่มต้นการประเมิน {hech}</button>
+                          <br></br>
+                          <button onClick={()=>onDoing(i)}>เริ่มต้นการประเมิน</button>
                         </div>}
                         {mode === "ทำการประเมินต่อ" && 
                         <div>
-                          <button onClick={()=>onDoing(i)}>ทำการประเมิน {hech} ต่อ</button>
+                          <button onClick={()=>onDoing(i)}>ทำการประเมินต่อ</button>
                         </div>}
                         {mode === "ไม่มีเอกสารการประเมิน" && <button onClick={()=>onCreate(i)}>สร้างเอกสารแบบประเมิน</button>}
                       </div>

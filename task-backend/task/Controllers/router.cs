@@ -43,6 +43,12 @@ namespace task.Controllers
             }
             return BadRequest();
         }
+        [HttpGet("find_user/{user_id}")]
+        public ActionResult<USER_STR_MONGO> find_user(int user_id)
+        {
+            var result = LOGIN_C.FIND_USER(user_id);
+            return result;
+        }
 
         [HttpPost("insert_user")]
         public ActionResult<Boolean> insert_user(USER_STR user)
@@ -75,7 +81,13 @@ namespace task.Controllers
         [HttpPost("update_status_doc")]
         public ActionResult<Boolean> update_kpistatus(UPDATE_ST_DOC_INPUT data)
         {
-            var result = repository.UPDATE_STATUS_DOC(data.doc_id,data.status_update,data.year);
+            var result = repository.UPDATE_STATUS_DOC(data.doc_id,data.status_update,data.year,data.last_see);
+            return result;
+        }
+        [HttpPost("update_deny_doc")]
+        public ActionResult<Boolean> update_deny_kpistatus(DENY_DOC data)
+        {
+            var result = repository.INSERT_DENY_DOC(data);
             return result;
         }
 
@@ -157,7 +169,7 @@ namespace task.Controllers
         [HttpPost("show_score")]
         public ActionResult<SUBMIT_SCORE> show_score(INPUT_SCORE data)
         {
-            var result = repository.SHOW_SHOW_WHO(data.doc_id,data.year);
+            var result = repository.SHOW_SHOW_WHO(data.doc_id,data.year,data.mode);
             return result;
         }
         [HttpPost("test")]
@@ -165,6 +177,38 @@ namespace task.Controllers
         {
             return data;
         }
+        [HttpPost("search_score")]
+        public List<SUBMIT_SCORE> search_score(INPUT_SEARCH_SCORE data)
+        {
+            var result = repository.FIND_BY_ORE(data);
+            return result;
+        }
+
+        [HttpPost("edit_assessment")]
+        public Boolean edit_assessment(CREATE_ASSESSMENT_FORM data)
+        {   
+            var result = repository.EDIT_ASSESSMENT(data);
+            return result;
+        }
+        [HttpGet("delete_assessment/{ass_code}")]
+        public Boolean delete_assessment(string ass_code)
+        {
+            var result = repository.DELETE_ASSESSMENT(ass_code);
+            return result;
+        }
+        [HttpGet("show_deny_doc/{ass_code}")]
+        public List<DENY_DOC> show_deny(string ass_code)
+        {
+            var result = repository.SHOW_DENY_DOC(ass_code);
+            return result;
+        }
+        [HttpGet("show_ass_user/{ass_code}")]
+        public List<SHOW_ASSEMENT_BY_USER> show_ass_user(string ass_code)
+        {
+            var result = repository.SHOW_ASS_USER(ass_code);
+            return result;
+        }
+
     }
 
 }
